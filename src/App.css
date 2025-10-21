@@ -232,6 +232,28 @@ section h2{
 }
 .lang-btn.active{ color:var(--bg); }
 
+.expand-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:12px 0 16px;
+}
+.expand-controls button{
+  padding:8px 16px;
+  border-radius:9999px;
+  border:1px solid var(--line);
+  background:var(--card-bg);
+  color:var(--fg);
+  cursor:pointer;
+  box-shadow: var(--shadow);
+  font-size:14px;
+  transition: background .2s ease, transform .12s ease;
+}
+.expand-controls button:hover{
+  background:var(--hover-bg);
+  transform: translateY(-1px);
+}
+
 /* ===== Footer / Contact ===== */
 .theme-toggle {
   display: inline-flex;
@@ -288,4 +310,3 @@ section h2{
 .side-project-card span {
   font-size: 1.1em;
 } */
-

@@ -73,6 +73,8 @@ export default function App() {
       achievements: "대회",
       skills: "보유 기술",
       mainProjects: "주요 프로젝트",
+      expandAll: "전체 펼치기",
+      collapseAll: "전체 접기",
     },
     ENG: {
       name: "Eunsu Park's Page",
@@ -89,22 +91,10 @@ export default function App() {
       achievements: "Competitions",
       skills: "Skills",
       mainProjects: "Main Projects",
+      expandAll: "Expand All",
+      collapseAll: "Collapse All",
     },
   };
-
-  // 섹션 펼침 상태
-  const [expandedEntries, setExpandedEntries] = useState({
-    education: {},
-    experience: {},
-    awardsCertifications: {},
-    projects: {},
-    achievements: {},
-  });
-  const toggleEntry = (sec, key) =>
-    setExpandedEntries((p) => ({
-      ...p,
-      [sec]: { ...p[sec], [key]: !p[sec][key] },
-    }));
 
   // --- 교육
   const educationEntries  = [
@@ -185,7 +175,7 @@ export default function App() {
               "자사의 검색엔진 솔루션을 고객사의 리눅스서버에 설치합니다.",
               "고객사의 요구사항에 맞춰 검색엔진 커스터마이징을 진행합니다.",
               "고객사의 데이터베이스 SQL을 제공받고 SQL select문으로 검색엔진서버에 데이터를 수집합니다.",
-              "컬렉션(검색대상)정의, 검색조건, 검색 컬럼(필드)를 정의합니다.",
+              "컬렉션(검색대상), 검색조건, 검색 컬럼(필드)를 정의합니다.",
               "고객사의 피드백을 받습니다.",
               "공공데이터 API 유사한 형태로 JSON이나 XML형태로 파싱가능한 API형태로 제공합니다.",
               "고객사 내부의 통합 검색 화면을 직접 개발하며, 주로 JSP 또는 스프링 MVC 환경에서 검색 서버 및 솔루션 API와 데이터를 송수신하는 방식으로 구현합니다.",
@@ -207,7 +197,7 @@ export default function App() {
             [
               "자사의 챗봇 솔루션을 고객사의 리눅스서버에 설치합니다. ",
               "고객사의 요구사항에 맞춰 검색엔진 커스터마이징을 진행합니다.",
-              "지식구축팀이 고객과 소통하며 인텐트(사용자)를 구축하고 문서화합니다.",
+              "지식구축팀이 고객과 소통하며 인텐트(사용자 의도)를 구축하고 문서화합니다.",
               "개발팀이 챗봇 관리도구를 통해 인텐트를 적재합니다.",
               "챗봇 관리도구를 고객사의 요청에맞게 커스텀개발합니다.",
               "필요할 경우 검색엔진을 도입하여 검색기능을 챗봇에 연계합니다.",
@@ -247,7 +237,7 @@ export default function App() {
     {
       title: lang === "KOR" ? "데이터분석 준전문가(ADsP)" : "Advanced Data Analytics Semi-Professional (ADsP)",
       location: lang === "KOR" ? "한국데이터산업진흥원" : "Korea Data Agency",
-      dates: "2024.11", // 취득하신 날짜로 수정해주세요.
+      dates: "2024.11",
       details: lang === "KOR"
         ? ["자격 취득"]
         : ["Acquired Qualification"],
@@ -391,6 +381,41 @@ export default function App() {
     ? { label: "프로젝트 더 보러가기", href: "https://github.com/peussd55" }
     : { label: "Go to Side Project", href: "https://github.com/peussd55" };
 
+  const projectKeys = ["lawI", "pj_bindq", "pj_scamcut", "pj_estandard"];
+
+  const sectionKeyMap = {
+    education: educationEntries.map((edu) => edu.id),
+    experience: exp_example.map((_, idx) => `exp${idx}`),
+    awardsCertifications: awardsCertifications.map((_, idx) => `item${idx}`),
+    projects: projectKeys,
+    achievements: [],
+  };
+
+  const mapKeysToValue = (keys = [], value) =>
+    keys.reduce((acc, key) => {
+      acc[key] = value;
+      return acc;
+    }, {});
+
+  const buildExpandedState = (isExpanded) => ({
+    education: mapKeysToValue(sectionKeyMap.education, isExpanded),
+    experience: mapKeysToValue(sectionKeyMap.experience, isExpanded),
+    awardsCertifications: mapKeysToValue(sectionKeyMap.awardsCertifications, isExpanded),
+    projects: mapKeysToValue(sectionKeyMap.projects, isExpanded),
+    achievements: mapKeysToValue(sectionKeyMap.achievements, isExpanded),
+  });
+
+  const [expandedEntries, setExpandedEntries] = useState(() => buildExpandedState(false));
+
+  const toggleEntry = (section, key) =>
+    setExpandedEntries((prev) => ({
+      ...prev,
+      [section]: { ...prev[section], [key]: !prev[section]?.[key] },
+    }));
+
+  const handleExpandAll = () => setExpandedEntries(buildExpandedState(true));
+  const handleCollapseAll = () => setExpandedEntries(buildExpandedState(false));
+
   // --- 스킬
   const skills =
     lang === "KOR"
@@ -497,6 +522,11 @@ export default function App() {
           <button className={`lang-btn ${lang === "KOR" ? "active" : ""}`} onClick={() => setLang("KOR")}>
             KOR
           </button>
+        </div>
+
+        <div className="expand-controls">
+          <button type="button" onClick={handleExpandAll}>{t[lang].expandAll}</button>
+          <button type="button" onClick={handleCollapseAll}>{t[lang].collapseAll}</button>
         </div>
 
         {/* 연락처 */}
