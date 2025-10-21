@@ -404,7 +404,7 @@ export default function App() {
             { Icon: SiScikitlearn, label: "Scikitlearn" },
           ]},
           { title: "프론트엔드", items: [
-            { Icon: SiJavascript, label: "JavaScript" },
+            { Icon: SiReact, label: "React" },
             { Icon: SiJquery, label: "Jquery" },
             { Icon: SiFigma, label: "Figma" },
             { Icon: SiVercel, label: "Vercel" },
@@ -438,7 +438,7 @@ export default function App() {
             { Icon: SiScikitlearn, label: "Scikitlearn" },
           ]},
           { title: "Frontend", items: [
-            { Icon: SiJavascript, label: "JavaScript" },
+            { Icon: SiReact, label: "React" },
             { Icon: SiJquery, label: "Jquery" },
             { Icon: SiFigma, label: "Figma" },
             { Icon: SiVercel, label: "Vercel" },
