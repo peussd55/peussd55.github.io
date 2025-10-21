@@ -265,7 +265,7 @@ export default function App() {
   // --- 프로젝트
   const pj_lawI = {
     title: lang === "KOR" ? "법률 도메인 특화 Agentic LLM 서비스" : "Agentic LLM Service for Legal Domain",
-    location: "Team / 5인",
+    location: lang === "KOR" ? "Team / 5인" : "Team / 5 members",
     dates: lang === "KOR" ? "2025 - 진행중" : "2025.09 - Present",
     details:
       lang === "KOR"
@@ -284,7 +284,7 @@ export default function App() {
 
   const pj_bindq = {
     title: lang === "KOR" ? "BindQ Studio" : "BindQ Studio",
-    location: "Team / 5인",
+    location: lang === "KOR" ? "Team / 5인" : "Team / 5 members",
     dates: "2025",
     details:
       lang === "KOR"
@@ -316,7 +316,7 @@ export default function App() {
 
   const pj_scamcut = {
     title: lang === "KOR" ? "사기컷: 전자금융사기 예방 뉴스 큐레이터" : "ScamCut: A News Curator for Online Financial Scam Prevention",
-    location: "Team / 5인",
+    location: lang === "KOR" ? "Team / 5인" : "Team / 5 members",
     dates: "2024",
     details:
       lang === "KOR"
@@ -351,7 +351,7 @@ export default function App() {
 
   const pj_estandard = {
     title: lang === "KOR" ? "국가기술표준원 e나라표준인증" : "Korean Agency for Technology and Standards (KATS), e-Korean Standards Certification",
-    location: "국가기술표준원",
+    location: lang === "KOR" ? "국가기술표준원" : "Korean Agency for Technology and Standards (KATS)",
     dates: "2022~2023 / 2023~2024",
     details:
       lang === "KOR"
