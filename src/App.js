@@ -113,7 +113,7 @@ export default function App() {
       title:
         lang === "KOR" ? "한국교통대학교 나노화학소재공학과" : "Korea National University of Transportation – Department of Polymer science & Engineering",
       location: lang === "KOR" ? "충주, 대한민국" : "Chungju, Korea",
-      dates: lang === "KOR" ? "2013 ~ 2020" : "2013 ~ 2020",
+      dates: lang === "KOR" ? "2013 - 2020" : "2013 - 2020",
       details:
         lang === "KOR"
           ? [
@@ -128,7 +128,7 @@ export default function App() {
       title:
         lang === "KOR" ? "한국방송통신대학교 컴퓨터과학과" : "Korea National Open University – Department of Computer Science",
       location: lang === "KOR" ? "서울, 대한민국" : "Seoul, Korea",
-      dates: lang === "KOR" ? "2021 ~ 재학 중" : "2021 ~ Present",
+      dates: lang === "KOR" ? "2021 - 재학 중" : "2021 - Present",
       details:
         lang === "KOR"
           ? [
@@ -143,7 +143,7 @@ export default function App() {
       title:
         lang === "KOR" ? "[IBM x RedHat] AX(AI Transformation)" : "[IBM x RedHat] AX (AI Transformation)",
       location: lang === "KOR" ? "서울, 대한민국" : "Seoul, Korea",
-      dates: lang === "KOR" ? "2025.05 ~ 현재" : "May 2025 – Present",
+      dates: lang === "KOR" ? "2025.05 - 현재" : "May 2025 – Present",
       details:
         lang === "KOR"
           ? [
@@ -166,7 +166,7 @@ export default function App() {
     {
       title: lang === "KOR" ? "WISENUT" : "WISENUT",
       location: lang === "KOR" ? "솔루션 구축 및 웹개발" : "Solution building and web development",
-      dates: "2020.09 ~ 2024.04",
+      dates: "2020.09 - 2024.04",
       summary: lang === "KOR" ? 
         [
           "검색엔진 구축 및 웹(API)개발 (2년 6개월)",
@@ -179,7 +179,7 @@ export default function App() {
       projects: [
         {
           title: lang === "KOR" ? "검색엔진 구축 및 웹(API)개발 (2년 6개월)" : "Search engine development and web (API) development (2 years and 6 months)",
-          dates: "2020.10 ~ 2024.04",
+          dates: "2020.10 - 2024.04",
           details: lang === "KOR" ? 
             [
               "자사의 검색엔진 솔루션을 고객사의 리눅스서버에 설치합니다.",
@@ -202,7 +202,7 @@ export default function App() {
         },
         {
           title: lang === "KOR" ? "챗봇 구축 및 웹개발 (1년)" : "Chatbot building and web development (1 year)",
-          dates: "2020.10 ~ 2024.04",
+          dates: "2020.10 - 2024.04",
           details: lang === "KOR" ?
             [
               "자사의 챗봇 솔루션을 고객사의 리눅스서버에 설치합니다. ",
@@ -266,7 +266,7 @@ export default function App() {
   const pj_lawI = {
     title: lang === "KOR" ? "법률 도메인 특화 Agentic LLM 서비스" : "Agentic LLM Service for Legal Domain",
     location: "Team / 5인",
-    dates: lang === "KOR" ? "2025 ~ 진행중" : "2025.09 ~ Present",
+    dates: lang === "KOR" ? "2025 - 진행중" : "2025.09 - Present",
     details:
       lang === "KOR"
         ? [
@@ -289,7 +289,7 @@ export default function App() {
     details:
       lang === "KOR"
         ? [
-            "프로젝트 진행기간 : 2025.01 ~ 2025.03",
+            "프로젝트 진행기간 : 2025.01 - 2025.03",
             "단백질 구조기반 신약 개발을 위한 De novo 단백질 설계 플랫폼(MVP) 개발",
             "복잡한 생물정보학 연구 도구들을 하나의 FastAPI·Gradio 기반 화면으로 묶어, 다섯 개 탭을 따라가며 설계할 수 있는 여정을 개발",
             "타겟 단백질정보를 입력, 타겟의 각 아미노산별 결합 부위 예측 -> 다음 설계  단계의 파라미터값 도출",
@@ -301,7 +301,7 @@ export default function App() {
             </a>,
           ]
         : [
-            "Project Period: 2025.01 ~ 2025.03",
+            "Project Period: 2025.01 - 2025.03",
             "Development of a De novo Protein Design Platform (MVP) for Structure-Based Drug Discovery",
             "Developed a guided design journey by integrating complex bioinformatics research tools into a single interface based on FastAPI and Gradio, structured as a simple five-tab workflow.",
             "Input target protein information to predict binding sites for each amino acid, which in turn derives the parameters for the subsequent design phase.",
@@ -321,7 +321,7 @@ export default function App() {
     details:
       lang === "KOR"
         ? [
-            "프로젝트 진행기간 : 2024.10 ~ 2024.11",
+            "프로젝트 진행기간 : 2024.10 - 2024.11",
             "2024 뉴스 빅데이터 해커톤 우수상 수상작",
             "융합 데이터 활용을 통한 취약 사기 진단 기반 맞춤형 AI 가공 뉴스 콘텐츠 제공 서비스 프로토타입 개발",
             "빅카인즈 사기 뉴스를 KoBERT 파인튜닝(+LLM)을 통해 유형별로 정밀 분류",
@@ -334,13 +334,14 @@ export default function App() {
             </a>,
           ]
         : [
-            "Project Period: 2024.10 ~ 2024.11",
+            "Project Period: 2024.10 - 2024.11",
             "2024 News Big Data Hackathon Excellence Award-winning project",
-            "Developed a service prototype that uses integrated data to diagnose vulnerable scam types and provide customized AI‑generated news content",
-            "Embedded BigKinds news data using a KoBERT model (+LLM) and classified it by category",
-            "Removed duplicate articles using TF‑IDF and cosine similarity",
-            "Diagnosed the most vulnerable scam type using RAG technology (combining user metadata and news article embedding vectors with Hamming distance similarity calculation)",
-            "Produced news‑based summary illustrations and short‑form videos using generative AI tools such as DALL‑E and the Vadoo API",
+            "Developing a prototype service for tailored, AI-processed news content based on fraud vulnerability diagnosis using converged data",
+            "Precisely classifying BIG KINDS fraud news by category through KoBERT fine-tuning (+LLM)",
+            "Vectorizing classified news and structured user information (e.g., 'female in her 20s')—converted into text sentences—using SBERT embeddings",
+            "Removing semantically duplicate articles by calculating cosine similarity between news embedding vectors",
+            "Diagnosing (matching) the most relevant fraud type by calculating vector similarity between the user profile and the 'average victim profile' extracted from news via an LLM",
+            "Creating news-based summary illustrations and short-form videos using generative AI tools (e.g., DALL-E)",
             <a href="https://www.kpf.or.kr/synap/skin/doc.html?fn=1735016238208.pdf&rs=/synap/result/board/" target="_blank" rel="noopener noreferrer">
               Award-Winning Collection
             </a>,
@@ -355,8 +356,8 @@ export default function App() {
     details:
       lang === "KOR"
         ? [
-            "1차 프로젝트 진행기간 : 2022.09 ~ 2023.02",
-            "2차 프로젝트 진행기간 : 2023.11 ~ 2024.02",
+            "1차 프로젝트 진행기간 : 2022.09 - 2023.02",
+            "2차 프로젝트 진행기간 : 2023.11 - 2024.02",
             "국가기술표준원의 대국민 서비스 e나라표준인증 구축/개편 프로젝트",
             "검색엔진을 활용한 통합검색 기능의 JSON API 개발을 담당",
             "검색엔진과 연계된 스마트 챗봇의 국가표준 카테고리 개발",
