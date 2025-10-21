@@ -315,7 +315,7 @@ export default function App() {
   };
 
   const pj_scamcut = {
-    title: lang === "KOR" ? "사기컷: 전자금융사기 예방 뉴스 큐레이터" : "Personal Portfolio Website",
+    title: lang === "KOR" ? "사기컷: 전자금융사기 예방 뉴스 큐레이터" : "ScamCut: A News Curator for Online Financial Scam Prevention",
     location: "Team / 5인",
     dates: "2024",
     details:
@@ -324,10 +324,11 @@ export default function App() {
             "프로젝트 진행기간 : 2024.10 ~ 2024.11",
             "2024 뉴스 빅데이터 해커톤 우수상 수상작",
             "융합 데이터 활용을 통한 취약 사기 진단 기반 맞춤형 AI 가공 뉴스 콘텐츠 제공 서비스 프로토타입 개발",
-            "빅카인즈 뉴스 데이터 중 사기관련 뉴스를 세분화 한 뒤, KOBERT 모델(+LLM)로 벡터임베딩하여 유형별 분류",
-            "TF-IDF·코사인유사도로 중복 기사제거",
-            "KoBERT/LLM으로 임베딩된 사용자 정보와 사기 유형별 뉴스 벡터 간의 코사인 유사도를 계산하여, 가장 취약한 사기 유형을 진단(매칭)",
-            "생성형AI도구(DALL-E, Vadoo API 등)를 기반으로 뉴스 기반 요약 삽화와 숏폼 영상을 제작",
+            "빅카인즈 사기 뉴스를 KoBERT 파인튜닝(+LLM)을 통해 유형별로 정밀 분류",
+            "분류된 뉴스와, '20대 여성' 등 정형적 사용자 정보를 텍스트 문장으로 변환하여, SBERT 임베딩으로 벡터화",
+            "뉴스 임베딩 벡터 간 코사인 유사도를 계산하여 의미 기반의 중복 기사 제거",
+            "사용자 프로필 벡터와, LLM으로 뉴스에서 추출한 '평균 피해자 프로필' 벡터 간의 유사도를 계산하여 가장 연관성 높은 사기 유형을 진단(매칭)",
+            "생성형AI도구(DALL-E 등)를 기반으로 뉴스 기반 요약 삽화와 숏폼 영상을 제작",
             <a href="https://www.kpf.or.kr/synap/skin/doc.html?fn=1735016238208.pdf&rs=/synap/result/board/" target="_blank" rel="noopener noreferrer">
               수상작 모음집
             </a>,

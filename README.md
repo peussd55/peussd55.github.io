@@ -1,2 +1,2 @@
 # web-portfolio
-Sunjoon Kim's Portfolio
+Eunsu Park's Portfolio
