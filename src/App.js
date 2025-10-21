@@ -9,7 +9,7 @@ import {
   SiPostgresql, SiDocker, SiGit, SiFigma, SiKeras,
   SiScikitlearn, SiJquery, SiGithubactions, SiJupyter,
   SiFastapi, SiFlask, SiSpring, SiSpringboot, SiAmazonaws,
-  SiVercel,
+  SiVercel, SiLinux
 } from "react-icons/si";
 
 /** 프로필 이미지: public/profile.jpg 가 있으면 노출, 없으면 자동 숨김 */
@@ -57,13 +57,13 @@ export default function App() {
   const [lang, setLang] = useState("KOR"); // 'KOR' | 'ENG'
   const t = {
     KOR: {
-      name: "박은수",
+      name: "Eunsu Park's Page",
       title: "AI 엔지니어",
       tagline: "AI 기술로 현실의 문제를 해결하는 엔지니어",
       aboutTitle: "소개",
       aboutText:
-        "IBM x RedHat의 AX(AI Transformation) 과정을 통해 AI 전문가로 성장하고 있습니다. 데이터 기반의 문제 해결 능력과 새로운 기술에 대한 빠른 학습 능력을 바탕으로, 복잡한 비즈니스 요구사항을 해결하는 AI 솔루션을 만들고 싶습니다.",
-      aboutFocus: ["관심사 : RAG, LLM, NLP, VLM, Agent"],
+        "검색엔진 엔지니어를 거쳐 IBM x RedHat의 AX(AI Transformation) 과정을 통해 AI 전문가로 성장하고 있습니다. 데이터 기반의 문제 해결 능력과 새로운 기술에 대한 빠른 학습 능력을 바탕으로, 복잡한 비즈니스 요구사항을 해결하는 AI 솔루션을 만들고 싶습니다.",
+      aboutFocus: ["키워드 : RAG, LLM, NLP, VLM, Agent"],
       education: "교육",
       experience: "경력",
       awardsCertifications: "수상이력 & 자격증",
@@ -73,12 +73,13 @@ export default function App() {
       mainProjects: "주요 프로젝트",
     },
     ENG: {
-      name: "Eunsu Park",
+      name: "Eunsu Park's Page",
       title: "AI Engineer",
       tagline: "An engineer who solves real-world problems with AI technology.",
       aboutTitle: "About",
       aboutText:
-        "Currently growing as an AI specialist through the AX (AI Transformation) course by IBM x RedHat. With strong data-driven problem-solving skills and a knack for quickly learning new technologies, I aim to create AI solutions that tackle complex business needs.",
+        "Starting as a Search Engine Engineer, I am currently growing as an AI specialist through the AX (AI Transformation) course by IBM x RedHat. With strong data-driven problem-solving skills and a knack for quickly learning new technologies, I aim to create AI solutions that tackle complex business needs.",
+      aboutFocus: ["Keyword : RAG, LLM, NLP, VLM, Agent"],
       education: "Education",
       experience: "Experience",
       awardsCertifications: "Awards & Certifications",
@@ -139,7 +140,7 @@ export default function App() {
       id: "ibm",
       title:
         lang === "KOR" ? "[IBM x RedHat] AX(AI Transformation)" : "[IBM x RedHat] AX (AI Transformation)",
-      location: lang === "KOR" ? "대한민국" : "Korea",
+      location: lang === "KOR" ? "서울, 대한민국" : "Seoul, Korea",
       dates: lang === "KOR" ? "2025.05 ~ 현재" : "May 2025 – Present",
       details:
         lang === "KOR"
@@ -379,7 +380,7 @@ export default function App() {
 
   const pj_side =
   lang === "KOR"
-    ? { label: "사이드 프로젝트 보러가기", href: "https://github.com/peussd55" }
+    ? { label: "프로젝트 더 보러가기", href: "https://github.com/peussd55" }
     : { label: "Go to Side Project", href: "https://github.com/peussd55" };
 
   // --- 스킬
@@ -407,6 +408,7 @@ export default function App() {
             { Icon: SiSpringboot, label: "Springboot" },
           ]},
           { title: "데이터 / 인프라", items: [
+            { Icon: SiLinux, label: "Linux" },
             { Icon: SiPostgresql, label: "PostgreSQL" },
             { Icon: SiDocker, label: "Docker" },
             { Icon: SiGit, label: "Git" },
@@ -436,6 +438,7 @@ export default function App() {
             { Icon: SiSpringboot, label: "Springboot" },
           ]},
           { title: "Data/Infra", items: [
+            { Icon: SiLinux, label: "Linux" },
             { Icon: SiPostgresql, label: "PostgreSQL" },
             { Icon: SiDocker, label: "Docker" },
             { Icon: SiGit, label: "Git" },
