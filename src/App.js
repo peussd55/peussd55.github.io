@@ -12,6 +12,8 @@ import {
   SiVercel, SiLinux
 } from "react-icons/si";
 
+const withBase = (relPath) => `${process.env.PUBLIC_URL}${relPath}`;
+
 /** 프로필 이미지: public/profile.jpg 가 있으면 노출, 없으면 자동 숨김 */
 function ProfileAvatar() {
   const imgRef = useRef(null);
@@ -277,7 +279,7 @@ export default function App() {
             "Built Agentic Architecture: Orchestrated modules like Retrieval, Reasoning, and Drafting using LangChain, and implemented dynamic tool routing.",
             "Database & Deployment: Established a Vector DB with ChromaDB and a PostgreSQL RDBMS. Automated the CI/CD pipeline and deployed the service using GitHub Actions and AWS EC2.",
           ],
-    images: ["/images/lawai.png"],
+    images: [withBase("/images/lawai.png")],
   };
 
   const pj_bindq = {
@@ -375,7 +377,11 @@ export default function App() {
               Go to Service
             </a>,
           ],
-    images: ["/images/estandard_1.png","/images/estandard_2.png","/images/estandard_3.png"],
+      images: [
+        withBase("/images/estandard_1.png"),
+        withBase("/images/estandard_2.png"),
+        withBase("/images/estandard_3.png"),
+      ],
   };
 
   const pj_side =
