@@ -9,7 +9,7 @@ import {
   SiPostgresql, SiDocker, SiGit, SiFigma, SiKeras,
   SiScikitlearn, SiJquery, SiGithubactions, SiJupyter,
   SiFastapi, SiFlask, SiSpring, SiSpringboot, SiAmazonaws,
-  SiVercel, SiLinux
+  SiVercel, SiLinux, SiPodman, SiMongodb, SiSubversion
 } from "react-icons/si";
 
 const withBase = (relPath) => `${process.env.PUBLIC_URL}${relPath}`;
@@ -416,11 +416,15 @@ export default function App() {
           ]},
           { title: "데이터 / 인프라", items: [
             { Icon: SiLinux, label: "Linux" },
-            { Icon: SiPostgresql, label: "PostgreSQL" },
-            { Icon: SiDocker, label: "Docker" },
-            { Icon: SiGit, label: "Git" },
-            { Icon: SiGithubactions, label: "Githubactions" },
             { Icon: SiAmazonaws, label: "Amazonaws" },
+            { Icon: SiPostgresql, label: "PostgreSQL" },
+            { Icon: SiMongodb, label: "MongoDB" },
+            { Icon: SiDocker, label: "Docker" },
+            { Icon: SiPodman, label: "Podman" },
+          ]},
+          { title: "버전 관리", items: [
+            { Icon: SiGit, label: "Git" },
+            { Icon: SiSubversion, label: "Subversion" },
           ]},
         ]
       : [
@@ -444,13 +448,17 @@ export default function App() {
             { Icon: SiSpring, label: "Spring" },
             { Icon: SiSpringboot, label: "Springboot" },
           ]},
-          { title: "Data/Infra", items: [
+          { title: "Data / Infra", items: [
             { Icon: SiLinux, label: "Linux" },
-            { Icon: SiPostgresql, label: "PostgreSQL" },
-            { Icon: SiDocker, label: "Docker" },
-            { Icon: SiGit, label: "Git" },
-            { Icon: SiGithubactions, label: "Githubactions" },
             { Icon: SiAmazonaws, label: "Amazonaws" },
+            { Icon: SiPostgresql, label: "PostgreSQL" },
+            { Icon: SiMongodb, label: "MongoDB" },
+            { Icon: SiDocker, label: "Docker" },
+            { Icon: SiPodman, label: "Podman" },
+          ]},
+          { title: "Version Control", items: [
+            { Icon: SiGit, label: "Git" },
+            { Icon: SiSubversion, label: "Subversion" },
           ]},
         ];
 
