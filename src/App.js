@@ -70,11 +70,14 @@ export default function App() {
       experience: "경력",
       awardsCertifications: "수상이력 & 자격증",
       projects: "프로젝트",
+      paperReviews: "논문리뷰",
       achievements: "대회",
       skills: "보유 기술",
       mainProjects: "주요 프로젝트",
       expandAll: "전체 펼치기",
       collapseAll: "전체 접기",
+      paperReviewsMore: "더보기",
+      paperReviewsLess: "접기",
     },
     ENG: {
       name: "Eunsu Park's Page",
@@ -88,11 +91,14 @@ export default function App() {
       experience: "Experience",
       awardsCertifications: "Awards & Certifications",
       projects: "Projects",
+      paperReviews: "Paper Reviews",
       achievements: "Competitions",
       skills: "Skills",
       mainProjects: "Main Projects",
       expandAll: "Expand All",
       collapseAll: "Collapse All",
+      paperReviewsMore: "Show more",
+      paperReviewsLess: "Show less",
     },
   };
 
@@ -380,6 +386,69 @@ export default function App() {
   lang === "KOR"
     ? { label: "프로젝트 더 보러가기", href: "https://github.com/peussd55" }
     : { label: "Go to Side Project", href: "https://github.com/peussd55" };
+  const PAPER_REVIEW_MAX_VISIBLE = 4;
+  const paperReviews = [
+    {
+      id: "transformer",
+      title: {
+        KOR: "Transformer & Seq2Seq with Attention 리뷰",
+        ENG: "Transformer & Seq2Seq with Attention Review",
+      },
+      summary: {
+        KOR: "RNN 기반 Seq2Seq with Attention과 Transformer(Self-Attention)의 구조와 차이를 비교",
+        ENG: "A Comparison of the Structure and Differences between RNN-based Seq2Seq with Attention and Transformer (Self-Attention)",
+      },
+      href: "https://peussd55.github.io/lemonade_paper_review_repo/Transformer.pdf",
+    },
+    {
+      id: "gpt-bert",
+      title: {
+        KOR: "GPT-1·2·3 & BERT 사전학습 패러다임 리뷰",
+        ENG: "Pre-training Paradigms: GPT-1/2/3 & BERT",
+      },
+      summary: {
+        KOR: "Autoregressive(GPT)와 Masked LM(BERT)의 구조와 차이를 비교",
+        ENG: "A Comparison of the Structure and Differences between Autoregressive (GPT) and Masked LM (BERT)",
+      },
+      href: "https://peussd55.github.io/lemonade_paper_review_repo/Bert_GPT.pdf",
+    },
+    {
+      id: "vit-swin",
+      title: {
+        KOR: "Vision Transformer & Swin Transformer v1/v2 리뷰",
+        ENG: "Vision Transformer & Swin Transformer v1/v2 Review",
+      },
+      summary: {
+        KOR: "ViT 패치 임베딩과 Swin의 시프트 윈도우·계층적 구조 개선을 비교",
+        ENG: "Reviews ViT patch embeddings versus Swin's shifted window and hierarchical upgrades across v1/v2.",
+      },
+      href: "https://peussd55.github.io/lemonade_paper_review_repo/Vision-Transformer.pdf",
+    },
+    {
+      id: "sam",
+      title: {
+        KOR: "SAM & SAM 2 세그멘테이션 리뷰",
+        ENG: "Segmentation Review: SAM & SAM 2",
+      },
+      summary: {
+        KOR: "프롬프트 기반 세그멘테이션 파이프라인과 SAM/SAM 2의 데이터셋, 마스크 생성 전략 비교",
+        ENG: "Covers promptable segmentation pipelines, datasets, and mask generation in SAM and SAM 2.",
+      },
+      href: "https://peussd55.github.io/lemonade_paper_review_repo/SAM2.pdf",
+    },
+    // {
+    //   id: "yolo",
+    //   title: {
+    //     KOR: "YOLO v1·v3·v5·v11 진화 리뷰",
+    //     ENG: "Evolution of YOLO v1/v3/v5/v11",
+    //   },
+    //   summary: {
+    //     KOR: "YOLO 계열의 백본·헤드 구조 변화와 성능/경량화 트렌드를 따라가며 정리",
+    //     ENG: "Tracks YOLO backbone/head upgrades and performance-versus-efficiency trends from v1 to v11.",
+    //   },
+    //   href: "https://arxiv.org/abs/1506.02640",
+    // },
+  ];
 
   const projectKeys = ["lawI", "pj_bindq", "pj_scamcut", "pj_estandard"];
 
@@ -406,6 +475,9 @@ export default function App() {
   });
 
   const [expandedEntries, setExpandedEntries] = useState(() => buildExpandedState(false));
+  const [showAllPaperReviews, setShowAllPaperReviews] = useState(false);
+  const hasMorePaperReviews = paperReviews.length > PAPER_REVIEW_MAX_VISIBLE;
+  const visiblePaperReviews = showAllPaperReviews ? paperReviews : paperReviews.slice(0, PAPER_REVIEW_MAX_VISIBLE);
 
   const toggleEntry = (section, key) =>
     setExpandedEntries((prev) => ({
@@ -682,6 +754,40 @@ export default function App() {
             {pj_side.label}
             <span aria-hidden="true">↗</span>
           </a>
+        </div>
+      </section>
+
+      {/* Paper Reviews */}
+      <section className="PaperReview-section">
+        <h2>{t[lang].paperReviews}</h2>
+        <div className="section-content entry-list">
+          {visiblePaperReviews.map((item) => (
+            <a
+              key={item.id}
+              className="paper-review-link"
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div>
+                <h3 className="entry-title">{item.title[lang]}</h3>
+                {item.summary?.[lang] && (
+                  <p className="entry-meta">{item.summary[lang]}</p>
+                )}
+              </div>
+              <span className="paper-review-arrow" aria-hidden="true">↗</span>
+            </a>
+          ))}
+          {hasMorePaperReviews && (
+            <button
+              type="button"
+              className="side-project-card"
+              onClick={() => setShowAllPaperReviews((prev) => !prev)}
+            >
+              {showAllPaperReviews ? t[lang].paperReviewsLess : t[lang].paperReviewsMore}
+              <span aria-hidden="true">↗</span>
+            </button>
+          )}
         </div>
       </section>
 

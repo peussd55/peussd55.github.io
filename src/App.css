@@ -97,6 +97,32 @@ section h2{
 .entry-header:hover{ background:var(--hover-bg); }
 .entry-title{ margin:0; font-weight:700; font-size:18px; }
 .entry-meta{ margin:0; color:var(--muted); font-size:14px; }
+.paper-review-link{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  padding:12px 10px;
+  border:1px solid transparent;
+  border-radius:12px;
+  background:var(--card-bg);
+  box-shadow: var(--shadow);
+  text-decoration:none;
+  color:inherit;
+  transition: background .2s ease, transform .12s ease;
+}
+.paper-review-link:hover{
+  background:var(--hover-bg);
+  transform: translateY(-1px);
+}
+.paper-review-link:focus-visible{
+  outline:2px solid #3b82f6;
+  outline-offset:2px;
+}
+.paper-review-arrow{
+  font-size:1.2rem;
+  line-height:1;
+}
 
 .arrow{ transition: transform .2s ease; }
 .arrow.expanded{ transform: rotate(180deg); }
@@ -286,27 +312,32 @@ section h2{
 }
 
 /* 사이드 프로젝트 보러가기 스타일 */
-/* .side-project-card {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 14px 18px;
-  margin-top: 18px;
-  border-radius: 14px;
-  border: 1px solid rgba(77, 161, 255, 0.45);
-  background: rgba(16, 25, 39, 0.65);
-  color: var(--text);
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+.side-project-card{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:12px 16px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:var(--card-bg);
+  color:var(--fg);
+  cursor:pointer;
+  box-shadow: var(--shadow);
+  font: inherit;
+  font-weight:600;
+  text-decoration:none;
+  transition: background .2s ease, transform .12s ease;
+  align-self:flex-start;
 }
-
-.side-project-card:hover {
+.side-project-card:hover{
+  background:var(--hover-bg);
   transform: translateY(-1px);
-  box-shadow: 0 10px 24px rgba(77, 161, 255, 0.18);
-  background: rgba(77, 161, 255, 0.12);
 }
-
-.side-project-card span {
-  font-size: 1.1em;
-} */
+.side-project-card:focus-visible{
+  outline:2px solid #3b82f6;
+  outline-offset:2px;
+}
+.side-project-card span{
+  font-size:1.1em;
+  line-height:1;
+}
