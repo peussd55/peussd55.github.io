@@ -275,7 +275,14 @@ export default function App() {
             "Built Agentic Architecture: Orchestrated modules like Retrieval, Reasoning, and Drafting using LangChain, and implemented dynamic tool routing.",
             "Database & Deployment: Established a Vector DB with ChromaDB and a PostgreSQL RDBMS. Automated the CI/CD pipeline and deployed the service using GitHub Actions and AWS EC2.",
           ],
-    images: [withBase("/images/lawai.png")],
+    images: [
+        withBase("/images/lawai_01.png"),
+        withBase("/images/lawai_02.png"),
+        withBase("/images/lawai_03.png"),
+        withBase("/images/lawai_04.png"),
+        withBase("/images/lawai_05.png"),
+        withBase("/images/lawai_06.png"),
+      ],
   };
 
   const pj_bindq = {
