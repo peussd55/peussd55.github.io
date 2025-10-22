@@ -448,18 +448,18 @@ export default function App() {
       },
       href: "https://peussd55.github.io/lemonade_paper_review_repo/2-Stage.pdf",
     },
-    {
-      id: "yolo",
-      title: {
-        KOR: "YOLO v1·v3·v5·v11 진화 리뷰",
-        ENG: "Evolution of YOLO v1/v3/v5/v11",
-      },
-      summary: {
-        KOR: "YOLO 계열의 백본·헤드 구조 변화와 성능/경량화 트렌드를 따라가며 정리",
-        ENG: "Tracks YOLO backbone/head upgrades and performance-versus-efficiency trends from v1 to v11.",
-      },
-      href: "https://peussd55.github.io/lemonade_paper_review_repo/YOLO.pdf",
-    },
+    // {
+    //   id: "yolo",
+    //   title: {
+    //     KOR: "YOLO v1·v3·v5·v11 진화 리뷰",
+    //     ENG: "Evolution of YOLO v1/v3/v5/v11",
+    //   },
+    //   summary: {
+    //     KOR: "YOLO 계열의 백본·헤드 구조 변화와 성능/경량화 트렌드를 따라가며 정리",
+    //     ENG: "Tracks YOLO backbone/head upgrades and performance-versus-efficiency trends from v1 to v11.",
+    //   },
+    //   href: "https://peussd55.github.io/lemonade_paper_review_repo/YOLO.pdf",
+    // },
   ];
 
   const projectKeys = ["lawI", "pj_bindq", "pj_scamcut", "pj_estandard"];
