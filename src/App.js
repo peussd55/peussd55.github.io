@@ -57,15 +57,36 @@ export default function App() {
 
   // ===== 언어 토글 =====
   const [lang, setLang] = useState("KOR"); // 'KOR' | 'ENG'
+  const [aboutExpanded, setAboutExpanded] = useState(false);
   const t = {
     KOR: {
       name: "Eunsu Park's Page",
       title: "AI 엔지니어",
       tagline: "AI 기술로 현실의 문제를 해결하는 엔지니어",
       aboutTitle: "소개",
-      aboutText:
-        "검색엔진 엔지니어를 거쳐 IBM x RedHat의 AX(AI Transformation) 과정을 통해 AI 전문가로 성장하고 있습니다. 데이터 기반의 문제 해결 능력과 새로운 기술에 대한 빠른 학습 능력을 바탕으로, 복잡한 비즈니스 요구사항을 해결하는 AI 솔루션을 만들고 싶습니다.",
-      aboutFocus: ["키워드 : RAG, LLM, NLP, VLM, Agent"],
+      aboutTextLines: [
+        "검색엔진 엔지니어를 거쳐 AI 전문가로 성장하고 있습니다. 데이터 기반의 문제 해결 능력과 새로운 기술에 대한 빠른 학습 능력을 바탕으로, 복잡한 비즈니스 요구사항을 해결하는 AI 솔루션을 만들고 싶습니다.",
+        "",
+        "[보유 역량]",
+        "- TensorFlow, PyTorch 등 딥러닝 라이브러리로 이미지, 텍스트데이터의 DNN·CNN·RNN·NLP 실습 및 모델 아키텍처 구현",
+        "- Scikit-learn의 ML모델 및 Boosting 모델(XGboost, Catboost, LightGBM)을 활용하여 하이퍼파라미터 튜닝 및 앙상블모델을 구성",
+        "- Pandas를 이용하여 데이터전처리(결측치처리, Feature Engineering)",
+        "- 파이썬 시각화 라이브러리(matplotlib, seaborn)를 활용한 데이터 시각화",
+        "- ChromaDB 등  Vector database 기반 RAG구성",
+        "- Ollama를 이용한 오픈소스 Pre-trained LLM 서빙",
+        "- Langchain, LanGraph를 이용한 LLM 추상화 프레임워크 활용",
+        "- FastAPI/Flask 를 활용한 RestAPI기반 서버구성",
+        "- Docker(Podman) 이미지 기반 배포 ",
+        "- AWS EC2를 이용한 서비스 배포, Route53 DNS 설정",
+        "- Runpod GPU 클라우드 서버활용",
+        "- 논문 리서치",
+        "- Figma를 이용한 프론트 목업 작성, React, JQuery를 활용한 기본적인 프론트엔드 코드 작성",
+        "",
+        "◎ 관심 분야 : RAG, LLM, NLP, VLM, Agent",
+      ],
+      // aboutFocus: ["키워드 : RAG, LLM, NLP, VLM, Agent"],
+      aboutToggleExpand: "펴기↘",
+      aboutToggleCollapse: "접기↗",
       education: "교육",
       experience: "경력",
       awardsCertifications: "수상이력 & 자격증",
@@ -84,9 +105,29 @@ export default function App() {
       title: "AI Engineer",
       tagline: "An engineer who solves real-world problems with AI technology.",
       aboutTitle: "About",
-      aboutText:
-        "Starting as a Search Engine Engineer, I am currently growing as an AI specialist through the AX (AI Transformation) course by IBM x RedHat. With strong data-driven problem-solving skills and a knack for quickly learning new technologies, I aim to create AI solutions that tackle complex business needs.",
-      aboutFocus: ["Keyword : RAG, LLM, NLP, VLM, Agent"],
+      aboutTextLines: [
+        "I am transitioning from a Search Engine Engineer to an AI Specialist. Leveraging data-driven problem-solving abilities and a capacity for rapid learning, I am eager to create AI solutions that solve complex business requirements.",
+        "",
+        "[Skills & Competencies]",
+        "- Hands-on implementation of DNN, CNN, RNN, and NLP model architectures for image and text data using deep learning libraries such as TensorFlow and PyTorch.",
+        "- Configuration of ensemble models and hyperparameter tuning using Scikit-learn's machine learning models and Boosting models (XGBoost, CatBoost, LightGBM).",
+        "- Data preprocessing (handling missing values, feature engineering) using Pandas.",
+        "- Data visualization using Python libraries (Matplotlib, Seaborn).",
+        "- Building RAG (Retrieval-Augmented Generation) systems based on vector databases like ChromaDB.",
+        "- Serving open-source pre-trained LLMs using Ollama.",
+        "- Utilizing LLM abstraction frameworks like LangChain and LangGraph.",
+        "- Building REST API-based servers using FastAPI and Flask.",
+        "- Deployment based on Docker (Podman) images.",
+        "- Service deployment using AWS EC2 and configuring Route53 DNS.",
+        "- Utilizing Runpod GPU cloud servers.",
+        "- Researching academic papers.",
+        "- Creating front-end mockups using Figma and writing basic front-end code with React and JQuery.",
+        "",
+        "◎ Areas of Interest: RAG, LLM, NLP, VLM, Agent",
+      ],
+      // aboutFocus: ["Keyword : RAG, LLM, NLP, VLM, Agent"],
+      aboutToggleExpand: "Expand↘",
+      aboutToggleCollapse: "Collapse↗",
       education: "Education",
       experience: "Experience",
       awardsCertifications: "Awards & Certifications",
@@ -101,6 +142,19 @@ export default function App() {
       paperReviewsLess: "Show less",
     },
   };
+
+  useEffect(() => {
+    setAboutExpanded(false);
+  }, [lang]);
+
+  const aboutTextLines = t[lang].aboutTextLines;
+  const ABOUT_PREVIEW_LINE_LIMIT = 2;
+  const shouldTruncateAbout = aboutTextLines.length > ABOUT_PREVIEW_LINE_LIMIT;
+  const aboutLinesToDisplay =
+    aboutExpanded || !shouldTruncateAbout
+      ? aboutTextLines
+      : aboutTextLines.slice(0, ABOUT_PREVIEW_LINE_LIMIT);
+  const showAboutEllipsis = !aboutExpanded && shouldTruncateAbout;
 
   // --- 교육
   const educationEntries  = [
@@ -504,8 +558,14 @@ export default function App() {
       [section]: { ...prev[section], [key]: !prev[section]?.[key] },
     }));
 
-  const handleExpandAll = () => setExpandedEntries(buildExpandedState(true));
-  const handleCollapseAll = () => setExpandedEntries(buildExpandedState(false));
+  const handleExpandAll = () => {
+    setExpandedEntries(buildExpandedState(true));
+    if (shouldTruncateAbout) setAboutExpanded(true);
+  };
+  const handleCollapseAll = () => {
+    setExpandedEntries(buildExpandedState(false));
+    if (shouldTruncateAbout) setAboutExpanded(false);
+  };
 
   // --- 스킬
   const skills =
@@ -640,22 +700,39 @@ export default function App() {
       {/* About */}
       {/* <section className="About-section">
         <h2>{t[lang].aboutTitle}</h2>
-        <p>{t[lang].aboutText}</p>
+        <p>{t[lang].aboutTextLines.join(" ")}</p>
       </section> */}
       <section className="About-section">
-      <h2>{t[lang].aboutTitle}</h2>
-      <p>{t[lang].aboutText}</p>
-      {t[lang].aboutFocus?.length > 0 && (
-        <div className="about-focus">
-          {/* <span>{lang === "KOR" ? "관심 기술 스택:" : "Focus Areas:"}</span> */}
-          <ul>
-            {t[lang].aboutFocus.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </section>
+        <h2>{t[lang].aboutTitle}</h2>
+        <p>
+          {aboutLinesToDisplay.map((line, idx) => (
+            <React.Fragment key={`about-line-${idx}`}>
+              {line}
+              {idx < aboutLinesToDisplay.length - 1 && <br />}
+            </React.Fragment>
+          ))}
+          {showAboutEllipsis && " ..."}
+        </p>
+        {shouldTruncateAbout && (
+          <button
+            type="button"
+            className="about-toggle"
+            onClick={() => setAboutExpanded((prev) => !prev)}
+          >
+            {aboutExpanded ? t[lang].aboutToggleCollapse : t[lang].aboutToggleExpand}
+          </button>
+        )}
+        {t[lang].aboutFocus?.length > 0 && (
+          <div className="about-focus">
+            {/* <span>{lang === "KOR" ? "관심 기술 스택:" : "Focus Areas:"}</span> */}
+            <ul>
+              {t[lang].aboutFocus.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
 
 
       {/* Education */}

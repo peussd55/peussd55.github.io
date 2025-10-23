@@ -72,6 +72,33 @@ section h2{
   line-height: 1.3;
 }
 
+.About-section .about-toggle{
+  margin-top: 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.About-section .about-toggle:hover{
+  color: var(--fg);
+  text-decoration-color: var(--fg);
+}
+
+.About-section .about-toggle:focus-visible{
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.About-section p{
+  margin: 0;
+}
+
 /* 공통 컨텐츠 래퍼 */
 .section-content{ margin-top: 8px; }
 .entry-list {
