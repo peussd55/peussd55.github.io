@@ -57,30 +57,46 @@ export default function App() {
 
   // ===== 언어 토글 =====
   const [lang, setLang] = useState("KOR"); // 'KOR' | 'ENG'
-  const [aboutExpanded, setAboutExpanded] = useState(false);
+  const [aboutExpanded, setAboutExpanded] = useState(true);
   const t = {
     KOR: {
-      name: "Eunsu Park's Page",
-      title: "AI 엔지니어",
+      name: "RAG·LLM 서비스에 특화된 AI 엔지니어",
+      title: "검색엔진 엔지니어를 거쳐 AI 전문가로 성장하고 있습니다. 데이터 기반의 문제 해결 능력과 새로운 기술에 대한 빠른 학습 능력을 바탕으로, 복잡한 비즈니스 요구사항을 해결하는 AI 솔루션을 만들고 싶습니다.",
       tagline: "AI 기술로 현실의 문제를 해결하는 엔지니어",
       aboutTitle: "소개",
       aboutTextLines: [
-        "검색엔진 엔지니어를 거쳐 AI 전문가로 성장하고 있습니다. 데이터 기반의 문제 해결 능력과 새로운 기술에 대한 빠른 학습 능력을 바탕으로, 복잡한 비즈니스 요구사항을 해결하는 AI 솔루션을 만들고 싶습니다.",
+        // "◎ 보유 역량",
+        // "- TensorFlow, PyTorch 등 딥러닝 라이브러리로 이미지, 텍스트데이터의 DNN·CNN·RNN·NLP 실습 및 모델 아키텍처 구현",
+        // "- Scikit-learn의 ML모델 및 Boosting 모델(XGboost, Catboost, LightGBM)을 활용하여 하이퍼파라미터 튜닝 및 앙상블모델을 구성",
+        // "- Pandas를 이용하여 데이터전처리(결측치처리, Feature Engineering)",
+        // "- 파이썬 시각화 라이브러리(matplotlib, seaborn)를 활용한 데이터 시각화",
+        // "- ChromaDB 등  Vector database 기반 RAG구성",
+        // "- Ollama를 이용한 오픈소스 Pre-trained LLM 서빙",
+        // "- Langchain, LanGraph를 이용한 LLM 추상화 프레임워크 활용",
+        // "- FastAPI/Flask 를 활용한 RestAPI기반 서버구성",
+        // "- Docker(Podman) 이미지 기반 배포 ",
+        // "- AWS EC2를 이용한 서비스 배포, Route53 DNS 설정",
+        // "- Runpod GPU 클라우드 서버활용",
+        // "- 논문 리서치",
+        // "- Figma를 이용한 프론트 목업 작성, React, JQuery를 활용한 기본적인 프론트엔드 코드 작성",
+        "[Programming Language]",
+        "- Python, Java, R",
         "",
-        "[보유 역량]",
-        "- TensorFlow, PyTorch 등 딥러닝 라이브러리로 이미지, 텍스트데이터의 DNN·CNN·RNN·NLP 실습 및 모델 아키텍처 구현",
-        "- Scikit-learn의 ML모델 및 Boosting 모델(XGboost, Catboost, LightGBM)을 활용하여 하이퍼파라미터 튜닝 및 앙상블모델을 구성",
-        "- Pandas를 이용하여 데이터전처리(결측치처리, Feature Engineering)",
-        "- 파이썬 시각화 라이브러리(matplotlib, seaborn)를 활용한 데이터 시각화",
-        "- ChromaDB 등  Vector database 기반 RAG구성",
-        "- Ollama를 이용한 오픈소스 Pre-trained LLM 서빙",
-        "- Langchain, LanGraph를 이용한 LLM 추상화 프레임워크 활용",
-        "- FastAPI/Flask 를 활용한 RestAPI기반 서버구성",
-        "- Docker(Podman) 이미지 기반 배포 ",
-        "- AWS EC2를 이용한 서비스 배포, Route53 DNS 설정",
-        "- Runpod GPU 클라우드 서버활용",
-        "- 논문 리서치",
-        "- Figma를 이용한 프론트 목업 작성, React, JQuery를 활용한 기본적인 프론트엔드 코드 작성",
+        "[Engineering]",
+        "- LLM Application : LangChain, LangGraph, OpenAI (API)",
+        "- Database : PostgreSQL, Mysql, MongoDB, Elasticsearch, Chroma, Qdrant, FAISS",
+        "- Open-Source LLM Serving : vLLM, Ollama",
+        "- Backend : FastAPI, Flask",
+        "",
+        "[Modeling]",
+        "- Data Processing & Viz : Pandas, Numpy, Matplotlib, Seaborn",
+        "- Modeling : Pytorch, Tensorflow(Keras), Scikit-learn, XGBoost, LightGBM, Catboost",
+        "- Hyper Parameter Tuning : Optuna",
+        "",
+        "[Infra & DevOps]",
+        "- Infra : AWS (EC2, Route 53), Docker, Vercel",
+        "- CI/CD : GitHub Actions",
+        "- Version Control : Git, SVN",
         "",
         "◎ 관심 분야 : RAG, LLM, NLP, VLM, Agent",
       ],
@@ -101,27 +117,43 @@ export default function App() {
       paperReviewsLess: "접기",
     },
     ENG: {
-      name: "Eunsu Park's Page",
-      title: "AI Engineer",
+      name: "AI Engineer specialized in RAG/LLM Services",
+      title: "I am transitioning from a Search Engine Engineer to an AI Specialist. Leveraging data-driven problem-solving abilities and a capacity for rapid learning, I am eager to create AI solutions that solve complex business requirements.",
       tagline: "An engineer who solves real-world problems with AI technology.",
       aboutTitle: "About",
       aboutTextLines: [
-        "I am transitioning from a Search Engine Engineer to an AI Specialist. Leveraging data-driven problem-solving abilities and a capacity for rapid learning, I am eager to create AI solutions that solve complex business requirements.",
+        // "[Skills & Competencies]",
+        // "- Hands-on implementation of DNN, CNN, RNN, and NLP model architectures for image and text data using deep learning libraries such as TensorFlow and PyTorch.",
+        // "- Configuration of ensemble models and hyperparameter tuning using Scikit-learn's machine learning models and Boosting models (XGBoost, CatBoost, LightGBM).",
+        // "- Data preprocessing (handling missing values, feature engineering) using Pandas.",
+        // "- Data visualization using Python libraries (Matplotlib, Seaborn).",
+        // "- Building RAG (Retrieval-Augmented Generation) systems based on vector databases like ChromaDB.",
+        // "- Serving open-source pre-trained LLMs using Ollama.",
+        // "- Utilizing LLM abstraction frameworks like LangChain and LangGraph.",
+        // "- Building REST API-based servers using FastAPI and Flask.",
+        // "- Deployment based on Docker (Podman) images.",
+        // "- Service deployment using AWS EC2 and configuring Route53 DNS.",
+        // "- Utilizing Runpod GPU cloud servers.",
+        // "- Researching academic papers.",
+        // "- Creating front-end mockups using Figma and writing basic front-end code with React and JQuery.",
+        "[Programming Language]",
+        "- Python, Java, R",
         "",
-        "[Skills & Competencies]",
-        "- Hands-on implementation of DNN, CNN, RNN, and NLP model architectures for image and text data using deep learning libraries such as TensorFlow and PyTorch.",
-        "- Configuration of ensemble models and hyperparameter tuning using Scikit-learn's machine learning models and Boosting models (XGBoost, CatBoost, LightGBM).",
-        "- Data preprocessing (handling missing values, feature engineering) using Pandas.",
-        "- Data visualization using Python libraries (Matplotlib, Seaborn).",
-        "- Building RAG (Retrieval-Augmented Generation) systems based on vector databases like ChromaDB.",
-        "- Serving open-source pre-trained LLMs using Ollama.",
-        "- Utilizing LLM abstraction frameworks like LangChain and LangGraph.",
-        "- Building REST API-based servers using FastAPI and Flask.",
-        "- Deployment based on Docker (Podman) images.",
-        "- Service deployment using AWS EC2 and configuring Route53 DNS.",
-        "- Utilizing Runpod GPU cloud servers.",
-        "- Researching academic papers.",
-        "- Creating front-end mockups using Figma and writing basic front-end code with React and JQuery.",
+        "[Engineering]",
+        "- LLM Application : LangChain, LangGraph, OpenAI (API)",
+        "- Database : PostgreSQL, Mysql, MongoDB, Elasticsearch, Chroma, Qdrant, FAISS",
+        "- Open-Source LLM Serving : vLLM, Ollama",
+        "- Backend : FastAPI, Flask",
+        "",
+        "[Modeling]",
+        "- Data Processing & Viz : Pandas, Numpy, Matplotlib, Seaborn",
+        "- Modeling : Pytorch, Tensorflow(Keras), Scikit-learn, XGBoost, LightGBM, Catboost",
+        "- Hyper Parameter Tuning : Optuna",
+        "",
+        "[Infra & DevOps]",
+        "- Infra : AWS (EC2, Route 53), Docker, Vercel",
+        "- CI/CD : GitHub Actions",
+        "- Version Control : Git, SVN",
         "",
         "◎ Areas of Interest: RAG, LLM, NLP, VLM, Agent",
       ],
@@ -142,10 +174,6 @@ export default function App() {
       paperReviewsLess: "Show less",
     },
   };
-
-  useEffect(() => {
-    setAboutExpanded(false);
-  }, [lang]);
 
   const aboutTextLines = t[lang].aboutTextLines;
   const ABOUT_PREVIEW_LINE_LIMIT = 2;
@@ -232,22 +260,16 @@ export default function App() {
           dates: "2020.10 - 2024.04",
           details: lang === "KOR" ? 
             [
-              "자사의 검색엔진 솔루션을 고객사의 리눅스서버에 설치합니다.",
-              "고객사의 요구사항에 맞춰 검색엔진 커스터마이징을 진행합니다.",
-              "고객사의 데이터베이스 SQL을 제공받고 SQL select문으로 검색엔진서버에 데이터를 수집합니다.",
-              "컬렉션(검색대상), 검색조건, 검색 컬럼(필드)를 정의합니다.",
-              "고객사의 피드백을 받습니다.",
-              "공공데이터 API 유사한 형태로 JSON이나 XML형태로 파싱가능한 API형태로 제공합니다.",
-              "고객사 내부의 통합 검색 화면을 직접 개발하며, 주로 JSP 또는 스프링 MVC 환경에서 검색 서버 및 솔루션 API와 데이터를 송수신하는 방식으로 구현합니다.",
+              "(구축/운영) 자사 검색엔진 솔루션(SF-1)을 활용한 IR 시스템 구축 및 고객사 요구사항에 맞게 커스터마이징",
+              "(데이터 파이프라인) RDB(Oracle/MySQL)에서 데이터를 수집/색인하는 데이터 파이프라인 설계 및 운영",
+              "(백엔드) 검색엔진 API를 활용하여, JSP/Spring MVC 환경에서 통합검색 백엔드 로직 및 API(JSON, XML) 개발",
+              "(프론트엔드) 고객사 요구사항에 맞춘 통합검색 UI(JSP, jQuery) 개발",
             ] : 
             [
-              "Install the search engine solution on the client's Linux server.",
-              "Customize the search engine according to the client's requirements.",
-              "Collect data for the search engine server using SQL select statements from the client's database.",
-              "Define collections (search targets), search conditions, and search columns (fields).",
-              "Receive and incorporate client feedback.",
-              "Provide data through an API that can be parsed as JSON or XML, similar to public data APIs.",
-              "Directly develop internal integrated search screens for clients, implementing data exchange with search servers and solution APIs, primarily using JSP or Spring MVC.",
+              "(Implementation/Operation) Built and operated IR systems using the in-house search solution (SF-1), customizing them to meet client requirements.",
+              "(Data Pipeline) Designed and operated data pipelines for collecting and indexing data from RDBs (Oracle/MySQL).",
+              "(Backend) Developed integrated search backend logic and APIs (JSON, XML) in a JSP/Spring MVC environment, utilizing search engine APIs.",
+              "(Frontend) Developed integrated search UI (JSP, jQuery) tailored to client requirements.",
             ],
         },
         {
@@ -255,23 +277,16 @@ export default function App() {
           dates: "2020.10 - 2024.04",
           details: lang === "KOR" ?
             [
-              "자사의 챗봇 솔루션을 고객사의 리눅스서버에 설치합니다. ",
-              "고객사의 요구사항에 맞춰 검색엔진 커스터마이징을 진행합니다.",
-              "지식구축팀이 고객과 소통하며 인텐트(사용자의도)를 구축하고 문서화합니다.",
-              "개발팀이 챗봇 관리도구를 통해 인텐트를 적재합니다.",
-              "챗봇 관리도구를 고객사의 요청에맞게 커스텀개발합니다.",
-              "필요할 경우 검색엔진을 도입하여 검색기능을 챗봇에 연계합니다.",
-              "챗봇 서비스 시스템(프론트엔드, 백엔드, 관리도구 DB 포함)을 개발하고 배포합니다.",
-              "고객을 위한 사용자 가이드를 제공합니다.",
+              "(구축/운영) 자사 챗봇 솔루션(WISE iChat) 설치, 운영 및 고객사 요구사항에 맞춘 커스텀 개발 (Java)",
+              "(검색 연계) 챗봇의 인텐트 답변 한계를 극복하기 위해, 검색엔진(SF-1)을 챗봇 시나리오와 연계하는 시스템 개발",
+              "(경험) 이 과정에서 키워드/인텐트 기반 시스템의 명확한 한계를 실무에서 경험 (LLM/RAG 전환의 핵심 동기)",
+              "(협업) 지식구축팀, 기획팀과 협업하여 인텐트 적재 및 관리도구 커스터마이징 수행",
             ] :
             [
-              "nstall the chatbot solution on the client's Linux server.",
-              "Customize the search engine according to the client's requirements.",
-              "Collaborate with the client to establish and document user intents through the knowledge-building team.",
-              "Load the established intents using the chatbot management tool.",
-              "Integrate search engine functionality into the chatbot as needed.",
-              "Develop and deploy the chatbot service system (including the front-end, back-end, and admin tool database).",
-              "Provide user guides for the client.",
+              "(Implementation/Operation) Installed and operated the in-house chatbot solution (WISE iChat), performing custom development (Java) to meet client requirements.",
+              "(Search Integration) Developed a system integrating the search engine (SF-1) with chatbot scenarios to overcome the limitations of intent-based responses.",
+              "(Experience) Gained hands-on experience with the clear limitations of keyword/intent-based systems, which became a key motivation for the transition to LLM/RAG.",
+              "(Collaboration) Collaborated with knowledge-building and planning teams to customize tools for intent loading and management.",
             ],
         },
       ]
@@ -280,6 +295,22 @@ export default function App() {
 
   // --- 수상이력 & 자격증
   const awardsCertifications = [
+    {
+      title: lang === "KOR" ? "정보처리기사" : "Engineer Information Processing",
+      location: lang === "KOR" ? "한국산업인력공단" : "HRD Korea",
+      dates: "2019.11",
+      details: lang === "KOR"
+        ? ["자격 취득"]
+        : ["Acquired Qualification"],
+    },
+    {
+      title: lang === "KOR" ? "데이터분석 준전문가(ADsP)" : "Advanced Data Analytics Semi-Professional (ADsP)",
+      location: lang === "KOR" ? "한국데이터산업진흥원" : "Korea Data Agency",
+      dates: "2024.11",
+      details: lang === "KOR"
+        ? ["자격 취득"]
+        : ["Acquired Qualification"],
+    },
     {
       title: lang === "KOR" ? "2024 뉴스빅데이터 해커톤 우수상" : "2024 News Big Data Hackathon Excellence Award",
       location: lang === "KOR" ? "주최: 한국언론진흥재단" : "Hosted by: Korea Press Foundation",
@@ -294,22 +325,6 @@ export default function App() {
             "Team: Scam Cut",
           ],
     },
-    {
-      title: lang === "KOR" ? "데이터분석 준전문가(ADsP)" : "Advanced Data Analytics Semi-Professional (ADsP)",
-      location: lang === "KOR" ? "한국데이터산업진흥원" : "Korea Data Agency",
-      dates: "2024.11",
-      details: lang === "KOR"
-        ? ["자격 취득"]
-        : ["Acquired Qualification"],
-    },
-    {
-      title: lang === "KOR" ? "정보처리기사" : "Engineer Information Processing",
-      location: lang === "KOR" ? "한국산업인력공단" : "HRD Korea",
-      dates: "2019.11",
-      details: lang === "KOR"
-        ? ["자격 취득"]
-        : ["Acquired Qualification"],
-    },
   ];
 
   // --- 프로젝트
@@ -320,21 +335,40 @@ export default function App() {
     details:
       lang === "KOR"
         ? [
-            "RAG 파이프라인 설계: Llama-3-8B 모델과 RAG를 결합하여 법률 질의응답 성능을 최적화하고, 법령·판례 텍스트를 도메인 구조에 맞게 정제·청킹하여 검색 정확도를 향상",
-            "Agentic 아키텍처 구축: LangChain 기반 에이전트 오케스트레이션으로 Retrieval, 추론, 문서 작성 등 모듈을 유연하게 조율하고, 동적 툴 라우팅을 구현",
-            "데이터베이스 및 배포: ChromaDB를 활용한 Vector DB와 PostgreSQL(RDBMS)을 구축했으며, GitHub Actions와 AWS EC2를 통해 CI/CD 파이프라인을 자동화하고 서비스를 배포.",
+            // "RAG 파이프라인 설계: Llama-3-8B 모델과 RAG를 결합하여 법률 질의응답 성능을 최적화하고, 법령·판례 텍스트를 도메인 구조에 맞게 정제·청킹하여 검색 정확도를 향상",
+            // "Agentic 아키텍처 구축: LangChain 기반 에이전트 오케스트레이션으로 Retrieval, 추론, 문서 작성 등 모듈을 유연하게 조율하고, 동적 툴 라우팅을 구현",
+            // "데이터베이스 및 배포: ChromaDB를 활용한 Vector DB와 PostgreSQL(RDBMS)을 구축했으며, GitHub Actions와 AWS EC2를 통해 CI/CD 파이프라인을 자동화하고 서비스를 배포.",
+            "[개요]",
+            "- (1) 지능형 리서치: 특정 법률 도메인 문서(법령: 민법, 형법 / 판례: 민사, 형사)를 기반으로 사용자의 복잡한 자연어 질의에 대해 정확하고 근거 있는 답변을 생성.",
+            "- (2) 모의 재판 시뮬레이션: IRAC(Issue, Rule, Application, Conclusion) 기반 법률 모의 시뮬레이터 (A 페르소나 vs B 페르소나 가상 법률 공방).",
+            "[핵심 기술]",
+            "- Python, LangGraph, LangChain, FastAPI, VectorDB (Chroma/Qdrant), Docker",
+            "[주요 역할 및 기여]",
+            "- 전체적인 시스템 설계.",
+            "- LangGraph를 이용한 Agentic RAG 파이프라인 아키텍처 설계 및 상태 관리 로직 구현.",
+            "- 법률 문서 특성을 고려한 Chunking 전략 수립 및 VectorDB 인덱싱 파이프라인 구축.",
+            "- FastAPI를 활용하여 Agent 핵심 기능을 외부에서 호출할 수 있는 API 엔드포인트 개발.",
           ]
         : [
-            "Designed RAG Pipeline: Optimized legal Q&A performance by combining the Llama-3-8B model with RAG, and improved search accuracy by refining and chunking legal texts.",
-            "Built Agentic Architecture: Orchestrated modules like Retrieval, Reasoning, and Drafting using LangChain, and implemented dynamic tool routing.",
-            "Database & Deployment: Established a Vector DB with ChromaDB and a PostgreSQL RDBMS. Automated the CI/CD pipeline and deployed the service using GitHub Actions and AWS EC2.",
+            // "Designed RAG Pipeline: Optimized legal Q&A performance by combining the Llama-3-8B model with RAG, and improved search accuracy by refining and chunking legal texts.",
+            // "Built Agentic Architecture: Orchestrated modules like Retrieval, Reasoning, and Drafting using LangChain, and implemented dynamic tool routing.",
+            // "Database & Deployment: Established a Vector DB with ChromaDB and a PostgreSQL RDBMS. Automated the CI/CD pipeline and deployed the service using GitHub Actions and AWS EC2.",
+            "[Overview]",
+            "- (1) Intelligent Research: Generates accurate and well-grounded answers to complex user queries based on specific legal domain documents (Statutes: Civil Act, Criminal Act / Precedents: Civil, Criminal).",
+            "- (2) Mock Trial Simulation: An IRAC (Issue, Rule, Application, Conclusion)-based legal simulator featuring a virtual legal debate between Persona A and Persona B.",
+            "[Key Technologies]",
+            "- Python, LangGraph, LangChain, FastAPI, VectorDB (Chroma/Qdrant), Docker",
+            "[Key Roles & Contributions]",
+            "- Led the overall system architecture design.",
+            "- Designed the Agentic RAG pipeline architecture using LangGraph and implemented state management logic.",
+            "- Established a chunking strategy tailored to the characteristics of legal documents and built the VectorDB indexing pipeline.",
+            "- Developed API endpoints using FastAPI to expose the Agent's core functionalities for external calls.",
           ],
     images: [
         withBase("/images/lawai_01.png"),
         withBase("/images/lawai_02.png"),
         withBase("/images/lawai_03.png"),
         withBase("/images/lawai_04.png"),
-        // withBase("/images/lawai_05.png"),
         withBase("/images/lawai_06.png"),
       ],
   };
@@ -346,29 +380,54 @@ export default function App() {
     details:
       lang === "KOR"
         ? [
-            "프로젝트 진행기간 : 2025.01 - 2025.03",
-            "단백질 구조기반 신약 개발을 위한 De novo 단백질 설계 플랫폼(MVP) 개발",
-            "복잡한 생물정보학 연구 도구들을 하나의 FastAPI·Gradio 기반 화면으로 묶어, 다섯 개 탭을 따라가며 설계할 수 있는 여정을 개발",
-            "타겟 단백질정보를 입력, 타겟의 각 아미노산별 결합 부위 예측 -> 다음 설계  단계의 파라미터값 도출",
-            "파라미터를 활용해 타겟에 결합할 바인더의 백본 설계",
-            "생성한 바인더 백본에 잔기(아미노산 서열)생성",
-            "결합 구조에서 타겟과 바인더의 결합 친화도 확인",
+            // "프로젝트 진행기간 : 2025.01 - 2025.03",
+            // "단백질 구조기반 신약 개발을 위한 De novo 단백질 설계 플랫폼(MVP) 개발",
+            // "복잡한 생물정보학 연구 도구들을 하나의 FastAPI·Gradio 기반 화면으로 묶어, 다섯 개 탭을 따라가며 설계할 수 있는 여정을 개발",
+            // "타겟 단백질정보를 입력, 타겟의 각 아미노산별 결합 부위 예측 -> 다음 설계  단계의 파라미터값 도출",
+            // "파라미터를 활용해 타겟에 결합할 바인더의 백본 설계",
+            // "생성한 바인더 백본에 잔기(아미노산 서열)생성",
+            // "결합 구조에서 타겟과 바인더의 결합 친화도 확인",
+            "[개요]",
+            "- 단백질 결합부위 탐지부터 서열 설계, 도킹 검증까지 단일 FastAPI·Gradio 애플리케이션으로 제공하는 구조 기반 결합제 설계 플랫폼.",
+            "- 사이드바 기반 5단계 파이프라인(Home, 결합부위 예측, RFdiffusion, ProteinMPNN, Prodigy)을 통해 실험·분석을 일괄 수행.",
+            "[핵심 기술]",
+            "- Python, FastAPI, Gradio, Docker, ScanNet, DeepBSRPred, RFdiffusion, ProteinMPNN, PRODIGY, Mol*, 3Dmol.js",
+            "[주요 역할 및 기여]",
+            "- 구조 기반 결합부위 예측 모듈 개발: ScanNet Flask API와 DeepBSRPred 로컬 스크립트를 통합하여 결합 확률을 가중 평균하는 파이프라인 구현, 연속 잔기 필터링과 Top-N 후보 선정을 자동화.",
+            "- 도킹 및 결합 친화도 검증 파트 구축: 업로드된 PDB·ZIP 입력을 체인 보정 후 PRODIGY CLI로 실행하고 ΔG, Kd, 상호작용 지표를 표·CSV로 제공하는 FastAPI 백엔드 및 Gradio UI 흐름 개발.",
+            "- 3D 시각화 및 UX 강화: Gradio 탭과 Mol*/3Dmol.js 기반 뷰어를 연계하여 결합부위 하이라이트, 도킹 결과, 모델 출력 구조를 실시간으로 시각화.",
             <a href="https://github.com/peussd55/BindQ" target="_blank" rel="noopener noreferrer">
               GitHub 저장소 바로가기
             </a>,
           ]
         : [
-            "Project Period: 2025.01 - 2025.03",
-            "Development of a De novo Protein Design Platform (MVP) for Structure-Based Drug Discovery",
-            "Developed a guided design journey by integrating complex bioinformatics research tools into a single interface based on FastAPI and Gradio, structured as a simple five-tab workflow.",
-            "Input target protein information to predict binding sites for each amino acid, which in turn derives the parameters for the subsequent design phase.",
-            "Utilize these parameters to design the backbone of a binder that will attach to the target.",
-            "Generate residues (the amino acid sequence) for the newly created binder backbone.",
-            "Confirm the binding affinity between the target and the binder in the resulting complex structure.",
+            // "Project Period: 2025.01 - 2025.03",
+            // "Development of a De novo Protein Design Platform (MVP) for Structure-Based Drug Discovery",
+            // "Developed a guided design journey by integrating complex bioinformatics research tools into a single interface based on FastAPI and Gradio, structured as a simple five-tab workflow.",
+            // "Input target protein information to predict binding sites for each amino acid, which in turn derives the parameters for the subsequent design phase.",
+            // "Utilize these parameters to design the backbone of a binder that will attach to the target.",
+            // "Generate residues (the amino acid sequence) for the newly created binder backbone.",
+            // "Confirm the binding affinity between the target and the binder in the resulting complex structure.",
+            "[Overview]",
+            "- A structure-based binder design platform providing services from protein binding site detection, sequence design, to docking verification within a single FastAPI/Gradio application.",
+            "- Performs batch experiments and analysis through a sidebar-based 5-stage pipeline (Home, Binding Site Prediction, RFdiffusion, ProteinMPNN, Prodigy).",
+            "[Key Technologies]",
+            "- Python, FastAPI, Gradio, Docker, ScanNet, DeepBSRPred, RFdiffusion, ProteinMPNN, PRODIGY, Mol*, 3Dmol.js",
+            "[Key Roles & Contributions]",
+            "- Developed the structure-based binding site prediction module: Implemented a pipeline integrating the ScanNet Flask API and local DeepBSRPred scripts to calculate weighted average binding probabilities, automating continuous residue filtering and Top-N candidate selection.",
+            "- Built the docking and binding affinity verification component: Developed the FastAPI backend and Gradio UI flow to process uploaded PDB/ZIP inputs (with chain correction), execute them via the PRODIGY CLI, and provide $\Delta G$, $K_d$, and interaction metrics in tables and CSV format.",
+            "- Enhanced 3D visualization and UX: Linked Gradio tabs with Mol*/3Dmol.js-based viewers to enable real-time visualization of highlighted binding sites, docking results, and model output structures.",
             <a href="https://github.com/peussd55/BindQ" target="_blank" rel="noopener noreferrer">
               View GitHub Repository
             </a>,
           ],
+    images: [
+      withBase("/images/bindq_01.png"),
+      withBase("/images/bindq_02.png"),
+      withBase("/images/bindq_03.png"),
+      withBase("/images/bindq_05.png"),
+      withBase("/images/bindq_06.png"),
+    ],
   };
 
   const pj_scamcut = {
@@ -403,7 +462,12 @@ export default function App() {
               Award-Winning Collection
             </a>,
           ],
-    images: [],
+    images: [
+      withBase("/images/scamcut_01.png"),
+      withBase("/images/scamcut_02.png"),
+      withBase("/images/scamcut_03.png"),
+      withBase("/images/scamcut_04.png"),
+    ],
   };
 
   const pj_estandard = {
@@ -547,7 +611,7 @@ export default function App() {
     achievements: mapKeysToValue(sectionKeyMap.achievements, isExpanded),
   });
 
-  const [expandedEntries, setExpandedEntries] = useState(() => buildExpandedState(false));
+  const [expandedEntries, setExpandedEntries] = useState(() => buildExpandedState(true));
   const [showAllPaperReviews, setShowAllPaperReviews] = useState(false);
   const hasMorePaperReviews = paperReviews.length > PAPER_REVIEW_MAX_VISIBLE;
   const visiblePaperReviews = showAllPaperReviews ? paperReviews : paperReviews.slice(0, PAPER_REVIEW_MAX_VISIBLE);
