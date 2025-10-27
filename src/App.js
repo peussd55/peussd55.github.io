@@ -334,7 +334,7 @@ export default function App() {
         withBase("/images/lawai_02.png"),
         withBase("/images/lawai_03.png"),
         withBase("/images/lawai_04.png"),
-        withBase("/images/lawai_05.png"),
+        // withBase("/images/lawai_05.png"),
         withBase("/images/lawai_06.png"),
       ],
   };
@@ -386,9 +386,9 @@ export default function App() {
             "뉴스 임베딩 벡터 간 코사인 유사도를 계산하여 의미 기반의 중복 기사 제거",
             "사용자 프로필과 LLM으로 뉴스에서 추출한 '평균 피해자 프로필'간의 벡터 유사도를 계산하여 가장 연관성 높은 사기 유형을 진단(매칭)",
             "생성형AI도구(DALL-E 등)를 기반으로 뉴스 기반 요약 삽화와 숏폼 영상을 제작",
-            <a href="https://www.kpf.or.kr/synap/skin/doc.html?fn=1735016238208.pdf&rs=/synap/result/board/" target="_blank" rel="noopener noreferrer">
-              수상작 모음집
-            </a>,
+            // <a href="https://www.kpf.or.kr/synap/skin/doc.html?fn=1735016238208.pdf&rs=/synap/result/board/" target="_blank" rel="noopener noreferrer">
+            //   수상작 모음집
+            // </a>,
           ]
         : [
             "Project Period: 2024.10 - 2024.11",
@@ -509,18 +509,18 @@ export default function App() {
       },
       href: "https://peussd55.github.io/lemonade_paper_review_repo/2-Stage.pdf",
     },
-    // {
-    //   id: "yolo",
-    //   title: {
-    //     KOR: "YOLO v1·v3·v5·v11 진화 리뷰",
-    //     ENG: "Evolution of YOLO v1/v3/v5/v11",
-    //   },
-    //   summary: {
-    //     KOR: "YOLO 계열의 백본·헤드 구조 변화와 성능/경량화 트렌드를 따라가며 정리",
-    //     ENG: "Tracks YOLO backbone/head upgrades and performance-versus-efficiency trends from v1 to v11.",
-    //   },
-    //   href: "https://peussd55.github.io/lemonade_paper_review_repo/YOLO.pdf",
-    // },
+    {
+      id: "yolo",
+      title: {
+        KOR: "YOLO v1·v3·v5·v11 진화 리뷰",
+        ENG: "Evolution of YOLO v1/v3/v5/v11",
+      },
+      summary: {
+        KOR: "YOLO 계열의 백본·헤드 구조 변화와 성능/경량화 트렌드를 따라가며 정리",
+        ENG: "Tracks YOLO backbone/head upgrades and performance-versus-efficiency trends from v1 to v11.",
+      },
+      href: "https://peussd55.github.io/lemonade_paper_review_repo/YOLO.pdf",
+    },
   ];
 
   const projectKeys = ["lawI", "pj_bindq", "pj_scamcut", "pj_estandard"];
