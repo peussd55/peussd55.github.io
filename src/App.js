@@ -451,12 +451,11 @@ export default function App() {
         : [
             "Project Period: 2024.10 - 2024.11",
             "2024 News Big Data Hackathon Excellence Award-winning project",
-            "Developing a prototype service for tailored, AI-processed news content based on fraud vulnerability diagnosis using converged data",
-            "Precisely classifying BIG KINDS fraud news by category through KoBERT fine-tuning (+LLM)",
-            "Vectorizing classified news and structured user information (e.g., 'female in her 20s')—converted into text sentences—using SBERT embeddings",
-            "Removing semantically duplicate articles by calculating cosine similarity between news embedding vectors",
-            "Diagnosing (matching) the most relevant fraud type by calculating vector similarity between the user profile and the 'average victim profile' extracted from news via an LLM",
-            "Creating news-based summary illustrations and short-form videos using generative AI tools (e.g., DALL-E)",
+            "Development of a service prototype providing customized, AI-processed news content based on fraud vulnerability diagnosis using converged data.",
+            "Precisely classifying BIG KINDS fraud news by type through KoBERT fine-tuning (+ GPT API singleton zero-shot prompting).",
+            "Removing semantically duplicate articles by calculating cosine similarity between news embedding vectors.",
+            "Diagnosing (matching) the most relevant fraud type by calculating the distance between user-inputted metadata and profiles that map which types of people are vulnerable to which types of fraud.",
+            "Producing news-based summary illustrations and short-form videos using generative AI tools (e.g., DALL-E).",
             <a href="https://www.kpf.or.kr/synap/skin/doc.html?fn=1735016238208.pdf&rs=/synap/result/board/" target="_blank" rel="noopener noreferrer">
               Award-Winning Collection
             </a>,
