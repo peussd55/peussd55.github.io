@@ -368,3 +368,51 @@ section h2{
   font-size:1.1em;
   line-height:1;
 }
+
+/* ── 사례 ───────────────────────────────────────── */
+.case-card{
+  background:var(--card-bg);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:20px 22px;
+  margin:0 0 16px;
+  text-align:left;
+}
+.case-title{ margin:0 0 6px; font-size:19px; font-weight:700; }
+.case-one{ margin:0 0 14px; color:var(--fg); line-height:1.6; }
+.case-row{
+  display:grid;
+  grid-template-columns:8.5rem 1fr;
+  gap:12px;
+  padding:10px 0;
+  border-top:1px solid var(--line);
+}
+.case-label{ color:var(--muted); font-size:14px; font-weight:600; padding-top:2px; }
+.case-list{ margin:0; padding-left:18px; }
+.case-list li{ margin:0 0 6px; line-height:1.6; }
+.case-role{ margin:10px 0 0; padding-top:10px; border-top:1px solid var(--line); color:var(--muted); font-size:14px; }
+.case-more .case-list{ margin-top:8px; }
+mark.needs-check{ background:#fde68a; color:#1f2937; padding:0 3px; border-radius:3px; }
+@media (max-width:640px){
+  .case-row{ grid-template-columns:1fr; gap:4px; }
+}
+
+/* ── 탭 ─────────────────────────────────────────── */
+.tabs{ display:flex; gap:4px; margin:18px 0 6px; border-bottom:1px solid var(--line); }
+.tab{
+  padding:10px 16px; color:var(--muted); text-decoration:none; font-weight:600; font-size:15px;
+  border-bottom:2px solid transparent; margin-bottom:-1px;
+}
+.tab:hover{ color:var(--fg); }
+.tab.active{ color:var(--fg); border-bottom-color:var(--fg); }
+.cases-lead{ color:var(--muted); font-size:14px; margin:4px 0 14px; text-align:left; }
+.case-head{
+  display:flex; justify-content:space-between; align-items:flex-start; gap:12px; width:100%;
+  padding:0; border:0; background:none; color:inherit; font:inherit; text-align:left; cursor:pointer;
+}
+.case-head .case-title{ font-size:19px; font-weight:700; margin:0 0 6px; }
+.case-caret{ color:var(--muted); font-size:14px; padding-top:4px; }
+.case-card .case-one{ margin-bottom:0; }
+.case-card .case-row:first-of-type{ margin-top:14px; }
+/* 탭 줄도 본문과 같은 폭에 맞춘다 */
+.tabs{ max-width:980px; margin:0 auto; padding:10px 20px 0; box-sizing:border-box; }

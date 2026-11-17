@@ -2,6 +2,8 @@
 import "./App.css";
 import React, { useState, useEffect, useRef } from "react";
 import Entry from "./Entry";
+import { cases, moreCases } from "./cases";
+
 import { FaEnvelope, FaPhone, FaLinkedin, FaGithub, FaSun, FaMoon } from "react-icons/fa";
 import {
   SiPython, SiTensorflow, SiPytorch, SiNumpy, SiPandas,
@@ -11,6 +13,20 @@ import {
   SiFastapi, SiFlask, SiSpring, SiSpringboot, SiAmazonaws,
   SiVercel, SiLinux, SiPodman, SiMongodb, SiSubversion
 } from "react-icons/si";
+
+// "[확인: …]" 표시는 검토가 끝나지 않은 문장이다. 눈에 띄게 그린다.
+const CHECK_MARK = /(\[확인[^\]]*\])/;
+function withChecks(text) {
+  return text.split(CHECK_MARK).map((part, i) =>
+    CHECK_MARK.test(part) ? <mark className="needs-check" key={i}>{part}</mark> : part
+  );
+}
+const CASE_ROWS = [
+  ["문제", "problem"],
+  ["고른 것과 버린 것", "chose"],
+  ["잰 것", "measured"],
+  ["한계와 다음", "limits"],
+];
 
 const withBase = (relPath) => `${process.env.PUBLIC_URL}${relPath}`;
 
@@ -56,8 +72,18 @@ export default function App() {
 
 
   // ===== 언어 토글 =====
-  const [lang, setLang] = useState("KOR"); // 'KOR' | 'ENG'
+  const [lang] = useState("KOR"); // 'KOR' | 'ENG'
   const [aboutExpanded, setAboutExpanded] = useState(true);
+  // 탭: 주소 끝의 #cases 로 바로 열 수 있다
+  const [tab, setTab] = useState(() => (window.location.hash === "#cases" ? "cases" : "profile"));
+  const [openCases, setOpenCases] = useState({});
+  useEffect(() => {
+    const onHash = () => setTab(window.location.hash === "#cases" ? "cases" : "profile");
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+  const activeTab = lang === "KOR" ? tab : "profile"; // 사례는 한국어 화면에서만
+  const toggleCase = (i) => setOpenCases((prev) => ({ ...prev, [i]: !prev[i] }));
   const t = {
     KOR: {
       name: "RAG·LLM 서비스에 특화된 AI 엔지니어",
@@ -586,20 +612,6 @@ export default function App() {
           </button>
         </div>
 
-        {/* 언어 토글 */}
-        <div className="lang-toggle" aria-label="Language toggle" style={{ margin: "10px 0 16px" }}>
-          <div
-            className="lang-indicator"
-            style={{ transform: `translateX(${lang === "ENG" ? "0" : "100%"})` }}
-          />
-          <button className={`lang-btn ${lang === "ENG" ? "active" : ""}`} onClick={() => setLang("ENG")}>
-            ENG
-          </button>
-          <button className={`lang-btn ${lang === "KOR" ? "active" : ""}`} onClick={() => setLang("KOR")}>
-            KOR
-          </button>
-        </div>
-
         <div className="expand-controls">
           <button type="button" onClick={handleExpandAll}>{t[lang].expandAll}</button>
           <button type="button" onClick={handleCollapseAll}>{t[lang].collapseAll}</button>
@@ -621,6 +633,16 @@ export default function App() {
           </a> */}
         </div>
       </header>
+
+      {/* Tabs */}
+      {lang === "KOR" && (
+        <nav className="tabs" aria-label="화면 전환">
+          <a href="#profile" className={activeTab === "profile" ? "tab active" : "tab"}>프로필</a>
+          <a href="#cases" className={activeTab === "cases" ? "tab active" : "tab"}>사례</a>
+        </nav>
+      )}
+
+      {activeTab === "profile" && (<>
 
       {/* About */}
       {/* <section className="About-section">
@@ -813,6 +835,45 @@ export default function App() {
           )}
         </div>
       </section>
+      </>)}
+
+      {/* Cases 탭 — 한국어 화면에서만 */}
+      {activeTab === "cases" && (
+        <section className="Cases-section">
+          <h2>사례</h2>
+          <p className="cases-lead">문제 → 고른 것과 버린 것 → 잰 것 → 한계와 다음. 제목을 누르면 펼쳐집니다.</p>
+          <div className="section-content">
+            {cases.map((c, i) => (
+              <article className="case-card" key={i}>
+                <button type="button" className="case-head" onClick={() => toggleCase(i)} aria-expanded={!!openCases[i]}>
+                  <span className="case-title">{c.title}</span>
+                  <span className="case-caret" aria-hidden="true">{openCases[i] ? "▴" : "▾"}</span>
+                </button>
+                <p className="case-one">{withChecks(c.oneLine)}</p>
+                {openCases[i] && (
+                  <>
+                    {CASE_ROWS.filter(([, key]) => c[key] && c[key].length > 0).map(([label, key]) => (
+                      <div className="case-row" key={key}>
+                        <div className="case-label">{label}</div>
+                        <ul className="case-list">
+                          {c[key].map((line, k) => <li key={k}>{withChecks(line)}</li>)}
+                        </ul>
+                      </div>
+                    ))}
+                    {c.role && <p className="case-role">역할: {c.role}</p>}
+                  </>
+                )}
+              </article>
+            ))}
+            <article className="case-card case-more">
+              <div className="case-title">그 밖에</div>
+              <ul className="case-list">
+                {moreCases.map((line, k) => <li key={k}>{withChecks(line)}</li>)}
+              </ul>
+            </article>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
