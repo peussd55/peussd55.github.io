@@ -3,9 +3,17 @@ title: 음성 상담봇의 검색 품질을 평가셋으로 측정 · 개선
 summary: 고객센터 음성 상담봇 시범 구축에서 색인에 쓰지 않은 질문으로 검색 정확도를 따로 측정, 정답 1위 비율을 58%에서 70%로 개선
 date: 2026-11-17
 order: 1
-category: 검색 · RAG
+category: RAG와 에이전트
 role: 단독 전담(고객 회의 · 설계 · 평가 · 결과 보고)
 ---
+
+<div class="flow__steps">
+  <div class="step"><span class="step__label">전</span><p>색인을 만든 질문으로 시험</p></div>
+  <span class="arrow" aria-hidden="true"></span>
+  <div class="step"><span class="step__label">후</span><p>색인에 쓰지 않은 질문 묶음으로 고칠 때마다 측정</p></div>
+  <span class="arrow" aria-hidden="true"></span>
+  <div class="step step--result"><span class="step__label">결과</span><dl class="metrics"><div><dt>정답 1위</dt><dd>58.4% <span class="to">→</span> 69.8%</dd></div><div><dt>3위 안</dt><dd>76.2% <span class="to">→</span> 88.6%</dd></div></dl></div>
+</div>
 
 ## 문제
 

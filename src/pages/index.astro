@@ -1,10 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getPosts } from '../lib/posts';
-import { headline, lead, glance, about, career, flows, cases, projects, papers } from '../data/profile';
+import { headline, lead, glance, about, career, work, projects, papers } from '../data/profile';
 
 const posts = await getPosts();
-const postIds = new Set(posts.map((post) => post.id));
 ---
 
 <Base current="profile">
@@ -92,41 +91,24 @@ const postIds = new Set(posts.map((post) => post.id));
 
   <section class="section wide" aria-labelledby="h-work">
     <h2 class="section-title" id="h-work">한 일</h2>
-    <div class="flows">
-      {flows.map((flow) => (
-        <article class="flow">
-          <h3 class="flow__title">{flow.title}</h3>
-          <div class="flow__steps">
-            <div class="step">
-              <span class="step__label">전</span>
-              <p>{flow.before}</p>
-            </div>
-            <span class="arrow" aria-hidden="true" />
-            <div class="step">
-              <span class="step__label">후</span>
-              <p>{flow.after}</p>
-            </div>
-            <span class="arrow" aria-hidden="true" />
-            <div class="step step--result">
-              <span class="step__label">결과</span>
-              <p>{flow.result}</p>
-            </div>
-          </div>
-          {flow.post && postIds.has(flow.post) && (
-            <a class="link" href={`/posts/${flow.post}/`}>글로 읽기 →</a>
-          )}
-        </article>
-      ))}
+    <div class="work-grid">
+      {work.map((group) => {
+        const items = posts.filter((post) => post.data.category === group.name);
+        return (
+          <article class="work">
+            <h3 class="work__name">{group.name}</h3>
+            <p class="work__sum">{group.summary}</p>
+            {items.length > 0 && (
+              <ul class="work__posts">
+                {items.map((post) => (
+                  <li><a class="link" href={`/posts/${post.id}/`}>{post.data.title}</a></li>
+                ))}
+              </ul>
+            )}
+          </article>
+        );
+      })}
     </div>
-
-    <ul class="case-list">
-      {cases.map((item) => (
-        <li>
-          <h3>{postIds.has(item.post) ? <a href={`/posts/${item.post}/`}>{item.title}</a> : item.title}</h3>
-          <p>{item.summary}</p>
-        </li>
-      ))}
-    </ul>
   </section>
 
   <section class="section section--minor wide" aria-labelledby="h-etc">

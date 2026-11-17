@@ -3,8 +3,16 @@ title: 흐름은 코드가, 답변은 모델이
 summary: 지시문만으로 대화 흐름을 맡기던 구조를, 단계 전환과 도구 호출은 코드가 하고 모델은 의도 판단과 답변만 하는 구조로 전환해 응답 지연 43% 단축
 date: 2026-11-17
 order: 2
-category: 에이전트
+category: RAG와 에이전트
 ---
+
+<div class="flow__steps">
+  <div class="step"><span class="step__label">전</span><p>지시문만으로 대화 흐름을 맡김</p></div>
+  <span class="arrow" aria-hidden="true"></span>
+  <div class="step"><span class="step__label">후</span><p>단계 전환과 도구 호출은 코드가, 모델은 의도 판단과 답변만</p></div>
+  <span class="arrow" aria-hidden="true"></span>
+  <div class="step step--result"><span class="step__label">결과</span><dl class="metrics"><div><dt>시나리오 통과</dt><dd>28/30 <span class="to">→</span> 30/30</dd></div><div><dt>턴 지연 중앙값</dt><dd>2,745ms <span class="to">→</span> 1,565ms</dd></div></dl></div>
+</div>
 
 ## 문제
 
