@@ -109,14 +109,7 @@ const postIds = new Set(posts.map((post) => post.id));
             <span class="arrow" aria-hidden="true" />
             <div class="step step--result">
               <span class="step__label">결과</span>
-              <dl class="metrics">
-                {flow.metrics.map((metric) => (
-                  <div>
-                    <dt>{metric.k}</dt>
-                    <dd>{metric.from}{' '}<span class="to">→</span>{' '}{metric.to}</dd>
-                  </div>
-                ))}
-              </dl>
+              <p>{flow.result}</p>
             </div>
           </div>
           {flow.post && postIds.has(flow.post) && (
