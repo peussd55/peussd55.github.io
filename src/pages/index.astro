@@ -90,7 +90,7 @@ const posts = await getPosts();
   </section>
 
   <section class="section wide" aria-labelledby="h-work">
-    <h2 class="section-title" id="h-work">한 일</h2>
+    <h2 class="section-title" id="h-work">주요 업무</h2>
     <div class="work-grid">
       {work.map((group) => {
         const items = posts.filter((post) => post.data.category === group.name);

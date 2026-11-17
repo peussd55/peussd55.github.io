@@ -10,7 +10,7 @@ export const site = {
   minPostsForList: 2,
 };
 
-// 글의 분류. 글 목록의 분류 메뉴와 프로필 "한 일"의 묶음이 이 이름을 쓴다.
+// 글의 분류. 글 목록의 분류 메뉴와 프로필 "주요 업무"의 묶음이 이 이름을 쓴다.
 export const categories = [
   '실시간 음성 에이전트',
   'RAG와 에이전트',

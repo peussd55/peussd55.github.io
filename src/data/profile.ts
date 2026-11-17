@@ -98,7 +98,7 @@ export const career = [
   },
 ];
 
-// 한 일 — 이름 붙은 묶음. name 은 글의 분류(src/data/site.ts)와 같아야 하고, 그 분류의 글 제목이 묶음 아래에 자동으로 붙는다.
+// 주요 업무 — 이름 붙은 묶음. name 은 글의 분류(src/data/site.ts)와 같아야 하고, 그 분류의 글 제목이 묶음 아래에 자동으로 붙는다.
 // 구체적인 수치는 여기에 적지 않고 글에서 보여 준다.
 export const work = [
   {
