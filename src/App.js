@@ -61,7 +61,7 @@ export default function App() {
   const t = {
     KOR: {
       name: "RAG·LLM 서비스에 특화된 AI 엔지니어",
-      title: "검색엔진 엔지니어를 거쳐 AI 전문가로 성장하고 있습니다. 데이터 기반의 문제 해결 능력과 새로운 기술에 대한 빠른 학습 능력을 바탕으로, 복잡한 비즈니스 요구사항을 해결하는 AI 솔루션을 만들고 싶습니다.",
+      title: "검색엔진 엔지니어로 시작해 인텐트 챗봇을 거쳐 LLM 에이전트를 만들고 있습니다. 지금은 AI 컨택센터 솔루션 회사에서 실시간 AI 콜봇 · 챗봇과 에이전트를 개발하고 운영합니다.",
       tagline: "AI 기술로 현실의 문제를 해결하는 엔지니어",
       aboutTitle: "소개",
       aboutTextLines: [
@@ -118,7 +118,7 @@ export default function App() {
     },
     ENG: {
       name: "AI Engineer specialized in RAG/LLM Services",
-      title: "I am transitioning from a Search Engine Engineer to an AI Specialist. Leveraging data-driven problem-solving abilities and a capacity for rapid learning, I am eager to create AI solutions that solve complex business requirements.",
+      title: "I started as a search engine engineer, moved through intent-based chatbots, and now build LLM agents. I currently develop and operate real-time AI voice bots, chatbots and agents at an AI contact-center solution company.",
       tagline: "An engineer who solves real-world problems with AI technology.",
       aboutTitle: "About",
       aboutTextLines: [
@@ -187,41 +187,11 @@ export default function App() {
   // --- 교육
   const educationEntries  = [
     {
-      id: "univ1",
-      title:
-        lang === "KOR" ? "한국교통대학교 나노화학소재공학과" : "Korea National University of Transportation – Department of Polymer science & Engineering",
-      location: lang === "KOR" ? "충주, 대한민국" : "Chungju, Korea",
-      dates: lang === "KOR" ? "2013 - 2020" : "2013 - 2020",
-      details:
-        lang === "KOR"
-          ? [
-              "금속, 세라믹, 폴리머 3대 재료 중 폴리머재료(고분자) 물질의 물리적/화학적 특성을 주로 공부",
-            ]
-          : [
-              "Focused on the physical and chemical properties of polymer materials, one of the three major material classes (metals, ceramics, and polymers)",
-            ],
-    },
-    {
-      id: "univ2",
-      title:
-        lang === "KOR" ? "한국방송통신대학교 컴퓨터과학과" : "Korea National Open University – Department of Computer Science",
-      location: lang === "KOR" ? "서울, 대한민국" : "Seoul, Korea",
-      dates: lang === "KOR" ? "2021 - 재학 중" : "2021 - Present",
-      details:
-        lang === "KOR"
-          ? [
-              "C, C++, 소프트웨어공학, 운영체제, 이산수학, 컴퓨터구조, 딥러닝, 머신러닝, 클라우드",
-            ]
-          : [
-              "C, C++, Software Engineering, Operating Systems, Discrete Mathematics, Computer Architecture, Deep Learning, Machine Learning, Cloud",
-            ],
-      },
-    {
       id: "ibm",
       title:
         lang === "KOR" ? "[IBM x RedHat] AX(AI Transformation)" : "[IBM x RedHat] AX (AI Transformation)",
       location: lang === "KOR" ? "서울, 대한민국" : "Seoul, Korea",
-      dates: lang === "KOR" ? "2025.05 - 현재" : "May 2025 – Present",
+      dates: lang === "KOR" ? "2025.05 - 2025.11 (수료)" : "May 2025 – Nov 2025 (Completed)",
       details:
         lang === "KOR"
           ? [
@@ -241,6 +211,25 @@ export default function App() {
 
   // --- 경력
   const exp_example = [
+    {
+      title: lang === "KOR" ? "AI 컨택센터 솔루션 회사" : "AI Contact-Center Solution Company",
+      location: lang === "KOR" ? "AI 엔지니어" : "AI Engineer",
+      dates: lang === "KOR" ? "2025.11 - 현재" : "2025.11 - Present",
+      summary: lang === "KOR" ?
+        [
+          "실시간 음성 에이전트: 음성인식 · LLM · 음성합성을 잇는 실시간 파이프라인, 의료 도메인 콜봇 실서비스 운영",
+          "RAG와 에이전트: 평가셋으로 검색 품질을 재고 개선, 대화 흐름은 코드가 관리하고 LLM은 답변만 맡는 구조, 되돌릴 수 없는 작업 앞의 사람 승인 게이트",
+          "LLM 서빙과 평가: 온프레미스 LLM 서빙, 성능 벤치마크, 모델 비교 평가",
+          "사내 AX: LLM 게이트웨이와 사내 AI 채팅 도구 도입 · 운영(팀별 예산과 모델 정책 관리)"
+        ] :
+        [
+          "Real-time voice agents: streaming pipeline connecting speech recognition, LLM and speech synthesis; operating a production voice bot in the healthcare domain",
+          "RAG and agents: measuring and improving retrieval quality with evaluation sets; dialogue flow managed in code with the LLM generating answers only; human approval gate before irreversible actions",
+          "LLM serving and evaluation: on-premises LLM serving, performance benchmarks, model comparison",
+          "In-house AI adoption: rolled out and operate an LLM gateway and an internal AI chat tool (per-team budgets and model policies)"
+        ],
+      projects: []
+    },
     {
       title: lang === "KOR" ? "WISENUT" : "WISENUT",
       location: lang === "KOR" ? "솔루션 구축 및 웹개발" : "Solution building and web development",
@@ -296,6 +285,14 @@ export default function App() {
   // --- 수상이력 & 자격증
   const awardsCertifications = [
     {
+      title: lang === "KOR" ? "2026 SK하이닉스 AI 해커톤 도전상(Top 20)" : "2026 SK hynix AI Hackathon – Challenge Award (Top 20)",
+      location: lang === "KOR" ? "주최: SK하이닉스" : "Hosted by: SK hynix",
+      dates: "2026.11",
+      details: lang === "KOR"
+        ? ["도전상 수상"]
+        : ["Challenge Award"],
+    },
+    {
       title: lang === "KOR" ? "정보처리기사" : "Engineer Information Processing",
       location: lang === "KOR" ? "한국산업인력공단" : "HRD Korea",
       dates: "2019.11",
@@ -331,7 +328,7 @@ export default function App() {
   const pj_lawI = {
     title: lang === "KOR" ? "법률 도메인 특화 Agentic LLM 서비스" : "Agentic LLM Service for Legal Domain",
     location: lang === "KOR" ? "Team / 5인" : "Team / 5 members",
-    dates: lang === "KOR" ? "2025 - 진행중" : "2025.09 - Present",
+    dates: lang === "KOR" ? "2025" : "2025",
     details:
       lang === "KOR"
         ? [
@@ -832,14 +829,16 @@ export default function App() {
                   <ul>
                     {exp.summary.map((item, i) => <li key={`s-${i}`}>{item}</li>)}
                   </ul>
-                  <div className="project-list">
-                    {exp.projects.map((proj, pIndex) => (
-                      <div key={pIndex} className="project-item">
-                        <div className="project-title">{proj.title} <span className="project-dates">({proj.dates})</span></div>
-                        <ul>{proj.details.map((d, i) => <li key={`p-${i}`}>{d}</li>)}</ul>
-                      </div>
-                    ))}
-                  </div>
+                  {exp.projects.length > 0 && (
+                    <div className="project-list">
+                      {exp.projects.map((proj, pIndex) => (
+                        <div key={pIndex} className="project-item">
+                          <div className="project-title">{proj.title} <span className="project-dates">({proj.dates})</span></div>
+                          <ul>{proj.details.map((d, i) => <li key={`p-${i}`}>{d}</li>)}</ul>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </>
               }
             />
