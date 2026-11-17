@@ -563,76 +563,6 @@ export default function App() {
   };
 
   // --- 스킬
-  const skills =
-    lang === "KOR"
-      ? [
-          { title: "AI / ML", items: [
-            { Icon: SiJupyter, label: "Jupyter" },
-            { Icon: SiPandas, label: "Pandas" },
-            { Icon: SiPytorch, label: "PyTorch" },
-            { Icon: SiTensorflow, label: "TensorFlow" },
-            { Icon: SiKeras, label: "Keras" },
-            { Icon: SiScikitlearn, label: "Scikitlearn" },
-          ]},
-          { title: "프론트엔드", items: [
-            { Icon: SiReact, label: "React" },
-            { Icon: SiJquery, label: "Jquery" },
-            { Icon: SiFigma, label: "Figma" },
-            { Icon: SiVercel, label: "Vercel" },
-          ]},
-          { title: "백엔드", items: [
-            { Icon: SiFastapi, label: "Fastapi" },
-            { Icon: SiFlask, label: "Flask" },
-            { Icon: SiSpring, label: "Spring" },
-            { Icon: SiSpringboot, label: "Springboot" },
-          ]},
-          { title: "데이터 / 인프라", items: [
-            { Icon: SiLinux, label: "Linux" },
-            { Icon: SiAmazonaws, label: "Amazonaws" },
-            { Icon: SiPostgresql, label: "PostgreSQL" },
-            { Icon: SiMongodb, label: "MongoDB" },
-            { Icon: SiDocker, label: "Docker" },
-            { Icon: SiPodman, label: "Podman" },
-          ]},
-          { title: "버전 관리", items: [
-            { Icon: SiGit, label: "Git" },
-            { Icon: SiSubversion, label: "Subversion" },
-          ]},
-        ]
-      : [
-          { title: "AI / ML", items: [
-            { Icon: SiJupyter, label: "Jupyter" },
-            { Icon: SiPandas, label: "Pandas" },
-            { Icon: SiPytorch, label: "PyTorch" },
-            { Icon: SiTensorflow, label: "TensorFlow" },
-            { Icon: SiKeras, label: "Keras" },
-            { Icon: SiScikitlearn, label: "Scikitlearn" },
-          ]},
-          { title: "Frontend", items: [
-            { Icon: SiReact, label: "React" },
-            { Icon: SiJquery, label: "Jquery" },
-            { Icon: SiFigma, label: "Figma" },
-            { Icon: SiVercel, label: "Vercel" },
-          ]},
-          { title: "Backend", items: [
-            { Icon: SiFastapi, label: "Fastapi" },
-            { Icon: SiFlask, label: "Flask" },
-            { Icon: SiSpring, label: "Spring" },
-            { Icon: SiSpringboot, label: "Springboot" },
-          ]},
-          { title: "Data / Infra", items: [
-            { Icon: SiLinux, label: "Linux" },
-            { Icon: SiAmazonaws, label: "Amazonaws" },
-            { Icon: SiPostgresql, label: "PostgreSQL" },
-            { Icon: SiMongodb, label: "MongoDB" },
-            { Icon: SiDocker, label: "Docker" },
-            { Icon: SiPodman, label: "Podman" },
-          ]},
-          { title: "Version Control", items: [
-            { Icon: SiGit, label: "Git" },
-            { Icon: SiSubversion, label: "Subversion" },
-          ]},
-        ];
 
   // ===== UI =====
   return (
@@ -881,28 +811,6 @@ export default function App() {
               <span aria-hidden="true">↗</span>
             </button>
           )}
-        </div>
-      </section>
-
-      {/* Skills */}
-      <section className="Skills-section">
-        <h2>{t[lang].skills}</h2>
-        <div className="section-content">
-          <div className="skills-grid">
-            {skills.map((g, i) => (
-              <div className="skill-card" key={i}>
-                <div className="skill-title">{g.title}</div>
-                <div className="skill-items-wrap">
-                  {g.items.map((it, idx) => (
-                    <div className="skill-item" key={idx}>
-                      <span className="skill-icon"><it.Icon size={18} /></span>
-                      <span className="skill-label">{it.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
     </div>
