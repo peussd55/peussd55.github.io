@@ -1,0 +1,97 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
+import { getPosts, isListVisible, formatDate } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post, listVisible: isListVisible(posts.length) },
+  }));
+}
+
+const { post, listVisible } = Astro.props;
+const { Content, headings } = await render(post);
+// 차례에는 큰 소제목(##)만 넣는다.
+const toc = headings.filter((heading) => heading.depth === 2);
+---
+
+<Base title={post.data.title} description={post.data.summary} current="posts">
+  <article class="post col">
+    <header class="post-head">
+      <p class="post-cat">{post.data.category}</p>
+      <h1>{post.data.title}</h1>
+      <p class="post-sum">{post.data.summary}</p>
+      <p class="post-meta">{site.name} · {formatDate(post.data.date)}</p>
+    </header>
+
+    <div class="post-body">
+      <div class="prose">
+        <Content />
+      </div>
+
+      {toc.length > 1 && (
+        <aside class="toc" aria-labelledby="toc-label">
+          <div class="toc__inner">
+            <p class="toc__label" id="toc-label">이 글의 차례</p>
+            <ol>
+              {toc.map((heading) => (
+                <li><a href={`#${heading.slug}`}>{heading.text}</a></li>
+              ))}
+            </ol>
+          </div>
+        </aside>
+      )}
+    </div>
+
+    {post.data.role && <p class="post-role">역할 · {post.data.role}</p>}
+  </article>
+
+  <nav class="post-back col" aria-label="글 목록">
+    {listVisible ? <a class="link" href="/posts/">목록으로</a> : <a class="link" href="/">프로필로</a>}
+  </nav>
+</Base>
+
+<script>
+  // 이 글의 차례: 화면 위쪽 40% 선을 지난 마지막 소제목을 표시한다. 맨 끝까지 내리면 마지막 소제목.
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.toc a'));
+  const heads = links
+    .map((link) => document.getElementById(decodeURIComponent(link.hash.slice(1))))
+    .filter((head): head is HTMLElement => head !== null);
+
+  function update() {
+    const line = Math.min(window.innerHeight * 0.4, 360);
+    let index = 0;
+    heads.forEach((head, i) => {
+      if (head.getBoundingClientRect().top - line <= 0) index = i;
+    });
+    const doc = document.documentElement;
+    const atEnd = window.innerHeight + window.scrollY >= doc.scrollHeight - 2;
+    if (doc.scrollHeight > window.innerHeight + 2 && atEnd) index = heads.length - 1;
+    links.forEach((link, i) => {
+      link.classList.toggle('is-active', i === index);
+      if (i === index) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+
+  if (links.length > 0 && heads.length === links.length) {
+    let ticking = false;
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          ticking = false;
+          update();
+        });
+      },
+      { passive: true },
+    );
+    window.addEventListener('resize', update);
+    update();
+  }
+</script>

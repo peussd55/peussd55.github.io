@@ -19,31 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Use Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install deps
-        run: npm ci || npm install
-
-      # CRA 빌드. 경고 때문에 실패하지 않도록 CI=false
-      - name: Build (CRA)
-        run: CI=false npm run build
-
-      # SPA 새로고침 404 방지 + 업로드 경로 지정
-      - name: Prepare artifact
-        run: |
-          cp build/index.html build/404.html
-          echo "OUTDIR=build" >> $GITHUB_ENV
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ${{ env.OUTDIR }}
+      # Astro 빌드와 Pages 산출물 올리기(패키지 관리자는 lock 파일로 알아낸다)
+      - name: Install, build, and upload
+        uses: withastro/action@v6
 
   deploy:
     needs: build
@@ -54,4 +34,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

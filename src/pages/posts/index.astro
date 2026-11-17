@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site, categories } from '../../data/site';
+import { getPosts, isListVisible, formatDate } from '../../lib/posts';
+
+const posts = await getPosts();
+
+// 글이 모이기 전에는 목록을 내놓지 않는다.
+if (!isListVisible(posts.length)) {
+  return Astro.redirect('/');
+}
+---
+
+<Base title="글" current="posts">
+  <div class="posts col">
+    <h1 class="vh">글</h1>
+
+    <div class="posts-bar">
+      <div class="cats" aria-label="분류">
+        <button type="button" data-cat="all" aria-pressed="true">전체</button>
+        {categories.map((cat) => (
+          <button type="button" data-cat={cat} aria-pressed="false">{cat}</button>
+        ))}
+      </div>
+      <label class="search">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="7" cy="7" r="5.25" stroke="currentColor" stroke-width="1.5" />
+          <path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        <input id="post-search" type="search" aria-label="검색" />
+      </label>
+    </div>
+
+    <ol class="post-list">
+      {posts.map((post) => (
+        <li data-cat={post.data.category}>
+          <a class="post-item" href={`/posts/${post.id}/`}>
+            <p class="post-item__cat">{post.data.category}</p>
+            <h2 class="post-item__title">{post.data.title}</h2>
+            <p class="post-item__sum">{post.data.summary}</p>
+            <p class="post-item__meta">{site.name} · {formatDate(post.data.date)}</p>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Base>
+
+<script>
+  // 분류와 검색어로 목록을 거른다.
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.cats button'));
+  const items = Array.from(document.querySelectorAll<HTMLLIElement>('.post-list > li'));
+  const search = document.querySelector<HTMLInputElement>('#post-search');
+  let cat = 'all';
+
+  function apply() {
+    const query = (search?.value ?? '').trim().toLowerCase();
+    for (const item of items) {
+      const inCat = cat === 'all' || item.dataset.cat === cat;
+      const inQuery = !query || (item.textContent ?? '').toLowerCase().includes(query);
+      item.hidden = !(inCat && inQuery);
+    }
+  }
+
+  for (const button of buttons) {
+    button.addEventListener('click', () => {
+      cat = button.dataset.cat ?? 'all';
+      for (const other of buttons) other.setAttribute('aria-pressed', other === button ? 'true' : 'false');
+      apply();
+    });
+  }
+  search?.addEventListener('input', apply);
+</script>

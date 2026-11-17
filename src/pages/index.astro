@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import { getPosts } from '../lib/posts';
+import { headline, lead, glance, about, career, flows, cases, projects, papers } from '../data/profile';
+
+const posts = await getPosts();
+const postIds = new Set(posts.map((post) => post.id));
+---
+
+<Base current="profile">
+  <section class="hero wide">
+    <h1>{headline}</h1>
+    <p class="lead">{lead}</p>
+  </section>
+
+  <section class="glance wide" aria-labelledby="h-glance">
+    <h2 class="section-title" id="h-glance">한눈에</h2>
+    <div class="glance__grid">
+      <div class="glance__col">
+        <h3>경력</h3>
+        <ul class="dated">
+          {glance.career.map((item) => (
+            <li>
+              <span class="date">{item.date}</span>
+              <span class="txt">{item.text}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="glance__col">
+        <h3>수상 · 자격</h3>
+        <ul class="dated">
+          {glance.awards.map((item) => (
+            <li>
+              <span class="date">{item.date}</span>
+              <span class="txt">{item.text}</span>
+              <span class="note">{item.note}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="glance__col">
+        <h3>지금 하는 일</h3>
+        <ul class="doing">
+          {glance.doing.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wide" aria-labelledby="h-about">
+    <h2 class="section-title" id="h-about">소개</h2>
+    <div class="about">
+      {about.map((line) => (
+        <p>{line.map((seg) => (seg.hl ? <strong class="hl">{seg.t}</strong> : seg.t))}</p>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wide" aria-labelledby="h-exp">
+    <h2 class="section-title" id="h-exp">경력</h2>
+    <ol class="timeline">
+      {career.map((job) => (
+        <li class="tl">
+          <p class="tl__date">{job.date}</p>
+          <span class="tl__rail" aria-hidden="true" />
+          <div class="tl__body">
+            <h3 class="tl__title">{job.title}</h3>
+            <p class="tl__role">{job.role}</p>
+            {job.topics.length > 0 && (
+              <ul class="topics">
+                {job.topics.map((topic) => (
+                  <li><strong>{topic.k}</strong>{' '}{topic.v}</li>
+                ))}
+              </ul>
+            )}
+            {job.subs.map((sub) => (
+              <div class="sub">
+                <h4>{sub.title}</h4>
+                <ul class="topics">
+                  {sub.topics.map((topic) => (
+                    <li><strong>{topic.k}</strong>{' '}{topic.v}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section wide" aria-labelledby="h-work">
+    <h2 class="section-title" id="h-work">한 일</h2>
+    <div class="flows">
+      {flows.map((flow) => (
+        <article class="flow">
+          <h3 class="flow__title">{flow.title}</h3>
+          <div class="flow__steps">
+            <div class="step">
+              <span class="step__label">전</span>
+              <p>{flow.before}</p>
+            </div>
+            <span class="arrow" aria-hidden="true" />
+            <div class="step">
+              <span class="step__label">후</span>
+              <p>{flow.after}</p>
+            </div>
+            <span class="arrow" aria-hidden="true" />
+            <div class="step step--result">
+              <span class="step__label">결과</span>
+              <dl class="metrics">
+                {flow.metrics.map((metric) => (
+                  <div>
+                    <dt>{metric.k}</dt>
+                    <dd>{metric.from}{' '}<span class="to">→</span>{' '}{metric.to}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+          {flow.post && postIds.has(flow.post) && (
+            <a class="link" href={`/posts/${flow.post}/`}>글로 읽기 →</a>
+          )}
+        </article>
+      ))}
+    </div>
+
+    <ul class="case-list">
+      {cases.map((item) => (
+        <li>
+          <h3>{item.title}</h3>
+          <p>{item.summary}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section section--minor wide" aria-labelledby="h-etc">
+    <h2 class="section-title" id="h-etc">그 밖에</h2>
+    <div class="minor-grid">
+      <div>
+        <h3>이전 프로젝트</h3>
+        <ul>
+          {projects.map((item) => (
+            <li>{item.href ? <a href={item.href} target="_blank" rel="noopener">{item.title}</a> : item.title}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3>논문 리뷰</h3>
+        <ul class="two-col">
+          {papers.map((item) => (
+            <li><a href={item.href} target="_blank" rel="noopener">{item.title}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>

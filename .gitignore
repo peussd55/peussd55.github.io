@@ -36,3 +36,5 @@ Thumbs.db
 
 # 편의
 .vscode/
+# Astro
+.astro/
