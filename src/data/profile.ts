@@ -160,8 +160,12 @@ export const cases = [
 
 // 그 밖에 — 제목만
 export const projects = [
-  { title: 'BindQ Studio', href: 'https://github.com/peussd55/BindQ' },
-  { title: '국가기술표준원 e나라표준인증', href: 'https://www.standard.go.kr/KSCI/portalindex.do' },
+  { title: 'BindQ Studio', href: 'https://github.com/peussd55/BindQ', note: '' },
+  {
+    title: '국가기술표준원 e나라표준인증',
+    href: 'https://www.standard.go.kr/KSCI/portalindex.do',
+    note: '통합검색 · 챗봇 개발 참여',
+  },
 ];
 
 const paperBase = 'https://peussd55.github.io/lemonade_paper_review_repo';

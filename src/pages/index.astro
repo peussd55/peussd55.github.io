@@ -136,7 +136,10 @@ const postIds = new Set(posts.map((post) => post.id));
         <h3>이전 프로젝트</h3>
         <ul>
           {projects.map((item) => (
-            <li>{item.href ? <a href={item.href} target="_blank" rel="noopener">{item.title}</a> : item.title}</li>
+            <li>
+              {item.href ? <a href={item.href} target="_blank" rel="noopener">{item.title}</a> : item.title}
+              {item.note && <span class="note">{item.note}</span>}
+            </li>
           ))}
         </ul>
       </div>

@@ -835,6 +835,12 @@ html { scroll-behavior: smooth; }
   text-decoration-color: var(--line-strong);
   text-underline-offset: 3px;
 }
+.minor-grid .note {
+  display: block;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--fg-3);
+}
 .minor-grid a:hover {
   color: var(--accent);
   text-decoration-color: currentColor;
