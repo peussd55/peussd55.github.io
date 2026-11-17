@@ -160,9 +160,7 @@ export const cases = [
 
 // 그 밖에 — 제목만
 export const projects = [
-  { title: '법률 도메인 특화 Agentic LLM 서비스', href: '' },
   { title: 'BindQ Studio', href: 'https://github.com/peussd55/BindQ' },
-  { title: '사기컷: 전자금융사기 예방 뉴스 큐레이터', href: '' },
   { title: '국가기술표준원 e나라표준인증', href: 'https://www.standard.go.kr/KSCI/portalindex.do' },
 ];
 
