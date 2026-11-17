@@ -420,6 +420,7 @@ body::before {
   letter-spacing: -0.01em;
   text-wrap: balance;
 }
+.case-list h3 a:hover { color: var(--accent); }
 .case-list p {
   max-width: var(--w-measure);
   margin-top: 2px;

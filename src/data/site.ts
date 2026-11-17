@@ -11,4 +11,4 @@ export const site = {
 };
 
 // 글의 분류. 글 목록의 분류 메뉴도 이 순서로 나온다.
-export const categories = ['검색 · RAG', '에이전트', '서빙 · 평가', '운영'] as const;
+export const categories = ['검색 · RAG', '에이전트', '서빙 · 평가', '운영', '그 밖에'] as const;

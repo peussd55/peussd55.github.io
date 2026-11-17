@@ -8,7 +8,9 @@ export async function getPosts() {
   const all = await getCollection('posts');
   return all
     .filter((post) => showDrafts || !post.data.draft)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    .sort(
+      (a, b) => b.data.date.valueOf() - a.data.date.valueOf() || a.data.order - b.data.order,
+    );
 }
 
 // 글 목록 화면과 메뉴의 "글"을 내놓을지.

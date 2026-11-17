@@ -122,7 +122,7 @@ export const flows = [
       { k: '시나리오 통과', from: '28/30', to: '30/30' },
       { k: '턴 지연 중앙값', from: '2,745ms', to: '1,565ms' },
     ],
-    post: '',
+    post: 'dialogue-flow-in-code',
   },
   {
     title: '음성 상담봇의 검색 품질을 평가셋으로 측정 · 개선',
@@ -136,25 +136,29 @@ export const flows = [
   },
 ];
 
-// 한 일 — 제목과 한 줄
+// 한 일 — 제목과 한 줄. post 는 글 파일 이름이고, 그 글이 공개돼 있으면 제목이 글로 이어진다.
 export const cases = [
   {
     title: '되돌릴 수 없는 작업 앞에 사람 승인을 두기',
+    post: 'human-approval-gate',
     summary:
       '주문 취소처럼 되돌릴 수 없는 도구 호출 앞에 사람 승인을 두고, 응답이 없으면 실행하지 않도록 구현',
   },
   {
     title: '나눠 쓰는 GPU 한 장으로 26B 모델을 서빙하고 용량 측정',
+    post: 'shared-gpu-26b-serving',
     summary:
       '다른 팀과 나눠 쓰는 GPU 한 장의 3분의 1 예산으로 26B 오픈소스 모델을 1초 안팎 응답으로 서빙, GPU를 전부 쓸 때의 한계 동시 접속은 별도 측정',
   },
   {
     title: '사내 모델 게이트웨이를 전사에 도입하고 운영하기',
+    post: 'model-gateway-rollout',
     summary:
       '여러 모델을 한 창구로 쓰는 게이트웨이를 개발팀 시범에서 전사로 확대, 팀별 예산과 허용 모델은 스크립트로 관리',
   },
   {
     title: '실시간 음성 연결의 60분 상한 넘기기',
+    post: 'realtime-voice-60min-limit',
     summary:
       '실시간 음성 모델 연결이 시작 60분에 끊기는 것을 기록으로 확인, 대화를 이어 붙여 새 연결로 전환',
   },

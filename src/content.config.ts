@@ -12,6 +12,8 @@ const posts = defineCollection({
     date: z.coerce.date(),
     category: z.enum(categories),
     role: z.string().optional(),
+    // 날짜가 같은 글의 순서(작은 수가 위).
+    order: z.number().default(0),
     // draft: true 인 글은 공개 빌드에 들어가지 않는다.
     draft: z.boolean().default(false),
   }),

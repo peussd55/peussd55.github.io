@@ -129,7 +129,7 @@ const postIds = new Set(posts.map((post) => post.id));
     <ul class="case-list">
       {cases.map((item) => (
         <li>
-          <h3>{item.title}</h3>
+          <h3>{postIds.has(item.post) ? <a href={`/posts/${item.post}/`}>{item.title}</a> : item.title}</h3>
           <p>{item.summary}</p>
         </li>
       ))}
