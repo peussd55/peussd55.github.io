@@ -734,6 +734,123 @@ a.post-item:hover .post-item__title { color: var(--accent); }
   .fig__canvas { padding: 28px 20px; }
 }
 
+/* 구조 그림 — 위에서 아래로 흐르고, 한 줄에 셋을 놓는 칸은 좁은 화면에서 위아래로 쌓는다. */
+.hx {
+  display: flex;
+  flex-direction: column;
+}
+.hx__ev {
+  align-self: center;
+  height: 28px;
+}
+.hx__box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border: 1px dashed var(--line-strong);
+}
+.hx__tag {
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--fg-3);
+}
+.hx__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr) 44px minmax(0, 1fr);
+}
+.edge--both::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -4px;
+  width: 9px;
+  height: 9px;
+  border-bottom: 1.5px solid var(--fg-3);
+  border-left: 1.5px solid var(--fg-3);
+  transform: rotate(45deg);
+}
+.hx__note,
+.hx__only {
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--fg-3);
+}
+.hx__note { margin-top: 12px; }
+.hx__only {
+  margin-top: 16px;
+  padding: 10px 12px;
+  border: 1px dashed var(--line-strong);
+}
+@media (max-width: 640px) {
+  .hx__row { grid-template-columns: minmax(0, 1fr); }
+  .hx__row .edge {
+    justify-self: center;
+    width: 1px;
+    height: 22px;
+    margin: 6px 0;
+  }
+  .hx__row .edge::after {
+    right: auto;
+    left: -4px;
+    top: auto;
+    bottom: 0;
+    transform: rotate(135deg);
+  }
+  .hx__row .edge--both::before {
+    left: -4px;
+    top: 0;
+    transform: rotate(135deg);
+  }
+}
+
+/* 막대 그림 — 회차마다 판정기별 통과 수(26건 중)를 가로 막대로 놓는다. */
+.bars {
+  display: grid;
+  gap: 18px;
+}
+.bars__row {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+.bars__name {
+  font-size: var(--fs-sm);
+  line-height: 20px;
+  font-weight: 700;
+}
+.bars__set {
+  display: grid;
+  gap: 6px;
+}
+.bars__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 20px;
+}
+.bars__bar {
+  flex: 0 0 auto;
+  width: calc(var(--n) * 62% / 26);
+  min-width: 2px;
+  height: 14px;
+  background: var(--line-strong);
+}
+.bars__bar--last { background: var(--fg); }
+/* 좁은 화면에서는 가장 긴 막대와 그 옆의 글이 한 줄에 들어가게 막대를 줄인다. */
+@media (max-width: 640px) {
+  .bars__bar { width: calc(var(--n) * 36% / 26); }
+}
+.bars__val {
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+
 .post-role {
   margin-top: 56px;
   padding-top: 20px;
