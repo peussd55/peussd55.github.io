@@ -676,6 +676,64 @@ a.post-item:hover .post-item__title { color: var(--accent); }
   transform: rotate(45deg);
 }
 
+/* 전후 비교 그림 — 두 흐름을 나란히 세우고, 좁은 화면에서는 위아래로 쌓는다. */
+.turns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+.turns__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.turns__head {
+  margin-bottom: 14px;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  font-weight: 700;
+}
+.turns__head small {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  color: var(--fg-3);
+}
+.turns__turn {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px dashed var(--line-strong);
+}
+/* 상자가 하나뿐인 쪽은 남는 높이의 가운데에 둔다(이름표는 위에 그대로). */
+.turns__turn .node:only-of-type { margin-block: auto; }
+.turns__label {
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--fg-3);
+}
+.turns__ev {
+  align-self: center;
+  height: 30px;
+}
+.turns__result {
+  margin-top: 12px;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  font-weight: 600;
+  text-align: center;
+  color: var(--fg-3);
+}
+.turns__result--ok { color: var(--accent); }
+@media (max-width: 640px) {
+  .turns { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .fig__canvas { padding: 28px 20px; }
+}
+
 .post-role {
   margin-top: 56px;
   padding-top: 20px;
@@ -940,6 +998,13 @@ html { scroll-behavior: smooth; }
   .prose pre { padding: 16px; font-size: 13px; }
   .prose th + th,
   .prose td + td { padding-left: 14px; }
+  /* 칸이 많은 표가 좁은 화면을 넘지 않게 글자를 한 단계 줄인다. */
+  .prose table { font-size: var(--fs-meta); }
+  .prose thead th { font-size: var(--fs-xs); }
+}
+/* 더 좁은 화면에서는 표 안에서만 낱말 중간 줄바꿈을 허용한다(화면 밖으로 밀려 나가는 것보다 낫다). */
+@media (max-width: 380px) {
+  .prose table { word-break: normal; }
 }
 
 /* ---------- 주요 업무 — 이름 붙은 묶음 ---------- */
