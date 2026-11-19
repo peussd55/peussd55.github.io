@@ -691,6 +691,9 @@ a.post-item:hover .post-item__title { color: var(--accent); }
    본문 단(가운데 720)의 위치는 그대로 두고 단 바깥에 걸어 둔다. */
 html { scroll-behavior: smooth; }
 .prose h2 { scroll-margin-top: 80px; }
+/* 각주 번호와 각주 줄로 건너뛸 때도 위에 붙은 머리띠에 가려지지 않게 같은 여백을 둔다. */
+.prose [data-footnote-ref],
+.prose li[id^='user-content-fn-'] { scroll-margin-top: 80px; }
 .post-body { position: relative; }
 .toc {
   position: absolute;
