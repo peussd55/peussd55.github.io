@@ -89,6 +89,37 @@ category: 실시간 음성 에이전트
 
 이 마지막 규칙이 문제의 핵심이에요. 음성 봇의 한 턴은 모델의 응답 하나이고, 응답 하나에 말과 도구 호출이 함께 들어갈 수 있어요. 그런데 통화 종료 도구를 부른 턴은 봇의 마지막 턴이에요. 그 턴에 끝인사 대신 다른 말을 하면 끝인사가 실릴 곳이 없고, 교환기는 고정 문구만 읽어요.
 
+<figure class="fig">
+<div class="fig__canvas">
+<div class="turns">
+<div class="turns__col">
+<div class="turns__head">고치기 전<small>끝인사를 말하고 같은 턴에 끊으라고 지시</small></div>
+<div class="turns__turn">
+<span class="turns__label">봇의 마지막 턴 · 응답 하나</span>
+<div class="node">말<small>이제 끊겠다는 예고</small></div>
+<div class="node">통화 종료 도구 호출<small>파라미터 비어 있음</small></div>
+</div>
+<span class="ev turns__ev" aria-hidden="true"></span>
+<div class="node">전화 교환기<small>고정 문구를 읽고 끊음</small></div>
+<div class="turns__result">끝인사는 나오지 않음</div>
+</div>
+<div class="turns__col">
+<div class="turns__head">고친 뒤<small>끝인사를 통화 종료 도구의 파라미터에 싣게 함</small></div>
+<div class="turns__turn">
+<span class="turns__label">봇의 마지막 턴 · 응답 하나</span>
+<div class="node node--out">통화 종료 도구 호출<small>파라미터 = 끝인사</small></div>
+</div>
+<span class="ev turns__ev" aria-hidden="true"></span>
+<div class="node">전화 교환기<small>끝인사를 읽고 끊음 · 챗봇에서는 말풍선</small></div>
+<div class="turns__result turns__result--ok">끝인사가 나옴</div>
+</div>
+</div>
+</div>
+<figcaption>통화 종료 도구를 부른 턴이 봇의 마지막 턴이에요. 서버는 그 뒤에 다음 응답을 요청하지 않아요.</figcaption>
+</figure>
+
+그림에서는 봇의 마지막 응답이 양쪽 모두 하나뿐인 것을 보면 돼요. 왼쪽은 그 하나를 예고와 빈 파라미터가 차지해 끝인사가 갈 곳이 없고, 오른쪽은 끝인사가 도구의 파라미터에 실려 교환기까지 가요.
+
 1차의 지시는 끝인사를 말한 뒤 종료 도구를 부르라는 것이었어요. 26건 중 19건은 이제 마무리하고 끊겠다는 식의 예고만 하고 끊었고, 6건은 그 턴에 아무 말 없이 끊었어요(그중 2건은 앞 턴에 끝인사를 따로 말했어요. 나머지 한 건은 전화를 건 쪽이 먼저 끊었어요). 끊는 턴에 정해진 끝인사가 실린 경우는 없었어요.
 
 결과를 보고 저는 이렇게 물었어요.
