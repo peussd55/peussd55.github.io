@@ -60,7 +60,7 @@ export const career = [
           },
           {
             k: '실시간 음성',
-            v: '음성인식 · LLM · 음성합성을 잇는 스트리밍 파이프라인 구축, 통화 기록 전수로 응답 지연을 측정하는 지표 체계 구축',
+            v: '음성인식(STT) · LLM · 음성합성(TTS)을 잇는 스트리밍 파이프라인 구축, 통화 기록 전수로 응답 지연을 측정하는 지표 체계 구축',
           },
           {
             k: '에이전트',
@@ -80,7 +80,7 @@ export const career = [
           },
           {
             k: '협업 방식',
-            v: '코딩 에이전트와 상시 협업(설계 · 검증 · 운영은 직접, 구현은 에이전트와 분담)',
+            v: '코딩 에이전트와 상시 협업(방향과 끝의 기준을 정하고, 결과는 직접 써 보고 확인)',
           },
         ],
       },
@@ -137,7 +137,7 @@ export const career = [
 export const work = [
   {
     name: '실시간 음성 에이전트',
-    summary: '음성인식 · LLM · 음성합성을 잇는 실시간 파이프라인, 의료 도메인 콜봇 실서비스 운영',
+    summary: 'STT · LLM · TTS를 잇는 실시간 파이프라인, 의료 도메인 콜봇 실서비스 운영',
   },
   {
     name: 'RAG와 에이전트',
@@ -150,13 +150,13 @@ export const work = [
   },
   {
     name: '사내 AX',
-    summary: 'LLM 게이트웨이와 사내 AI 채팅 도구 도입 · 운영(팀별 예산과 모델 정책 관리)',
+    summary:
+      'LLM 게이트웨이와 사내 AI 채팅 도구 도입 · 운영(팀별 예산과 모델 정책 관리), 한도 · 모델 요청을 처리하는 운영 포털 개발',
   },
 ];
 
 // 그 밖에 — 제목만
 export const projects = [
-  { title: 'BindQ Studio', href: 'https://github.com/peussd55/BindQ', note: '' },
   {
     title: '국가기술표준원 e나라표준인증',
     href: 'https://www.standard.go.kr/KSCI/portalindex.do',
