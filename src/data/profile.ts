@@ -155,6 +155,13 @@ export const work = [
   },
 ];
 
+// 일하는 방식 — 주요 업무 묶음 아래에 한 줄. category 분류의 글 제목이 그 아래에 붙는다.
+export const way = {
+  name: '일하는 방식',
+  category: '에이전트와 일하는 법',
+  summary: '코딩 에이전트와 함께 개발. 방향과 끝의 기준을 정하고, 결과는 직접 써 보고 확인.',
+};
+
 // 그 밖에 — 제목만
 export const projects = [
   {

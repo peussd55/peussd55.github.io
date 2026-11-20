@@ -1283,6 +1283,8 @@ html { scroll-behavior: smooth; }
   padding-top: 18px;
   border-top: 1px solid var(--fg);
 }
+/* 일하는 방식 — 묶음 넷 아래에 두 칸 너비로 놓는다. */
+.work--way { grid-column: 1 / -1; }
 .work__name {
   font-size: var(--fs-h3);
   line-height: 1.45;

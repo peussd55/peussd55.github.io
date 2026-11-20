@@ -1,9 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getPosts } from '../lib/posts';
-import { headline, lead, glance, about, career, work, projects, papers } from '../data/profile';
+import { headline, lead, glance, about, career, work, way, projects, papers } from '../data/profile';
 
 const posts = await getPosts();
+const wayPosts = posts.filter((post) => post.data.category === way.category);
 ---
 
 <Base current="profile">
@@ -108,6 +109,17 @@ const posts = await getPosts();
           </article>
         );
       })}
+      <article class="work work--way">
+        <h3 class="work__name">{way.name}</h3>
+        <p class="work__sum">{way.summary}</p>
+        {wayPosts.length > 0 && (
+          <ul class="work__posts">
+            {wayPosts.map((post) => (
+              <li><a class="link" href={`/posts/${post.id}/`}>{post.data.title}</a></li>
+            ))}
+          </ul>
+        )}
+      </article>
     </div>
   </section>
 
