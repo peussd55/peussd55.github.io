@@ -16,5 +16,6 @@ export const categories = [
   'RAG와 에이전트',
   'LLM 서빙과 평가',
   '사내 AX',
+  '에이전트와 일하는 법',
   '그 밖에',
 ] as const;

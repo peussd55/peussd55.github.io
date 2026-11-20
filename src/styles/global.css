@@ -851,6 +851,154 @@ a.post-item:hover .post-item__title { color: var(--accent); }
   white-space: nowrap;
 }
 
+/* 단면 그림 — 높이 상한에서 잘리는 카드. 가운데가 카드, 양옆이 테스트가 확인한 것과 사람이 본 것. */
+.cut {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 220px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+}
+.cut__note {
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  color: var(--fg-2);
+}
+.cut__head {
+  display: block;
+  margin-bottom: 6px;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--fg);
+}
+.cut__item { display: block; }
+.cut__item + .cut__item { margin-top: 6px; }
+.cut__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.cut__seen {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 12px 0;
+  border: 1px solid var(--fg);
+  border-bottom: 0;
+  background: var(--bg);
+}
+.cut__tag {
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--fg-3);
+}
+.cut__line {
+  padding: 7px 10px;
+  border: 1px solid var(--line-strong);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  color: var(--fg-2);
+}
+/* 버튼은 굵은 선에 반쯤 걸친다. 선 아래 칸이 그 위를 옅게 덮는다. */
+.cut__btn {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  box-sizing: border-box;
+  height: 44px;
+  margin-bottom: -22px;
+  padding: 1px 16px 0;
+  border: 1px solid var(--fg);
+  background: var(--bg);
+  font-size: var(--fs-xs);
+  line-height: 20px;
+  font-weight: 600;
+}
+.cut__gone {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 32px 12px 12px;
+  border: 1px dashed var(--line-strong);
+  border-top: 2px solid var(--fg);
+  background: rgba(245, 246, 248, 0.78);
+  background: color-mix(in srgb, var(--sub) 78%, transparent);
+}
+.cut__gone .cut__line {
+  border-style: dashed;
+  color: var(--fg-3);
+}
+.cut__edge {
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  font-weight: 600;
+  text-align: center;
+}
+@media (max-width: 640px) {
+  .cut { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .cut__card { width: 100%; max-width: 260px; justify-self: center; }
+}
+
+/* 칸 그림 — 줄마다 확인의 깊이, 열마다 시점. 칸에는 있음 · 일부 · 없음 표시만 둔다. */
+.mx {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
+}
+.mx > * {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 9px 6px;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+}
+.mx__h {
+  align-items: flex-end;
+  justify-content: center;
+  border-bottom-color: var(--fg);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-align: center;
+  color: var(--fg-3);
+}
+.mx__k { padding-left: 0; }
+.mx__v {
+  justify-content: center;
+  color: var(--fg-3);
+}
+.mk {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--fg);
+  border-radius: 50%;
+}
+.mk--on { background: var(--fg); }
+.mk--half { background: linear-gradient(90deg, var(--fg) 50%, transparent 50%); }
+.mk--off { border-color: var(--fg-3); }
+.mx__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 14px;
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  color: var(--fg-3);
+}
+.mx__legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+@media (max-width: 640px) {
+  .mx > * { padding: 8px 3px; font-size: var(--fs-xs); }
+  .mx__h { font-size: 11.5px; }
+}
+
 .post-role {
   margin-top: 56px;
   padding-top: 20px;
