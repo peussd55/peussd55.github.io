@@ -999,6 +999,245 @@ a.post-item:hover .post-item__title { color: var(--accent); }
   .mx__h { font-size: 11.5px; }
 }
 
+/* 기준별 막대 그림 — 줄마다 기준과 답, 그 아래 근거가 된 값, 그 아래 잰 범위(옅은 띠)와 답(막대).
+   가로축은 동시 요청 수(0~512 · 선형). 길이는 인라인 변수 --lim · --v(백분율)로 준다. */
+.cr {
+  display: grid;
+  gap: 18px;
+}
+.cr__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 12px;
+  align-items: baseline;
+}
+.cr__k {
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+.cr__val {
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  font-weight: 700;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.cr__sub {
+  grid-column: 1 / -1;
+  margin-top: -4px;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--fg-3);
+  font-variant-numeric: tabular-nums;
+}
+.cr__plot {
+  grid-column: 1 / -1;
+  position: relative;
+  height: 10px;
+}
+.cr__track,
+.cr__bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 0 4px 4px 0;
+}
+.cr__track {
+  width: calc(var(--lim) * 1%);
+  background: var(--line);
+}
+.cr__bar {
+  width: calc(var(--v) * 1%);
+  background: var(--fg-3);
+}
+.cr__bar--edge,
+.cr__sw.cr__sw--edge {
+  background: repeating-linear-gradient(135deg, var(--fg-3) 0 3px, transparent 3px 6px);
+  outline: 1px solid var(--fg-3);
+  outline-offset: -1px;
+}
+.cr__row--pick .cr__bar { background: var(--accent); }
+.cr__row--pick .cr__k { font-weight: 700; }
+.cr__tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 6px;
+  border: 1px solid var(--accent);
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--accent);
+  vertical-align: 1px;
+  white-space: nowrap;
+}
+.cr__axis {
+  position: relative;
+  height: 34px;
+  margin-top: -6px;
+  border-top: 1px solid var(--line-strong);
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--fg-3);
+  font-variant-numeric: tabular-nums;
+}
+.cr__axis span {
+  position: absolute;
+  top: 6px;
+  left: calc(var(--v) * 1%);
+  transform: translateX(-50%);
+}
+.cr__axis span::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 1px;
+  height: 4px;
+  background: var(--line-strong);
+}
+.cr__axis span:last-of-type { transform: translateX(-100%); }
+.cr__axis span:last-of-type::before { left: 100%; }
+.cr__axis em {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  font-style: normal;
+}
+.cr__legend,
+.dp__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin-top: 16px;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--fg-3);
+}
+.cr__legend > span,
+.dp__legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.cr__sw {
+  display: inline-block;
+  width: 22px;
+  height: 8px;
+  border-radius: 0 3px 3px 0;
+  background: var(--fg-3);
+}
+.cr__sw--lim {
+  background: var(--line);
+  outline: 1px solid var(--line-strong);
+  outline-offset: -1px;
+}
+
+/* 점 그림 두 장 — 한 장에 축 하나. 묶음마다 같은 조건으로 잰 세 번을 점 셋으로, 기준선은 점선.
+   세로 위치는 인라인 변수 --v를 그 장의 --min · --max 사이에서 잰다. 좁은 화면에서는 위아래로 쌓는다. */
+.dp {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px;
+}
+.dp__title {
+  margin-bottom: 14px;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  font-weight: 700;
+}
+.dp__title small {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  color: var(--fg-3);
+}
+.dp__plot {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  height: 168px;
+  margin-left: 38px;
+  border-bottom: 1px solid var(--line-strong);
+}
+.dp__y,
+.dp__line,
+.dp__dot {
+  position: absolute;
+  bottom: calc((var(--v) - var(--min)) / (var(--max) - var(--min)) * 100%);
+}
+.dp__y {
+  left: -38px;
+  width: 32px;
+  transform: translateY(50%);
+  font-size: 11.5px;
+  line-height: 1;
+  color: var(--fg-3);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.dp__line {
+  left: 0;
+  right: 0;
+  border-top: 1.5px dashed var(--accent);
+}
+.dp__line b {
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--fg-2);
+}
+.dp__col { position: relative; }
+.dp__col + .dp__col { border-left: 1px solid var(--line); }
+.dp__dot {
+  left: calc(26% + var(--i) * 24%);
+  width: 10px;
+  height: 10px;
+  margin: 0 0 -5px -5px;
+  border: 2px solid var(--fg);
+  border-radius: 50%;
+  background: var(--fg);
+  box-shadow: 0 0 0 2px var(--sub);
+}
+.dp__dot--out { background: var(--sub); }
+.dp__x {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 8px 0 0 38px;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  text-align: center;
+}
+.dp__x small {
+  display: block;
+  font-size: 11.5px;
+  color: var(--fg-3);
+  font-variant-numeric: tabular-nums;
+}
+.dp__mk {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--fg);
+  border-radius: 50%;
+  background: var(--fg);
+}
+.dp__mk--out { background: transparent; }
+.dp__mk--line {
+  width: 22px;
+  height: 0;
+  border: 0;
+  border-top: 1.5px dashed var(--accent);
+  border-radius: 0;
+  background: none;
+}
+@media (max-width: 640px) {
+  .dp { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .cr__k,
+  .cr__val { font-size: var(--fs-meta); }
+}
+
 .post-role {
   margin-top: 56px;
   padding-top: 20px;
