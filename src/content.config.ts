@@ -14,6 +14,8 @@ const posts = defineCollection({
     role: z.string().optional(),
     // 날짜가 같은 글의 순서(작은 수가 위).
     order: z.number().default(0),
+    // 프로필 "주요 업무"에 제목을 보일 대표 글(긴 글)에만 true. 글 탭에는 이 값과 상관없이 모두 나온다.
+    featured: z.boolean().default(false),
     // draft: true 인 글은 공개 빌드에 들어가지 않는다.
     draft: z.boolean().default(false),
   }),

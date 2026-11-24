@@ -70,4 +70,8 @@ if (!isListVisible(posts.length)) {
     });
   }
   search?.addEventListener('input', apply);
+
+  // 주소에 ?cat=분류 가 있으면 그 분류가 눌린 채로 연다(프로필의 "이 분류의 글 모두 보기").
+  const wanted = new URLSearchParams(location.search).get('cat');
+  buttons.find((button) => button.dataset.cat === wanted)?.click();
 </script>

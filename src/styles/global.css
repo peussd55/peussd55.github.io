@@ -1607,6 +1607,20 @@ html { scroll-behavior: smooth; }
   font-size: var(--fs-md);
   line-height: 1.55;
 }
+/* 묶음에 보이는 것보다 글이 많을 때 — 글 탭의 그 분류로 가는 링크 */
+.work__more {
+  margin-top: 12px;
+  font-size: var(--fs-meta);
+  line-height: 1.55;
+}
+.work__more a {
+  color: var(--fg-2);
+  text-underline-offset: 4px;
+}
+.work__more a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
 
 /* 글 첫머리의 전 → 후 흐름도 */
 .prose .flow__steps { margin: 40px 0 8px; }

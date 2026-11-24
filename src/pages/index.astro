@@ -4,7 +4,14 @@ import { getPosts } from '../lib/posts';
 import { headline, lead, glance, about, career, work, way, projects, papers } from '../data/profile';
 
 const posts = await getPosts();
-const wayPosts = posts.filter((post) => post.data.category === way.category);
+// "주요 업무"에는 대표 글(featured)만, 묶음마다 PER_GROUP편까지 보인다. 더 있으면 글 탭의 그 분류로 보낸다.
+const PER_GROUP = 3;
+const featured = posts.filter((post) => post.data.featured);
+const inCat = (name: string) => featured.filter((post) => post.data.category === name);
+const countInCat = (name: string) => posts.filter((post) => post.data.category === name).length;
+const catHref = (name: string) => `/posts/?cat=${encodeURIComponent(name)}`;
+const wayAll = inCat(way.category);
+const wayPosts = wayAll.slice(0, PER_GROUP);
 ---
 
 <Base current="profile">
@@ -94,7 +101,8 @@ const wayPosts = posts.filter((post) => post.data.category === way.category);
     <h2 class="section-title" id="h-work">주요 업무</h2>
     <div class="work-grid">
       {work.map((group) => {
-        const items = posts.filter((post) => post.data.category === group.name);
+        const all = inCat(group.name);
+        const items = all.slice(0, PER_GROUP);
         return (
           <article class="work">
             <h3 class="work__name">{group.name}</h3>
@@ -105,6 +113,11 @@ const wayPosts = posts.filter((post) => post.data.category === way.category);
                   <li><a class="link" href={`/posts/${post.id}/`}>{post.data.title}</a></li>
                 ))}
               </ul>
+            )}
+            {all.length > PER_GROUP && (
+              <p class="work__more">
+                <a href={catHref(group.name)}>이 분류의 글 모두 보기 ({countInCat(group.name)}편) →</a>
+              </p>
             )}
           </article>
         );
@@ -118,6 +131,11 @@ const wayPosts = posts.filter((post) => post.data.category === way.category);
               <li><a class="link" href={`/posts/${post.id}/`}>{post.data.title}</a></li>
             ))}
           </ul>
+        )}
+        {wayAll.length > PER_GROUP && (
+          <p class="work__more">
+            <a href={catHref(way.category)}>이 분류의 글 모두 보기 ({countInCat(way.category)}편) →</a>
+          </p>
         )}
       </article>
     </div>
