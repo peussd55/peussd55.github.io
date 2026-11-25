@@ -94,4 +94,55 @@ const toc = headings.filter((heading) => heading.depth === 2);
     window.addEventListener('resize', update);
     update();
   }
+
+  // 클립보드에 글을 넣는다. 클립보드 API가 막힌 곳(일부 앱 안 브라우저)에서는 임시 입력 칸을 골라 복사한다.
+  async function copyText(text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.append(area);
+      area.select();
+      let ok = false;
+      try {
+        ok = document.execCommand('copy');
+      } catch {
+        ok = false;
+      }
+      area.remove();
+      return ok;
+    }
+  }
+
+  // 코드 칸마다 복사 버튼을 붙인다. pre를 .code로 감싸고 그 위 한 줄에 버튼을 둔다.
+  for (const pre of document.querySelectorAll<HTMLElement>('.prose pre')) {
+    const wrap = document.createElement('div');
+    wrap.className = 'code';
+    const bar = document.createElement('div');
+    bar.className = 'code__bar';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'code__copy';
+    button.textContent = '복사';
+    button.setAttribute('aria-label', '코드 복사');
+
+    let timer = 0;
+    button.addEventListener('click', async () => {
+      const text = (pre.querySelector('code') ?? pre).innerText;
+      button.textContent = (await copyText(text)) ? '복사됨' : '복사 안 됨';
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        button.textContent = '복사';
+      }, 1600);
+    });
+
+    pre.replaceWith(wrap);
+    bar.append(button);
+    wrap.append(bar, pre);
+  }
 </script>
