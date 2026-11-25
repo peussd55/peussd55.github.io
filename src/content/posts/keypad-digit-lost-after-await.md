@@ -2,7 +2,7 @@
 title: 빨리 누르면 가끔 사라지는 숫자 — await 뒤에 되쓴 복사본
 summary: 전화 음성 봇에서 키패드를 빨리 누르면 숫자 한 자리가 가끔 빠지던 버그. 원인은 await 뒤에 상태의 복사본을 되쓰는 코드였고, 한 번 고친 뒤 3주 만에 다른 자리에서 다시 난 경위와 재현 코드
 date: 2026-11-25
-order: 1
+order: 2
 category: 실시간 음성 에이전트
 kind: troubleshooting
 ---

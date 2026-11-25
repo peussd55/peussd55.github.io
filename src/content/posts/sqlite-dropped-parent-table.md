@@ -2,7 +2,7 @@
 title: 검사는 통과하는데 막히는 INSERT — 참조를 비우고 지운 부모 테이블
 summary: 사내 포털의 SQLite 마이그레이션에서, 가리키는 컬럼을 다 비우고 부모 테이블을 지우면 외래키 검사와 무결성 검사는 통과하는데 자식 테이블의 INSERT와 DELETE가 막히던 함정. 배포 전에 재현으로 잡은 경위와 재현 코드
 date: 2026-11-25
-order: 0
+order: 1
 category: 사내 AX
 kind: troubleshooting
 ---
