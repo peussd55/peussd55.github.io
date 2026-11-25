@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { site, categories } from '../../data/site';
-import { getPosts, isListVisible, formatDate } from '../../lib/posts';
+import { getPosts, isListVisible, formatDate, catsOf } from '../../lib/posts';
 
 const posts = await getPosts();
 
@@ -50,10 +50,10 @@ const hasKinds = posts.some((post) => post.data.kind);
 
     <ol class="post-list">
       {posts.map((post) => (
-        <li data-cat={post.data.category} data-kind={kindOf(post)}>
+        <li data-cat={post.data.category} data-also={post.data.also} data-kind={kindOf(post)}>
           <a class="post-item" href={`/posts/${post.id}/`}>
             <p class="post-item__cat">
-              {post.data.category}
+              {catsOf(post).join(' · ')}
               {post.data.kind === 'troubleshooting' && <span class="tag">트러블슈팅</span>}
             </p>
             <h2 class="post-item__title">{post.data.title}</h2>
@@ -81,7 +81,8 @@ const hasKinds = posts.some((post) => post.data.kind);
     const query = (search?.value ?? '').trim().toLowerCase();
     let shown = 0;
     for (const item of items) {
-      const inCat = cat === 'all' || item.dataset.cat === cat;
+      // 대표 분류나 덧붙는 분류 가운데 하나가 맞으면 그 분류의 글이다.
+      const inCat = cat === 'all' || item.dataset.cat === cat || item.dataset.also === cat;
       const inKind = kind === 'all' || item.dataset.kind === kind;
       const inQuery = !query || (item.textContent ?? '').toLowerCase().includes(query);
       item.hidden = !(inCat && inKind && inQuery);

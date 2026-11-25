@@ -11,6 +11,9 @@ const posts = defineCollection({
     summary: z.string(),
     date: z.coerce.date(),
     category: z.enum(categories),
+    // 덧붙는 분류(하나까지). 글이 다른 주제의 줄거리에도 들어갈 때만 적는다.
+    // 글 탭에서는 두 분류 모두에서 나오고 편수에도 들어간다. 프로필 "주요 업무"에는 대표 분류(category)의 묶음에 한 번만 보인다.
+    also: z.enum(categories).optional(),
     role: z.string().optional(),
     // 날짜가 같은 글의 순서(작은 수가 위).
     order: z.number().default(0),

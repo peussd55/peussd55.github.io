@@ -4,6 +4,7 @@ summary: 자동 테스트로 '구현 끝'이 보고된 사내 운영 포털을 �
 date: 2026-11-20
 order: 3
 category: 에이전트와 일하는 법
+also: 사내 AX
 featured: true
 ---
 

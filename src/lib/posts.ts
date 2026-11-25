@@ -13,6 +13,12 @@ export async function getPosts() {
     );
 }
 
+// 글이 속한 분류들: 대표 분류와, 있으면 덧붙는 분류.
+export function catsOf(post: { data: { category: string; also?: string } }) {
+  const { category, also } = post.data;
+  return also && also !== category ? [category, also] : [category];
+}
+
 // 글 목록 화면과 메뉴의 "글"을 내놓을지.
 export function isListVisible(count: number) {
   return showDrafts ? count > 0 : count >= site.minPostsForList;

@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { getPosts } from '../lib/posts';
+import { getPosts, catsOf } from '../lib/posts';
 import { headline, lead, glance, about, career, work, way, shooting, projects, papers } from '../data/profile';
 
 const posts = await getPosts();
@@ -8,8 +8,10 @@ const posts = await getPosts();
 // 그 분류에 보이는 것보다 글이 더 있으면(대표 글이 아닌 글 포함) 글 탭의 그 분류로 보낸다.
 const PER_GROUP = 3;
 const featured = posts.filter((post) => post.data.featured);
+// 묶음에 제목이 보이는 것은 대표 분류가 그 묶음인 글뿐이다(같은 제목이 두 묶음에 나오지 않게).
 const inCat = (name: string) => featured.filter((post) => post.data.category === name);
-const countInCat = (name: string) => posts.filter((post) => post.data.category === name).length;
+// 편수와 "모두 보기"에는 덧붙는 분류로 들어온 글도 센다(글 탭에서는 그 분류로 나온다).
+const countInCat = (name: string) => posts.filter((post) => catsOf(post).includes(name)).length;
 const catHref = (name: string) => `/posts/?cat=${encodeURIComponent(name)}`;
 const wayAll = inCat(way.category);
 const wayPosts = wayAll.slice(0, PER_GROUP);
