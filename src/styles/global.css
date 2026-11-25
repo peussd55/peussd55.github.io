@@ -515,6 +515,46 @@ body::before {
 }
 .search input::-webkit-search-cancel-button { display: none; }
 
+/* 글의 종류 줄 — 분류 줄 아래에 한 단계 작게. 분류는 주제, 이 줄은 형식(긴 글 · 트러블슈팅). */
+.kinds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 18px;
+  margin-top: 14px;
+}
+.kinds button {
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--fs-meta);
+  line-height: 1.5;
+  color: var(--fg-3);
+  cursor: pointer;
+}
+.kinds button:hover { color: var(--fg); }
+.kinds button[aria-pressed="true"] {
+  color: var(--fg);
+  font-weight: 700;
+}
+/* 글의 종류 꼬리표 — 분류 글씨 옆에 붙는다(글 목록 · 글 한 편). */
+.tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 0 7px;
+  border: 1px solid var(--line-strong);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--fg-2);
+  vertical-align: 1px;
+}
+/* 고른 분류 · 종류 · 검색어에 맞는 글이 없을 때의 한 줄 */
+.post-empty {
+  padding-block: 36px;
+  font-size: var(--fs-md);
+  color: var(--fg-3);
+}
 .post-list > li { border-bottom: 1px solid var(--line); }
 .post-item {
   display: flex;
@@ -1634,6 +1674,13 @@ html { scroll-behavior: smooth; }
 .work__posts .link {
   font-size: var(--fs-md);
   line-height: 1.55;
+}
+/* 트러블슈팅 기록 칸 — 제목 뒤에 그 글의 분류를 작게 붙인다. */
+.work__cat {
+  margin-left: 8px;
+  font-size: var(--fs-meta);
+  color: var(--fg-3);
+  white-space: nowrap;
 }
 /* 묶음에 보이는 것보다 글이 많을 때 — 글 탭의 그 분류로 가는 링크 */
 .work__more {

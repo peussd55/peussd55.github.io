@@ -21,7 +21,10 @@ const toc = headings.filter((heading) => heading.depth === 2);
 <Base title={post.data.title} description={post.data.summary} current="posts">
   <article class="post col">
     <header class="post-head">
-      <p class="post-cat">{post.data.category}</p>
+      <p class="post-cat">
+        {post.data.category}
+        {post.data.kind === 'troubleshooting' && <span class="tag">트러블슈팅</span>}
+      </p>
       <h1>{post.data.title}</h1>
       <p class="post-sum">{post.data.summary}</p>
       <p class="post-meta">{site.name} · {formatDate(post.data.date)}</p>

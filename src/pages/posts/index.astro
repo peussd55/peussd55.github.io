@@ -9,6 +9,14 @@ const posts = await getPosts();
 if (!isListVisible(posts.length)) {
   return Astro.redirect('/');
 }
+
+// 글의 종류: 대표 글(featured)은 긴 글, 머리말에 kind 를 적은 글은 그 종류. 종류 줄은 종류가 적힌 글이 있을 때만 내놓는다.
+const kindOf = (post: (typeof posts)[number]) => post.data.kind ?? (post.data.featured ? 'long' : '');
+const kinds = [
+  { id: 'long', label: '긴 글' },
+  { id: 'troubleshooting', label: '트러블슈팅' },
+];
+const hasKinds = posts.some((post) => post.data.kind);
 ---
 
 <Base title="글" current="posts">
@@ -31,11 +39,23 @@ if (!isListVisible(posts.length)) {
       </label>
     </div>
 
+    {hasKinds && (
+      <div class="kinds" aria-label="글의 종류">
+        <button type="button" data-kind="all" aria-pressed="true">전체</button>
+        {kinds.map((kind) => (
+          <button type="button" data-kind={kind.id} aria-pressed="false">{kind.label}</button>
+        ))}
+      </div>
+    )}
+
     <ol class="post-list">
       {posts.map((post) => (
-        <li data-cat={post.data.category}>
+        <li data-cat={post.data.category} data-kind={kindOf(post)}>
           <a class="post-item" href={`/posts/${post.id}/`}>
-            <p class="post-item__cat">{post.data.category}</p>
+            <p class="post-item__cat">
+              {post.data.category}
+              {post.data.kind === 'troubleshooting' && <span class="tag">트러블슈팅</span>}
+            </p>
             <h2 class="post-item__title">{post.data.title}</h2>
             <p class="post-item__sum">{post.data.summary}</p>
             <p class="post-item__meta">{site.name} · {formatDate(post.data.date)}</p>
@@ -43,23 +63,32 @@ if (!isListVisible(posts.length)) {
         </li>
       ))}
     </ol>
+    <p class="post-empty" hidden>조건에 맞는 글이 없어요.</p>
   </div>
 </Base>
 
 <script>
-  // 분류와 검색어로 목록을 거른다.
+  // 분류 · 종류 · 검색어로 목록을 거른다.
   const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.cats button'));
+  const kindButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.kinds button'));
   const items = Array.from(document.querySelectorAll<HTMLLIElement>('.post-list > li'));
   const search = document.querySelector<HTMLInputElement>('#post-search');
+  const empty = document.querySelector<HTMLElement>('.post-empty');
   let cat = 'all';
+  let kind = 'all';
 
   function apply() {
     const query = (search?.value ?? '').trim().toLowerCase();
+    let shown = 0;
     for (const item of items) {
       const inCat = cat === 'all' || item.dataset.cat === cat;
+      const inKind = kind === 'all' || item.dataset.kind === kind;
       const inQuery = !query || (item.textContent ?? '').toLowerCase().includes(query);
-      item.hidden = !(inCat && inQuery);
+      item.hidden = !(inCat && inKind && inQuery);
+      if (!item.hidden) shown += 1;
     }
+    // 분류와 종류를 겹쳐 고르거나 검색어가 안 맞아 남는 글이 없을 때.
+    if (empty) empty.hidden = shown > 0;
   }
 
   for (const button of buttons) {
@@ -69,9 +98,17 @@ if (!isListVisible(posts.length)) {
       apply();
     });
   }
+  for (const button of kindButtons) {
+    button.addEventListener('click', () => {
+      kind = button.dataset.kind ?? 'all';
+      for (const other of kindButtons) other.setAttribute('aria-pressed', other === button ? 'true' : 'false');
+      apply();
+    });
+  }
   search?.addEventListener('input', apply);
 
-  // 주소에 ?cat=분류 가 있으면 그 분류가 눌린 채로 연다(프로필의 "이 분류의 글 모두 보기").
-  const wanted = new URLSearchParams(location.search).get('cat');
-  buttons.find((button) => button.dataset.cat === wanted)?.click();
+  // 주소에 ?cat=분류 나 ?kind=종류 가 있으면 그것이 눌린 채로 연다(프로필의 "모두 보기" 링크).
+  const params = new URLSearchParams(location.search);
+  buttons.find((button) => button.dataset.cat === params.get('cat'))?.click();
+  kindButtons.find((button) => button.dataset.kind === params.get('kind'))?.click();
 </script>

@@ -1,10 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getPosts } from '../lib/posts';
-import { headline, lead, glance, about, career, work, way, projects, papers } from '../data/profile';
+import { headline, lead, glance, about, career, work, way, shooting, projects, papers } from '../data/profile';
 
 const posts = await getPosts();
-// "주요 업무"에는 대표 글(featured)만, 묶음마다 PER_GROUP편까지 보인다. 더 있으면 글 탭의 그 분류로 보낸다.
+// "주요 업무"에는 대표 글(featured)만, 묶음마다 PER_GROUP편까지 보인다.
+// 그 분류에 보이는 것보다 글이 더 있으면(대표 글이 아닌 글 포함) 글 탭의 그 분류로 보낸다.
 const PER_GROUP = 3;
 const featured = posts.filter((post) => post.data.featured);
 const inCat = (name: string) => featured.filter((post) => post.data.category === name);
@@ -12,6 +13,11 @@ const countInCat = (name: string) => posts.filter((post) => post.data.category =
 const catHref = (name: string) => `/posts/?cat=${encodeURIComponent(name)}`;
 const wayAll = inCat(way.category);
 const wayPosts = wayAll.slice(0, PER_GROUP);
+// 트러블슈팅 기록 — 종류가 troubleshooting 인 글을 최신순으로 SHOOTING_MAX편까지. SHOOTING_MIN편이 안 되면 칸을 내놓지 않는다.
+const SHOOTING_MAX = 5;
+const SHOOTING_MIN = 1;
+const shootingAll = posts.filter((post) => post.data.kind === 'troubleshooting');
+const shootingPosts = shootingAll.slice(0, SHOOTING_MAX);
 ---
 
 <Base current="profile">
@@ -114,7 +120,7 @@ const wayPosts = wayAll.slice(0, PER_GROUP);
                 ))}
               </ul>
             )}
-            {all.length > PER_GROUP && (
+            {countInCat(group.name) > items.length && (
               <p class="work__more">
                 <a href={catHref(group.name)}>이 분류의 글 모두 보기 ({countInCat(group.name)}편) →</a>
               </p>
@@ -132,12 +138,31 @@ const wayPosts = wayAll.slice(0, PER_GROUP);
             ))}
           </ul>
         )}
-        {wayAll.length > PER_GROUP && (
+        {countInCat(way.category) > wayPosts.length && (
           <p class="work__more">
             <a href={catHref(way.category)}>이 분류의 글 모두 보기 ({countInCat(way.category)}편) →</a>
           </p>
         )}
       </article>
+      {shootingAll.length >= SHOOTING_MIN && (
+        <article class="work work--way">
+          <h3 class="work__name">{shooting.name}</h3>
+          <p class="work__sum">{shooting.summary}</p>
+          <ul class="work__posts">
+            {shootingPosts.map((post) => (
+              <li>
+                <a class="link" href={`/posts/${post.id}/`}>{post.data.title}</a>
+                <span class="work__cat">{post.data.category}</span>
+              </li>
+            ))}
+          </ul>
+          {shootingAll.length > shootingPosts.length && (
+            <p class="work__more">
+              <a href="/posts/?kind=troubleshooting">트러블슈팅 기록 모두 보기 ({shootingAll.length}편) →</a>
+            </p>
+          )}
+        </article>
+      )}
     </div>
   </section>
 
