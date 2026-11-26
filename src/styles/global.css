@@ -1675,13 +1675,6 @@ html { scroll-behavior: smooth; }
   font-size: var(--fs-md);
   line-height: 1.55;
 }
-/* 트러블슈팅 기록 칸 — 제목 뒤에 그 글의 분류를 작게 붙인다. */
-.work__cat {
-  margin-left: 8px;
-  font-size: var(--fs-meta);
-  color: var(--fg-3);
-  white-space: nowrap;
-}
 /* 묶음에 보이는 것보다 글이 많을 때 — 글 탭의 그 분류로 가는 링크 */
 .work__more {
   margin-top: 12px;

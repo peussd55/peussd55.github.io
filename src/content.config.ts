@@ -20,7 +20,7 @@ const posts = defineCollection({
     // 프로필 "주요 업무"에 제목을 보일 대표 글(긴 글)에만 true. 글 탭에는 이 값과 상관없이 모두 나온다.
     featured: z.boolean().default(false),
     // 글의 종류. 분류(category)는 주제이고 이것은 형식이다. 트러블슈팅 기록과 견해 글에만 적는다.
-    // 글 탭의 종류 줄과 꼬리표가 이 값을 쓴다(이름표 = src/data/site.ts 의 kindLabels). 프로필의 "트러블슈팅 기록" 칸은 troubleshooting 만 쓴다.
+    // 글 탭의 종류 줄과 꼬리표가 이 값을 쓴다(이름표 = src/data/site.ts 의 kindLabels). 프로필에는 종류별 칸을 두지 않는다.
     kind: z.enum(['troubleshooting', 'opinion']).optional(),
     // draft: true 인 글은 공개 빌드에 들어가지 않는다.
     draft: z.boolean().default(false),

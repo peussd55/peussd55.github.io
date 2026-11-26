@@ -158,12 +158,6 @@ export const way = {
   summary: '코딩 에이전트와 함께 개발. 방향과 끝의 기준을 정하고, 결과는 직접 써 보고 확인.',
 };
 
-// 트러블슈팅 기록 — "일하는 방식" 아래에 한 줄. 머리말에 kind: troubleshooting 을 적은 글의 제목이 최신순으로 붙는다.
-export const shooting = {
-  name: '트러블슈팅 기록',
-  summary: '현업에서 겪은 기술 · 성능 문제를 한 건씩 정리. 증상 · 원인 · 수정 · 재현 코드.',
-};
-
 // 전체 구성도 — 주요 업무 묶음 넷 바로 아래에 한 줄. 구성도 페이지(/map/)로 간다.
 export const diagram = {
   name: '전체 구성도',
