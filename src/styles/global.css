@@ -1710,3 +1710,163 @@ html { scroll-behavior: smooth; }
     gap: 32px;
   }
 }
+
+/* ── 위치 그림(.loc) — 전체 구성도에서 이 글이 다룬 자리 · 2026-11-26 ── */
+.loc {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 128px;
+  gap: 0 20px;
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+}
+.loc__main { display: grid; gap: 0; }
+.loc__row {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0 12px;
+  position: relative;
+  padding-top: 18px;
+}
+.loc__row:first-child { padding-top: 0; }
+.loc__row + .loc__row::before {
+  content: "";
+  position: absolute;
+  left: calc(84px + 12px + (100% - 96px) / 2);
+  top: 0;
+  width: 1px;
+  height: 18px;
+  background: var(--line-strong);
+}
+.loc__k { align-self: center; font-size: var(--fs-xs); color: var(--fg-3); line-height: 1.35; }
+.loc__set { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; }
+.loc__n {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 10px 8px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg-3);
+  text-align: center;
+  position: relative;
+}
+.loc__n small { display: block; margin-top: 1px; font-size: 12px; color: var(--fg-3); }
+.loc__n--on { border: 1.5px solid var(--accent); color: var(--fg); font-weight: 600; }
+.loc__n--on small { color: var(--fg-2); font-weight: 400; }
+.loc__no {
+  position: absolute;
+  left: -8px;
+  top: -12px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.loc__side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 10px;
+  border: 1px dashed var(--line-strong);
+  color: var(--fg-3);
+  text-align: center;
+}
+.loc__side b { font-size: var(--fs-xs); font-weight: 600; color: var(--fg-3); }
+.loc__side span { font-size: var(--fs-xs); }
+.loc__side--on { border: 1.5px solid var(--accent); }
+.loc__side--on > b:not(.loc__no) { color: var(--fg-2); }
+.loc__side .loc__no { color: #fff; font-size: 12px; font-weight: 700; }
+.loc__side .loc__hit { color: var(--fg); font-weight: 600; }
+.fig .loc__did {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--line-strong);
+  display: grid;
+  gap: 10px;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+.fig .loc__did li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 0 8px; margin: 0; padding: 0; }
+.fig .loc__did li::marker { content: none; }
+.fig .loc__did .loc__no { position: static; align-self: start; margin-top: 3px; justify-self: start; }
+.fig .loc__did b { font-weight: 600; }
+@media (max-width: 640px) {
+  .loc { grid-template-columns: minmax(0, 1fr); font-size: 14px; }
+  .loc__row { grid-template-columns: minmax(0, 1fr); padding-top: 14px; }
+  .loc__row + .loc__row::before { left: 50%; height: 14px; }
+  .loc__k { margin-bottom: 4px; }
+  .loc__n { padding: 8px 4px; }
+  .loc__side { margin-top: 18px; flex-direction: row; flex-wrap: wrap; gap: 2px 10px; }
+  .fig .loc__did { font-size: 14px; }
+}
+
+/* ── 층 그림(.lay) — 같은 층들을 경우마다 따라가는 탭 그림 · 스크립트 없음(라디오 버튼) · 2026-11-26 ── */
+.lay { font-size: var(--fs-sm); line-height: 1.6; }
+.lay > input { position: absolute; opacity: 0; pointer-events: none; }
+.lay > label {
+  display: inline-block;
+  margin: 0 14px 0 0;
+  padding: 6px 0;
+  color: var(--fg-3);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+.lay > label:hover { color: var(--fg); }
+.lay > input:checked + label { color: var(--fg); border-bottom-color: var(--fg); }
+.lay > input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: 3px; }
+.lay__panels { margin-top: 14px; border-top: 1px solid var(--line-strong); }
+.lay__p { display: none; }
+.lay > input:nth-of-type(1):checked ~ .lay__panels > .lay__p:nth-child(1),
+.lay > input:nth-of-type(2):checked ~ .lay__panels > .lay__p:nth-child(2),
+.lay > input:nth-of-type(3):checked ~ .lay__panels > .lay__p:nth-child(3),
+.lay > input:nth-of-type(4):checked ~ .lay__panels > .lay__p:nth-child(4) { display: block; }
+.lay .lay__cond {
+  margin: 0;
+  padding: 10px 0 10px 15px;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--fg-3);
+}
+.lay__row {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 0 16px;
+  padding: 14px 0 14px 12px;
+  border-bottom: 1px solid var(--line);
+  border-left: 3px solid transparent;
+}
+.lay__row--hit { border-left-color: var(--accent); background: var(--bg); }
+.lay__k { font-weight: 600; line-height: 1.4; }
+.lay__k em { display: block; margin-top: 4px; font-style: normal; font-size: 12px; font-weight: 700; color: var(--accent); }
+.lay .lay__v p { margin: 0; font-size: var(--fs-sm); line-height: 1.6; color: var(--fg-2); }
+.lay .lay__v code {
+  padding: 0 4px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+}
+.lay__src { display: inline-block; margin-top: 4px; font-size: 12px; line-height: 1.4; color: var(--fg-3); }
+@media (max-width: 640px) {
+  .lay > label { margin-right: 10px; font-size: 14px; }
+  .lay__row { grid-template-columns: minmax(0, 1fr); gap: 6px 0; padding-left: 10px; }
+  .lay .lay__cond { padding-left: 13px; }
+}
+@media print { .lay__p { display: block !important; } }
