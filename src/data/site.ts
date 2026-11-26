@@ -19,3 +19,9 @@ export const categories = [
   '에이전트와 일하는 법',
   '그 밖에',
 ] as const;
+
+// 글의 종류에 붙는 이름표. 글 머리말의 kind 값 → 글 탭의 종류 줄과 글 제목 위 꼬리표에 보이는 말.
+export const kindLabels = {
+  troubleshooting: '트러블슈팅',
+  opinion: '견해',
+} as const;

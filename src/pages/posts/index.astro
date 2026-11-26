@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { site, categories } from '../../data/site';
+import { site, categories, kindLabels } from '../../data/site';
 import { getPosts, isListVisible, formatDate, catsOf } from '../../lib/posts';
 
 const posts = await getPosts();
@@ -12,9 +12,12 @@ if (!isListVisible(posts.length)) {
 
 // 글의 종류: 대표 글(featured)은 긴 글, 머리말에 kind 를 적은 글은 그 종류. 종류 줄은 종류가 적힌 글이 있을 때만 내놓는다.
 const kindOf = (post: (typeof posts)[number]) => post.data.kind ?? (post.data.featured ? 'long' : '');
+// 종류 줄의 단추는 그 종류의 글이 한 편이라도 있을 때만 내놓는다(긴 글은 늘 내놓는다).
 const kinds = [
   { id: 'long', label: '긴 글' },
-  { id: 'troubleshooting', label: '트러블슈팅' },
+  ...Object.entries(kindLabels)
+    .filter(([id]) => posts.some((post) => post.data.kind === id))
+    .map(([id, label]) => ({ id, label })),
 ];
 const hasKinds = posts.some((post) => post.data.kind);
 ---
@@ -54,7 +57,7 @@ const hasKinds = posts.some((post) => post.data.kind);
           <a class="post-item" href={`/posts/${post.id}/`}>
             <p class="post-item__cat">
               {catsOf(post).join(' · ')}
-              {post.data.kind === 'troubleshooting' && <span class="tag">트러블슈팅</span>}
+              {post.data.kind && <span class="tag">{kindLabels[post.data.kind]}</span>}
             </p>
             <h2 class="post-item__title">{post.data.title}</h2>
             <p class="post-item__sum">{post.data.summary}</p>

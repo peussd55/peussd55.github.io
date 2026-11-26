@@ -1,7 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { site } from '../../data/site';
+import { site, kindLabels } from '../../data/site';
 import { getPosts, isListVisible, formatDate, catsOf } from '../../lib/posts';
 
 export async function getStaticPaths() {
@@ -23,7 +23,7 @@ const toc = headings.filter((heading) => heading.depth === 2);
     <header class="post-head">
       <p class="post-cat">
         {catsOf(post).join(' · ')}
-        {post.data.kind === 'troubleshooting' && <span class="tag">트러블슈팅</span>}
+        {post.data.kind && <span class="tag">{kindLabels[post.data.kind]}</span>}
       </p>
       <h1>{post.data.title}</h1>
       <p class="post-sum">{post.data.summary}</p>
