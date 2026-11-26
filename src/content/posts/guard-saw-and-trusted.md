@@ -12,6 +12,28 @@ featured: true
 > - **확인한 것과 못 한 것** — 지어낸 값이 다시 나오면 가드가 제때 불려 그 말을 버리고 고쳐 말하게 하는지는 대본대로 답하는 가짜 모델로 확인했어요. 실제로 얼마나 자주 잡는지, 첫 문자를 받은 사람이 있었는지는 확인하지 못했어요. 지어낸 값의 재료가 가드가 믿는 출처에 들어 있던 구멍은 고친 기록이 없어요.
 > - **이 글** — 세 번의 일을 따라가며, 가드가 막은 범위가 그 가드가 보는 곳과 믿는 것까지였다는 이야기를 적어요.
 
+<figure class="fig">
+<div class="fig__canvas">
+<div class="loc" role="img" aria-label="전체 구성도. 위에서부터 들어오는 쪽(전화 교환기 · 음성인식), 봇 서버(인스트럭션 · 도구 정의 · 코드가 쥔 흐름), 모델(클라우드 모델 · 사내 GPU 모델 서버), 도구와 데이터(검색 · 문자와 주문), 나가는 쪽(음성합성 · 웹챗 화면), 옆에 테스트와 평가. 이 글이 다룬 자리는 봇 서버의 코드가 쥔 흐름(가드), 문자 도구, 봇 서버의 인스트럭션, 테스트와 평가의 러너와 가짜 모델 넷.">
+<div class="loc__main">
+<div class="loc__row"><span class="loc__k">들어오는 쪽</span><div class="loc__set"><span class="loc__n">전화 교환기</span><span class="loc__n">음성인식<small>말끝 판정</small></span></div></div>
+<div class="loc__row"><span class="loc__k">봇 서버</span><div class="loc__set"><span class="loc__n loc__n--on"><b class="loc__no">3</b>인스트럭션</span><span class="loc__n">도구 정의</span><span class="loc__n loc__n--on"><b class="loc__no">1</b>코드가 쥔 흐름<small>가드 · 경보 · 재요청</small></span></div></div>
+<div class="loc__row"><span class="loc__k">모델</span><div class="loc__set"><span class="loc__n">클라우드 모델<small>실시간 음성 · 상용 LLM</small></span><span class="loc__n">사내 GPU 모델 서버<small>오픈 모델 · vLLM</small></span></div></div>
+<div class="loc__row"><span class="loc__k">도구와 데이터</span><div class="loc__set"><span class="loc__n">검색<small>FAQ · 주소</small></span><span class="loc__n loc__n--on"><b class="loc__no">2</b>문자 · 주문<small>통화 종료</small></span></div></div>
+<div class="loc__row"><span class="loc__k">나가는 쪽</span><div class="loc__set"><span class="loc__n">음성합성</span><span class="loc__n">웹챗 화면</span></div></div>
+</div>
+<div class="loc__side loc__side--on"><b class="loc__no">4</b><b>테스트와 평가</b><span>텍스트 하네스</span><span>판정기 · LLM 심판</span><span>벤치 · 부하 측정</span><span class="loc__hit">러너 · 가짜 모델</span></div>
+</div>
+<ol class="loc__did">
+<li><b class="loc__no">1</b><span><b>봇 서버의 가드</b> — 경보는 봇의 말만 봤고, 첫 문자 뒤에 넣은 인자 가드는 도구에 넘기는 번호를 봤어요.</span></li>
+<li><b class="loc__no">2</b><span><b>문자 도구</b> — 테스트 중에 문자가 두 번 실제로 나갔어요.</span></li>
+<li><b class="loc__no">3</b><span><b>인스트럭션</b> — 지어낸 주문번호의 재료가 여기 넣어 둔 예시였고, 그 숫자는 가드가 믿는 출처에 들어 있었어요.</span></li>
+<li><b class="loc__no">4</b><span><b>테스트와 평가</b> — 대본대로 답하는 가짜 모델로 가드가 제때 불리는지 봤어요. 둘째 문자의 번호는 러너가 만든 가짜 번호였어요.</span></li>
+</ol>
+</div>
+<figcaption>위에서 아래로 한 번의 대화가 지나는 길을 단순하게 그린 것이에요. 파란 테두리가 이 글이 다룬 자리예요.</figcaption>
+</figure>
+
 ## 먼저, 이 글에 나오는 것들
 
 이 글의 주인공은 사내 시연용으로 만든 데모 쇼핑 봇이에요. 사내 GPU에서 서빙하는 26B 오픈 모델로 돌고, 웹챗으로 텍스트를 주고받아요. 이 글의 일은 모두 이 봇 하나에서 있었고, 가드도 이 봇에 넣은 것이에요. 실제 고객의 대화가 아니라 우리 테스트 중에 난 일이에요.
