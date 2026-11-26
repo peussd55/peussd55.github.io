@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/atlas.css';
+import { getPosts } from '../lib/posts';
+import { buildAtlas, CAP_PATH } from '../lib/atlas';
+
+// 글에 든 위치 그림에서 자료를 뽑는다. 구성도의 글자는 전부 거기서 온다.
+const atlas = buildAtlas(await getPosts());
+// 페이지에 넣어 두고 스크립트가 읽는다. 꺾쇠는 스크립트 칸이 끊기지 않게 바꿔 적는다.
+const json = JSON.stringify(atlas).replace(/</g, '\\u003c');
+---
+
+<Base title="전체 구성도" description="한 번의 대화가 지나는 길을 단순하게 그린 구성도와 글마다 다룬 자리">
+  <div class="atl-page wide">
+    <header class="atl-head">
+      <h1>전체 구성도</h1>
+      <p class="atl-lead">
+        한 번의 대화가 지나는 길을 위에서 아래로 단순하게 그린 구성도예요.<span data-atlas-js hidden>
+          {' '}글을 고르면 그 글이 다룬 자리가 켜지고, 상자를 고르면 그 자리를 다룬 글이 나와요.</span>
+      </p>
+    </header>
+
+    <div class="atl" data-atlas>
+      <div class="atl-view">
+        <div class="atl-flat fig__canvas">
+          <div class="loc" role="group" aria-label="전체 구성도">
+            <div class="loc__main">
+              {atlas.rows.map((row) => (
+                <div class="loc__row">
+                  <span class="loc__k">{row.k}</span>
+                  <div class="loc__set">
+                    {row.nodes.map((node) => (
+                      <span class="loc__n" data-id={node.id}>{node.label}{node.small && <small>{node.small}</small>}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div class="loc__side" data-id="side">
+              <b>{atlas.side.title}</b>
+              {atlas.side.items.map((item) => <span>{item}</span>)}
+            </div>
+          </div>
+        </div>
+        <p class="atl-cap" data-cap>{CAP_PATH}</p>
+      </div>
+
+      <div class="atl-static">
+        {atlas.posts.map((post) => (
+          <section>
+            <h3><a class="link" href={`/posts/${post.slug}/`}>{post.short}</a></h3>
+            <ol class="atl-did">
+              {post.did.map((line) => (
+                <li><b class="loc__no">{line.no}</b><span><b>{line.head}</b> — {line.text}</span></li>
+              ))}
+            </ol>
+            {post.extra && <p class="atl-extra">{post.extra}</p>}
+          </section>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" id="atlas-data" set:html={json} />
+</Base>
+
+<script>
+  import '../scripts/atlas.js';
+</script>
