@@ -12,6 +12,28 @@ featured: true
 > - **확인한 것과 못 한 것** — 규칙을 좁히고 같은 404문항으로 다시 재자 텍스트의 2차는 78.7%에서 83.4%가 됐고, 늘어난 몫은 되묻던 문항에서 나왔어요. 규칙도 같은 404문항의 결과로 골랐으니, 그 404문항 안에서 할 수 있는 말이에요. 이틀 뒤 같은 봇 코드로 다시 재자 합계는 1\~2문항 안에서 같았지만 결과가 바뀐 문항이 있었어요. 심판을 사람의 판정과 견준 적은 없고, 실제 통화로 잰 정답률도 없어요.
 > - **이 글** — 같은 문항을 층마다 재고, 층 사이의 간격을 손실이 나는 자리로 읽은 과정과 그 숫자들이 말하지 않는 것을 적어요.
 
+<figure class="fig">
+<div class="fig__canvas">
+<div class="loc" role="img" aria-label="전체 구성도. 위에서부터 들어오는 쪽(전화 교환기 · 음성인식), 봇 서버(인스트럭션 · 도구 정의 · 코드가 쥔 흐름), 모델(클라우드 모델 · 사내 GPU 모델 서버), 도구와 데이터(검색 · 문자와 주문), 나가는 쪽(음성합성 · 웹챗 화면), 옆에 테스트와 평가. 이 글이 다룬 자리는 테스트와 평가의 LLM 심판, 검색, 봇 서버의 코드가 쥔 흐름(버전 확인 규칙), 음성인식 넷.">
+<div class="loc__main">
+<div class="loc__row"><span class="loc__k">들어오는 쪽</span><div class="loc__set"><span class="loc__n">전화 교환기</span><span class="loc__n loc__n--on"><b class="loc__no">4</b>음성인식<small>받아 적은 전사문</small></span></div></div>
+<div class="loc__row"><span class="loc__k">봇 서버</span><div class="loc__set"><span class="loc__n">인스트럭션</span><span class="loc__n">도구 정의</span><span class="loc__n loc__n--on"><b class="loc__no">3</b>코드가 쥔 흐름<small>버전 확인 규칙</small></span></div></div>
+<div class="loc__row"><span class="loc__k">모델</span><div class="loc__set"><span class="loc__n">클라우드 모델<small>실시간 음성 · 상용 LLM</small></span><span class="loc__n">사내 GPU 모델 서버<small>오픈 모델 · vLLM</small></span></div></div>
+<div class="loc__row"><span class="loc__k">도구와 데이터</span><div class="loc__set"><span class="loc__n loc__n--on"><b class="loc__no">2</b>검색<small>FAQ · 후보 5개</small></span><span class="loc__n">문자 · 주문<small>통화 종료</small></span></div></div>
+<div class="loc__row"><span class="loc__k">나가는 쪽</span><div class="loc__set"><span class="loc__n">음성합성</span><span class="loc__n">웹챗 화면</span></div></div>
+</div>
+<div class="loc__side loc__side--on"><b class="loc__no">1</b><b>테스트와 평가</b><span>텍스트 하네스</span><span class="loc__hit">판정기 · LLM 심판</span><span>벤치 · 부하 측정</span></div>
+</div>
+<ol class="loc__did">
+<li><b class="loc__no">1</b><span><b>테스트와 평가</b> — 같은 404문항을 세 층과 두 입력으로 세 번 쟀고, 봇이 한 답은 LLM 심판이 매겼어요.</span></li>
+<li><b class="loc__no">2</b><span><b>검색</b> — 질문을 검색에 바로 넣은 검색 단독 top-1은 69.8%였고, 두 번 돌려도 같았어요.</span></li>
+<li><b class="loc__no">3</b><span><b>봇 서버의 코드</b> — 첫 회차 텍스트에서 되물은 38턴 가운데 32턴은 버전 확인 규칙이 냈고, 규칙을 좁혀 같은 404문항으로 다시 쟀어요.</span></li>
+<li><b class="loc__no">4</b><span><b>음성인식</b> — 글자 대신 합성음을 STT가 받아 적은 전사문을 넣자 9~13%p 안팎이 빠졌어요.</span></li>
+</ol>
+</div>
+<figcaption>위에서 아래로 한 번의 대화가 지나는 길을 단순하게 그린 것이에요. 파란 테두리가 이 글이 다룬 자리예요.</figcaption>
+</figure>
+
 ## 먼저, 이 글에 나오는 것들
 
 이 글의 주인공은 한 고객사의 FAQ 음성 상담봇 시범 구축(PoC)이에요. 자주 묻는 질문(FAQ) 206건으로 답하는 봇이에요.
@@ -155,6 +177,43 @@ LLM 심판은 생성 모델과 다른 작은 상용 LLM이에요. 고객 질문,
 ## 다시, 69.8%로
 
 검색 단독 69.8%는 두 번 돌려도 같았어요. 봇 1차도 둘째와 셋째 회차에 69.8%였지만, 안을 보면 검색과 11문항씩 엇갈려 있었어요. 1차와 2차 사이에서는 보고서가 형제 FAQ와 핵심 조치가 빠진 요약으로 본 턴이 엇갈렸고, 텍스트와 전화 조건 사이에서는 STT를 거친 입력에서 9\~13%p 안팎이 빠졌어요.
+
+<figure class="fig">
+<div class="fig__canvas">
+<div class="lay">
+<input type="radio" name="lay-g045" id="lay-g045-1" checked><label for="lay-g045-1">검색 → 1차</label>
+<input type="radio" name="lay-g045" id="lay-g045-2"><label for="lay-g045-2">1차 → 2차</label>
+<input type="radio" name="lay-g045" id="lay-g045-3"><label for="lay-g045-3">텍스트 → 전화 조건</label>
+<div class="lay__panels">
+<div class="lay__p">
+<p class="lay__cond">첫 회차 · 텍스트 · 69.8% → 65.8%</p>
+<div class="lay__row"><div class="lay__k">입력</div><div class="lay__v"><p>질문 글자를 봇 세션에 그대로 넣었어요.</p></div></div>
+<div class="lay__row"><div class="lay__k">검색</div><div class="lay__v"><p>질문을 검색에 바로 넣으면 1위가 정답 FAQ인 문항이 69.8%였어요.</p><span class="lay__src">검색 단독 · 두 번 돌려 같은 값</span></div></div>
+<div class="lay__row lay__row--hit"><div class="lay__k">봇 서버의 코드<em>간격이 가리킨 자리</em></div><div class="lay__v"><p>봇이 되물은 38턴 가운데 32턴은 버전 확인 규칙이 냈어요. 38턴 가운데 21턴은 다시 줄 세운 뒤 정답 FAQ가 이미 1위였어요.</p><span class="lay__src">되물은 턴의 결과 행에서 센 값</span></div></div>
+<div class="lay__row"><div class="lay__k">봇의 답</div><div class="lay__v"><p>답 대신 버전(32턴)이나 제품명(6턴)을 묻는 정해진 문구가 나갔어요.</p></div></div>
+<div class="lay__row"><div class="lay__k">판정</div><div class="lay__v"><p>되물은 턴은 답을 주지 못한 턴으로 쳐서 분모에 넣었어요. 봇 1차는 65.8%, 답한 턴만 분모로 하면 73.5%였어요.</p><span class="lay__src">1차 · 코드가 FAQ 번호만 대조</span></div></div>
+</div>
+<div class="lay__p">
+<p class="lay__cond">첫 회차 · 텍스트 · 65.8% → 78.7% · 봇이 답한 362턴</p>
+<div class="lay__row"><div class="lay__k">입력</div><div class="lay__v"><p>질문 글자를 봇 세션에 그대로 넣었어요.</p></div></div>
+<div class="lay__row"><div class="lay__k">검색</div><div class="lay__v"><p>후보 5개를 돌려줘요.</p></div></div>
+<div class="lay__row"><div class="lay__k">봇 서버의 코드</div><div class="lay__v"><p>질문의 제품명과 맞는 후보를 앞으로 당겨 다시 줄 세워요. 그 1순위가 안내 FAQ예요.</p></div></div>
+<div class="lay__row"><div class="lay__k">봇의 답</div><div class="lay__v"><p>1차가 덜 센 턴은 형제 FAQ로 같은 조치를 안내했거나 다른 후보로 맞게 답한 경우, 더 센 턴은 요약에서 핵심 조치가 빠진 경우로 봤어요.</p><span class="lay__src">첫 회차 보고서의 해석</span></div></div>
+<div class="lay__row lay__row--hit"><div class="lay__k">판정<em>여기서 엇갈렸어요</em></div><div class="lay__v"><p>1차는 코드가 FAQ 번호만 대조하고, 2차는 LLM 심판이 봇의 답을 정답 FAQ와 견줘요. 정답이 후보 2~5위나 후보 밖인데 correct인 턴이 63, 안내 FAQ는 정답인데 partial인 턴이 11이었어요.</p><span class="lay__src">1차와 2차의 교차표</span></div></div>
+</div>
+<div class="lay__p">
+<p class="lay__cond">같은 회차끼리 · 1차와 2차 모두 9~13%p 안팎 낮음</p>
+<div class="lay__row lay__row--hit"><div class="lay__k">입력<em>간격이 가리킨 자리</em></div><div class="lay__v"><p>404문항을 TTS로 읽혀 STT가 받아 적은 전사문을 넣었어요. 제품명이 이름 그대로나 사전 발음 그대로 받아 적힌 것은 제품명이 나온 횟수의 8.1%였어요.</p><span class="lay__src">같은 날 잰 STT 결과 · 실제 통화가 아닌 합성음</span></div></div>
+<div class="lay__row"><div class="lay__k">검색</div><div class="lay__v"><p>전화 조건에서는 검색 단독을 재지 않았어요.</p></div></div>
+<div class="lay__row"><div class="lay__k">봇 서버의 코드</div><div class="lay__v"><p>첫 회차와 둘째 회차 사이에 전사문 속 제품명을 발음으로 되찾는 보정을 넣었어요. 다른 변경 둘과 함께 들어갔어요.</p></div></div>
+<div class="lay__row"><div class="lay__k">봇의 답</div><div class="lay__v"><p>첫 회차에 wrong을 받은 턴이 텍스트 2, 전화 조건 19였어요. 19턴은 잘못 받아 적힌 질문에 다른 FAQ로 확신 있게 답한 경우로 봤어요.</p><span class="lay__src">첫 회차 보고서의 해석</span></div></div>
+<div class="lay__row"><div class="lay__k">판정</div><div class="lay__v"><p>첫 회차 전화 조건은 1차 57.2%, 2차 69.6%였어요. 세 회차 모두 같은 전사문을 썼어요.</p></div></div>
+</div>
+</div>
+</div>
+</div>
+<figcaption>층 사이의 세 간격을 같은 층에 놓아 본 것이에요. 탭을 누르면 바뀌어요. 파란 줄은 그 간격에서 본문이 짚은 층이고, 줄 아래의 작은 글씨는 그 말의 근거예요.</figcaption>
+</figure>
 
 다시 한다면 바꿀 점들이에요. 당시에 적어 둔 것은 아니고, 이 글을 정리하며 정한 것이에요.
 
