@@ -2,7 +2,7 @@
 title: curl보다 느리던 내장 fetch — 4초 쉬면 닫히는 연결
 summary: 고객사 콜봇의 지식 검색 호출이 제한 시간을 넘겨 구간별로 재 보니, 임베딩 API 호출이 같은 호출을 curl로 잰 것보다 0.7초 느렸던 일. 연결을 다시 쓰게 고친 경위와, 그때 적은 원인 설명을 문서와 재현 코드로 다시 확인한 결과
 date: 2026-11-26
-order: 2
+order: 3
 category: RAG와 에이전트
 kind: troubleshooting
 ---

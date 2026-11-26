@@ -2,7 +2,7 @@
 title: 끝내 보지 못한 1,024토큰 — 사내 GPU의 Gemma 4를 벤치와 웹챗에 붙이며 출력 형식이 깨진 7월
 summary: Gemma 4를 벤치와 웹챗에 붙인 7월, 받는 쪽마다 다르게 깨진 출력 형식을 네 층으로 따라간 경위
 date: 2026-11-26
-order: 0
+order: 1
 category: LLM 서빙과 평가
 featured: true
 ---
