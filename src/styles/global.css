@@ -1806,7 +1806,7 @@ html { scroll-behavior: smooth; }
   .loc { grid-template-columns: minmax(0, 1fr); font-size: 14px; }
   .loc__row { grid-template-columns: minmax(0, 1fr); padding-top: 14px; }
   .loc__row + .loc__row::before { left: 50%; height: 14px; }
-  .loc__k { margin-bottom: 4px; }
+  .loc__k { margin-bottom: 14px; }
   .loc__n { padding: 8px 4px; }
   .loc__side { margin-top: 18px; flex-direction: row; flex-wrap: wrap; gap: 2px 10px; }
   .fig .loc__did { font-size: 14px; }

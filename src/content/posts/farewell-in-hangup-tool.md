@@ -12,6 +12,28 @@ featured: true
 > - **확인한 것과 못 한 것** — 짧은 끝인사가 실제 전화에서 읽히고 끊기는 것은 확인했어요. 긴 끝인사가 끝까지 들리는지, 그리고 10월에 이 길을 고른 이유였던 '말한 직후 끊으면 말이 잘린다'는 판단이 맞는지는 확인하지 못했어요.
 > - **이 글** — 두 번의 경위와 고르지 않은 길, 그리고 3주 만에 우리 해법을 잊은 일을 적어요.
 
+<figure class="fig">
+<div class="fig__canvas">
+<div class="loc" role="img" aria-label="전체 구성도. 위에서부터 들어오는 쪽(전화 교환기 · 음성인식), 봇 서버(인스트럭션 · 도구 정의 · 코드가 쥔 흐름), 모델(클라우드 모델 · 사내 GPU 모델 서버), 도구와 데이터(검색 · 통화 종료와 문자 · 주문), 나가는 쪽(음성합성 · 웹챗 화면), 옆에 테스트와 평가. 이 글이 다룬 자리는 봇 서버의 인스트럭션, 통화 종료 도구, 전화 교환기, 봇 서버의 도구 정의 넷.">
+<div class="loc__main">
+<div class="loc__row"><span class="loc__k">들어오는 쪽</span><div class="loc__set"><span class="loc__n loc__n--on"><b class="loc__no">3</b>전화 교환기</span><span class="loc__n">음성인식<small>말끝 판정</small></span></div></div>
+<div class="loc__row"><span class="loc__k">봇 서버</span><div class="loc__set"><span class="loc__n loc__n--on"><b class="loc__no">1</b>인스트럭션</span><span class="loc__n loc__n--on"><b class="loc__no">4</b>도구 정의</span><span class="loc__n">코드가 쥔 흐름<small>가드 · 재시도</small></span></div></div>
+<div class="loc__row"><span class="loc__k">모델</span><div class="loc__set"><span class="loc__n">클라우드 모델<small>실시간 음성 · 상용 LLM</small></span><span class="loc__n">사내 GPU 모델 서버<small>오픈 모델 · vLLM</small></span></div></div>
+<div class="loc__row"><span class="loc__k">도구와 데이터</span><div class="loc__set"><span class="loc__n">검색<small>FAQ · 주소</small></span><span class="loc__n loc__n--on"><b class="loc__no">2</b>통화 종료<small>문자 · 주문</small></span></div></div>
+<div class="loc__row"><span class="loc__k">나가는 쪽</span><div class="loc__set"><span class="loc__n">음성합성</span><span class="loc__n">웹챗 화면</span></div></div>
+</div>
+<div class="loc__side"><b>테스트와 평가</b><span>텍스트 하네스</span><span>판정기 · LLM 심판</span><span>벤치 · 부하 측정</span></div>
+</div>
+<ol class="loc__did">
+<li><b class="loc__no">1</b><span><b>인스트럭션</b> — 10월에는 서로 부딪친 두 문장을 고쳤고, 11월의 다른 봇에서는 두 번 고쳐도 끝인사가 나오지 않았어요.</span></li>
+<li><b class="loc__no">2</b><span><b>통화 종료 도구</b> — 봇이 말하던 끝인사를 이 도구의 파라미터로 옮겼어요.</span></li>
+<li><b class="loc__no">3</b><span><b>전화 교환기</b> — 도구가 넘긴 문구를 읽고 전화를 끊어요.</span></li>
+<li><b class="loc__no">4</b><span><b>도구 정의</b> — 끝인사 파라미터가 정의에 없을 때는 26번 중 9번만 실렸고, 정의에 두자 모두 실렸어요(텍스트 테스트).</span></li>
+</ol>
+</div>
+<figcaption>위에서 아래로 한 번의 대화가 지나는 길을 단순하게 그린 것이에요. 파란 테두리가 이 글이 다룬 자리예요.</figcaption>
+</figure>
+
 ## 먼저, 이 글에 나오는 것들
 
 이 글의 주인공은 전화를 받아 말로 응대하는 음성 봇이에요. 네 가지가 맞물려 돌아가요.
