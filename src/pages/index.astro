@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getPosts, catsOf } from '../lib/posts';
-import { headline, lead, glance, about, career, work, way, shooting, projects, papers } from '../data/profile';
+import { headline, lead, glance, about, career, work, way, shooting, diagram, projects, papers } from '../data/profile';
 
 const posts = await getPosts();
 // "주요 업무"에는 대표 글(featured)만, 묶음마다 PER_GROUP편까지 보인다.
@@ -130,6 +130,13 @@ const shootingPosts = shootingAll.slice(0, SHOOTING_MAX);
           </article>
         );
       })}
+      <article class="work work--way">
+        <h3 class="work__name">{diagram.name}</h3>
+        <p class="work__sum">{diagram.summary}</p>
+        <ul class="work__posts">
+          <li><a class="link" href="/map/">{diagram.link}</a></li>
+        </ul>
+      </article>
       <article class="work work--way">
         <h3 class="work__name">{way.name}</h3>
         <p class="work__sum">{way.summary}</p>

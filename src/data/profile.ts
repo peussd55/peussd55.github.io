@@ -164,6 +164,13 @@ export const shooting = {
   summary: '현업에서 겪은 기술 · 성능 문제를 한 건씩 정리. 증상 · 원인 · 수정 · 재현 코드.',
 };
 
+// 전체 구성도 — 주요 업무 묶음 넷 바로 아래에 한 줄. 구성도 페이지(/map/)로 간다.
+export const diagram = {
+  name: '전체 구성도',
+  summary: '한 번의 대화가 지나는 길을 단순화한 구성도. 글마다 다룬 자리를 표시.',
+  link: '구성도 보기 →',
+};
+
 // 그 밖에 — 제목만
 export const projects = [
   {
