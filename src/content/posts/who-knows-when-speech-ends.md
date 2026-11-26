@@ -12,6 +12,28 @@ featured: true
 > - **확인한 것과 못 한 것** — 같은 주 보고서가 가장 큰 레버로 꼽은 스트리밍 TTS는 켜 보니 첫 문장과 응답 완료의 차이가 0.1\~0.3초였어요. 고객 목소리는 합성음이었고 통신사 구간은 재지 않았어요. 자유롭게 말한 턴이 회차마다 대여섯 개라, 이 글의 p90은 가장 느린 한 턴이에요.
 > - **이 글** — 어디서부터 잴지 정하고 지연을 구간으로 나눠 줄일 곳을 찾은 과정, 그리고 그 분해를 보고 짚은 레버가 빗나간 자리를 적어요. 다른 고객사 운영 콜봇의 숫자 둘에도 같은 물음을 짧게 대 봐요.
 
+<figure class="fig">
+<div class="fig__canvas">
+<div class="loc" role="img" aria-label="전체 구성도. 위에서부터 들어오는 쪽(전화 교환기 · 음성인식), 봇 서버(인스트럭션 · 도구 정의 · 코드가 쥔 흐름), 모델(클라우드 모델 · 사내 GPU 모델 서버), 도구와 데이터(검색 · 문자와 주문), 나가는 쪽(음성합성 · 웹챗 화면), 옆에 테스트와 평가. 이 글이 다룬 자리는 음성인식(말끝 판정), 검색, 클라우드 모델, 음성합성 넷이고, 이 글의 네 구간과 같아요.">
+<div class="loc__main">
+<div class="loc__row"><span class="loc__k">들어오는 쪽</span><div class="loc__set"><span class="loc__n">전화 교환기</span><span class="loc__n loc__n--on"><b class="loc__no">1</b>음성인식<small>말끝 판정</small></span></div></div>
+<div class="loc__row"><span class="loc__k">봇 서버</span><div class="loc__set"><span class="loc__n">인스트럭션</span><span class="loc__n">도구 정의</span><span class="loc__n">코드가 쥔 흐름<small>가드 · 재시도</small></span></div></div>
+<div class="loc__row"><span class="loc__k">모델</span><div class="loc__set"><span class="loc__n loc__n--on"><b class="loc__no">3</b>클라우드 모델<small>실시간 음성 · 상용 LLM</small></span><span class="loc__n">사내 GPU 모델 서버<small>오픈 모델 · vLLM</small></span></div></div>
+<div class="loc__row"><span class="loc__k">도구와 데이터</span><div class="loc__set"><span class="loc__n loc__n--on"><b class="loc__no">2</b>검색<small>FAQ</small></span><span class="loc__n">문자 · 주문<small>통화 종료</small></span></div></div>
+<div class="loc__row"><span class="loc__k">나가는 쪽</span><div class="loc__set"><span class="loc__n loc__n--on"><b class="loc__no">4</b>음성합성<small>스트리밍 TTS</small></span><span class="loc__n">웹챗 화면</span></div></div>
+</div>
+<div class="loc__side"><b>테스트와 평가</b><span>텍스트 하네스</span><span>판정기 · LLM 심판</span><span>벤치 · 부하 측정</span></div>
+</div>
+<ol class="loc__did">
+<li><b class="loc__no">1</b><span><b>음성인식</b> — 말끝을 확정하기까지의 대기예요. 두 시작점을 함께 적자 이 발화 종료 판정 구간이 숫자 안에서 따로 보였어요.</span></li>
+<li><b class="loc__no">2</b><span><b>검색</b> — 9월 첫 주에는 모델이 도구로 불렀고, 그다음 주부터 코드가 먼저 검색해요.</span></li>
+<li><b class="loc__no">3</b><span><b>클라우드 모델</b> — 9월 첫 주 자유롭게 말한 턴에서 가장 긴 구간은 LLM 3.4초였고, 모델을 두 번 부른 몫이었어요. 호출을 한 번으로 줄인 뒤 약 1.9초가 됐고, 그사이 다른 변경 셋도 들어갔어요.</span></li>
+<li><b class="loc__no">4</b><span><b>음성합성</b> — 가장 큰 레버로 꼽혔던 스트리밍 TTS는 켜 보니 첫 문장과 응답 완료의 차이가 0.1~0.3초였어요.</span></li>
+</ol>
+</div>
+<figcaption>위에서 아래로 한 번의 대화가 지나는 길을 단순하게 그린 것이에요. 파란 테두리가 이 글이 다룬 자리예요. 숫자는 모두 교환기 안에서 자동으로 건 통화에서 잰 값이에요.</figcaption>
+</figure>
+
 ## 먼저, 이 글에 나오는 것들
 
 이 글에서 주로 다루는 것은 [평가 질문 404문항을 세 번 잰 글](/posts/gaps-between-layers/)과 같은 봇, 한 고객사의 FAQ 음성 상담봇 시범 구축(PoC)을 9월에 여덟 번 잰 일이에요. 봇은 외부 STT 엔진, 우리 어댑터, 기존 TTS 엔진을 이어 붙였고, 상용 LLM이 FAQ 검색 결과를 요약해 답해요. 단계와 정해진 안내는 코드가 맡아요. 구조는 [인텐트 · 엔티티 · 시나리오가 옮겨 간 자리를 적은 글](/posts/intent-entity-scenario-moved/)에 적었어요.
