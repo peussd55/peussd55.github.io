@@ -3,11 +3,15 @@ import Base from '../layouts/Base.astro';
 import '../styles/atlas.css';
 import { getPosts } from '../lib/posts';
 import { buildAtlas, CAP_PATH } from '../lib/atlas';
+import { buildBounds } from '../lib/atlasBounds';
 
 // 글에 든 위치 그림에서 자료를 뽑는다. 구성도의 글자는 전부 거기서 온다.
-const atlas = buildAtlas(await getPosts());
+const posts = await getPosts();
+const atlas = buildAtlas(posts);
+// 꼬리표(누가 맡는지 · 무엇으로 붙는지)도 글에 적힌 낱말과 문장만 쓴다. 본문에 없으면 빌드가 멈춘다.
+const bounds = buildBounds(posts, atlas);
 // 페이지에 넣어 두고 스크립트가 읽는다. 꺾쇠는 스크립트 칸이 끊기지 않게 바꿔 적는다.
-const json = JSON.stringify(atlas).replace(/</g, '\\u003c');
+const json = JSON.stringify({ ...atlas, bounds }).replace(/</g, '\\u003c');
 ---
 
 <Base title="전체 구성도" description="한 번의 대화가 지나는 길을 단순하게 그린 구성도와 글마다 다룬 자리">
@@ -25,14 +29,17 @@ const json = JSON.stringify(atlas).replace(/</g, '\\u003c');
         <div class="atl-flat fig__canvas">
           <div class="loc" role="group" aria-label="전체 구성도">
             <div class="loc__main">
-              {atlas.rows.map((row) => (
+              {atlas.rows.map((row, ri) => (
                 <div class="loc__row">
-                  <span class="loc__k">{row.k}</span>
+                  <span class="loc__k">{row.k}{bounds.rows[ri] && <i class="atl-tag atl-tag--row">{bounds.rows[ri].tag}</i>}</span>
                   <div class="loc__set">
                     {row.nodes.map((node) => (
-                      <span class="loc__n" data-id={node.id}>{node.label}{node.small && <small>{node.small}</small>}</span>
+                      <span class="loc__n" data-id={node.id}>{node.label}{node.small && <small>{node.small}</small>}{bounds.nodes[node.id] && <i class="atl-tag">{bounds.nodes[node.id].tag}</i>}</span>
                     ))}
                   </div>
+                  {bounds.links.filter((link) => link.row === ri).map((link) => (
+                    <span class="atl-link" style={`--at:${link.at}`}>{link.label}</span>
+                  ))}
                 </div>
               ))}
             </div>
@@ -43,6 +50,17 @@ const json = JSON.stringify(atlas).replace(/</g, '\\u003c');
           </div>
         </div>
         <p class="atl-cap" data-cap>{CAP_PATH}</p>
+        <div class="atl-notes">
+          <p>꼬리표는 그 자리를 누가 맡는지, 상자 사이의 이름표는 무엇으로 붙는지예요. 글에 적힌 자리에만 붙였어요.</p>
+          {bounds.notes.map((note) => (
+            <ul>
+              {note.lines.map((line) => (
+                <li><b class="atl-tag">{line.tag}</b><span>“{line.quote}”</span></li>
+              ))}
+              <li class="atl-notes__src"><a class="link" href={`/posts/${note.slug}/`}>{note.short}</a>에 적은 문장이에요.</li>
+            </ul>
+          ))}
+        </div>
       </div>
 
       <div class="atl-static">

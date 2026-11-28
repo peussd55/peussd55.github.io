@@ -343,6 +343,67 @@
 .atl-flat .loc__row.is-lit .loc__k { color: var(--accent); font-weight: 600; }
 .atl-flat .loc__row.is-lit .loc__n { border-color: var(--accent); }
 
+/* ── 꼬리표(그 자리를 누가 맡는지)와 상자 사이의 이름표(무엇으로 붙는지) · 2026-11-28 ──
+   낱말은 빌드할 때 글의 본문과 맞대 본 것만 온다(src/lib/atlasBounds.ts). */
+.atl-tag {
+  position: absolute;
+  right: 6px;
+  bottom: -8px;
+  z-index: 1;
+  padding: 2px 5px 3px;
+  border: 1px solid var(--fg-3);
+  background: var(--bg);
+  color: var(--fg-2);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.atl-tag--row { position: static; display: block; width: fit-content; margin-top: 5px; }
+.atl-chip .atl-tag { right: -1px; bottom: -13px; }
+/* 입체 판에서는 층 앞면(높이 18px)에 줄 이름과 나란히 적는다 */
+.atl-slab > .f .atl-tag--row,
+.atl-slab > .f .atl-link {
+  box-sizing: border-box;
+  top: 1px;
+  height: 16px;
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 14px;
+  color: var(--fg-2);
+}
+.atl-slab > .f .atl-tag--row { position: static; display: inline-block; width: auto; margin: 1px 0 0 8px; vertical-align: top; }
+.atl-slab > .f .atl-link { transform: translateX(-50%); }
+.atl-link {
+  position: absolute;
+  left: calc(96px + (100% - 96px) * var(--at, 0.5));
+  top: 100%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  padding: 2px 7px 3px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--fg-2);
+  font-size: 11px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.atl-notes {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  max-width: var(--w-text);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+  color: var(--fg-3);
+}
+.atl-notes ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+.atl-notes li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; color: var(--fg-2); }
+.atl-notes .atl-tag { position: static; flex: none; }
+.atl-notes li.atl-notes__src { display: block; margin-top: 2px; color: var(--fg-3); }
+
 @media (max-width: 1007px) {
   .atl--js { grid-template-columns: minmax(0, 1fr); }
 }
@@ -351,6 +412,8 @@
   .atl-head h1 { font-size: 28px; }
   .atl { margin-top: 28px; }
   .atl-flat.fig__canvas { padding: 28px 16px; }
+  .atl-tag--row { display: inline-block; margin: 0 0 0 8px; vertical-align: 1px; }
+  .atl-link { left: calc(100% * var(--at, 0.5)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .atl-cub > i,

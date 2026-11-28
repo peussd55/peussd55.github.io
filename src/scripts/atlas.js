@@ -5,6 +5,9 @@
   const root = document.querySelector('[data-atlas]');
   if (!source || !root) return;
   const D = JSON.parse(source.textContent);
+  // 꼬리표(누가 맡는지 · 무엇으로 붙는지). 낱말은 빌드할 때 글의 본문과 맞대 본 것만 온다(src/lib/atlasBounds.ts).
+  const B = D.bounds || { nodes: {}, rows: {}, links: [] };
+  const tagOf = (id) => (B.nodes[id] ? B.nodes[id].tag : '');
 
   const view = root.querySelector('.atl-view');
   const flat = root.querySelector('.atl-flat');
@@ -46,8 +49,9 @@
     const p = state.post && postOf[state.post];
     return p && p.side ? p.side.items : D.side.items.map((t) => ({ t, hit: false }));
   }
-  function say(v) {
-    return v.label + (v.small ? `, ${v.small}` : '') + (v.no ? `. 이 글의 ${v.no}번 자리` : v.count ? `. 다룬 글 ${v.count}편` : '');
+  function say(v, id) {
+    const tag = tagOf(id);
+    return v.label + (v.small ? `, ${v.small}` : '') + (tag ? `, ${tag}` : '') + (v.no ? `. 이 글의 ${v.no}번 자리` : v.count ? `. 다룬 글 ${v.count}편` : '');
   }
   function fill(target, v) {
     target.textContent = '';
@@ -142,9 +146,18 @@
       const slab = cub('atl-slab', G.W, G.T, G.D);
       slab.style.transform = `translate3d(0px, ${G.T}px, 0px)`;
       slab.querySelector('.f').textContent = r.k;
-      f.append(slab);
       const n = r.nodes.length;
       const bw = (G.W - 2 * G.pad - (n - 1) * G.gap) / n;
+      // 줄의 꼬리표와 상자 사이의 이름표는 판 앞면에 줄 이름과 나란히 적는다.
+      // 화면을 보는 딱지로 띄우면 아래층 상자의 딱지 옆에 놓여 그 상자의 것으로 읽힌다.
+      const face = slab.querySelector('.f');
+      if (B.rows[i]) face.append(el('i', 'atl-tag atl-tag--row', B.rows[i].tag));
+      B.links.filter((lk) => lk.row === i).forEach((lk) => {
+        const t = el('i', 'atl-link', lk.label);
+        t.style.left = `${G.pad + (lk.left + 1) * bw + lk.left * G.gap + G.gap / 2}px`;
+        face.append(t);
+      });
+      f.append(slab);
       r.nodes.forEach((nd, j) => {
         const box = cub('atl-node', bw, 8, G.bd);
         box.dataset.id = nd.id;
@@ -249,7 +262,7 @@
     fill(head, v).append(el('span', '', v.label));
     head.classList.toggle('is-on', v.on);
     head.setAttribute('aria-pressed', String(state.node === 'side'));
-    head.setAttribute('aria-label', say(v));
+    head.setAttribute('aria-label', say(v, 'side'));
     put(0.08, head);
     items.forEach((it, k) => {
       const c = el('span', `atl-bb atl-bb--c atl-chip atl-chip--item${it.hit ? ' is-hit' : ''}`, it.t);
@@ -401,16 +414,18 @@
           n.box.dataset.c = v.count || '';
           fill(n.chip, v).append(el('span', '', v.label));
           if (v.small) n.chip.append(el('small', '', v.small));
+          if (tagOf(id)) n.chip.append(el('i', 'atl-tag', tagOf(id)));
           n.chip.classList.toggle('is-on', v.on);
           n.chip.setAttribute('aria-pressed', String(state.node === id));
-          n.chip.setAttribute('aria-label', say(v));
+          n.chip.setAttribute('aria-label', say(v, id));
         }
         fill(n.flat, v).append(v.label);
         if (v.small) n.flat.append(el('small', '', v.small));
+        if (tagOf(id)) n.flat.append(el('i', 'atl-tag', tagOf(id)));
         n.flat.classList.toggle('loc__n--on', v.on);
       }
       n.flat.setAttribute('aria-pressed', String(state.node === id));
-      n.flat.setAttribute('aria-label', say(v));
+      n.flat.setAttribute('aria-label', say(v, id));
     });
     renderPanel();
     const p = state.post && postOf[state.post];
